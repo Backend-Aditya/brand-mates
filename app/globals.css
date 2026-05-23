@@ -1,26 +1,110 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-brand-50: #e8f7f0;
+  --color-brand-100: #c5ebd7;
+  --color-brand-200: #8fd5b0;
+  --color-brand-300: #57cea5;
+  --color-brand-400: #21ba80;
+  --color-brand-500: #0b5c43;
+  --color-brand-600: #084331;
+  --color-brand-700: #063124;
+  --color-brand-ink: #141414;
+
+  --animate-pulse-ring: pulseRing 2s ease-in-out infinite;
+  --animate-scroll-down: scrollDown 2s ease-in-out infinite;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@keyframes pulseRing {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.6); opacity: 0; }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes scrollDown {
+  0% { top: -50%; }
+  100% { top: 150%; }
+}
+
+/* Grain texture */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Nav toggler transforms */
+.nav-toggler span {
+  transition: transform 0.4s ease;
+}
+.nav-toggler.open span:first-child {
+  transform: translateY(3.5px) rotate(45deg) scaleX(0.75);
+}
+.nav-toggler.open span:nth-child(2) {
+  transform: translateY(-3.5px) rotate(-45deg) scaleX(0.75);
+}
+
+/* SplitText line hidden state */
+.nav-content a .line {
+  display: block;
+  transform: translateY(100%);
+  will-change: transform;
+}
+
+/* Nav overlay clip-path */
+.nav-items {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+  will-change: clip-path;
+}
+
+/* Hover underline for nav links */
+.link-underline::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* FAQ toggle chip */
+#faq details > summary > span:last-child {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+#faq details:not([open]) > summary:hover > span:last-child {
+  transform: scale(1.06);
+}
+#faq details[open] > summary:hover > span:last-child {
+  transform: scale(1.06);
+}
+
+/* Custom scrollbar */
+html, body {
+  scrollbar-width: thin;
+  scrollbar-color: #4caf50 #141414;
+}
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #141414; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #4caf50, #2e7d32);
+  border-radius: 10px;
+  border: 2px solid #141414;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #66bb6a, #388e3c);
 }
