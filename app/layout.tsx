@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${onest.variable} scroll-smooth`}>
-      <body className="bg-brand-ink font-sans text-white overflow-x-hidden antialiased">
+      <body suppressHydrationWarning className="bg-brand-ink font-sans text-white overflow-x-hidden antialiased">
         <SmoothScroll />
 <Nav />
         {children}
