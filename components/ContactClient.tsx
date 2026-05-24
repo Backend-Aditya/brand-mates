@@ -44,14 +44,35 @@ export default function ContactClient() {
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
       gsap.registerPlugin(ScrollTrigger);
 
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.querySelectorAll<HTMLElement>(".opacity-0").forEach((el) => {
+          el.style.opacity = "1";
+          el.style.translate = "none";
+          el.style.transform = "none";
+        });
+        return;
+      }
+
+      const mobile = ScrollTrigger.isTouch === 1;
+
+      document.querySelectorAll<HTMLElement>(".opacity-0").forEach((el) => {
+        [...el.classList].filter(c => c.startsWith("translate-y-") || c.startsWith("-translate-y-")).forEach(c => el.classList.remove(c));
+        el.style.transition = "none";
+      });
+
       ctx = gsap.context(() => {
         const ease = "power4.out";
+        const y    = mobile ? 10 : 20;
+        const dur  = mobile ? 0.45 : 0.65;
+        const from = { opacity: 0, y };
+        const to   = { opacity: 1, y: 0, duration: dur, ease, force3D: true, clearProps: "translate,transition" };
+
         const tl = gsap.timeline({ defaults: { ease } });
-        tl.fromTo(".ct-badge",   { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.55 }, 0.3);
-        tl.fromTo(".ct-heading", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.95, ease: "expo.out" }, 0.45);
-        tl.fromTo(".ct-intro",   { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7 }, 0.72);
-        tl.fromTo(".ct-form",    { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1   }, 0.85);
-        tl.fromTo(".ct-sidebar", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1   }, 1.0);
+        tl.fromTo(".ct-badge",   from, to, 0.3);
+        tl.fromTo(".ct-heading", from, to, 0.4);
+        tl.fromTo(".ct-intro",   from, to, 0.5);
+        tl.fromTo(".ct-form",    from, to, 0.6);
+        tl.fromTo(".ct-sidebar", from, to, 0.7);
       });
     }
 
@@ -63,17 +84,14 @@ export default function ContactClient() {
     <>
       {/* PAGE HERO */}
       <section className="relative w-full pt-36 md:pt-44 pb-16 px-6 sm:px-10 md:px-16 overflow-hidden">
-        <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full bg-brand-400/8 blur-[120px]"></div>
         <div className="relative max-w-7xl mx-auto text-center">
-          <div className="ct-badge opacity-0 translate-y-4 inline-flex items-center gap-2.5 mb-8 px-4 py-1.5 rounded-full border border-brand-400/40 bg-brand-400/10">
-            <span className="relative w-2 h-2 shrink-0 rounded-full bg-brand-400">
-              <span className="absolute -inset-1 rounded-full bg-brand-400 opacity-30 animate-pulse-ring"></span>
-            </span>
+          <div className="ct-badge opacity-0 translate-y-4 inline-flex items-center gap-2.5 mb-8">
+            <span className="w-2 h-2 rounded-full bg-brand-400 shrink-0"></span>
             <span className="text-[0.72rem] font-medium tracking-[0.08em] uppercase text-brand-400">Booking Q2 · 2 slots left</span>
           </div>
-          <h1 className="ct-heading opacity-0 translate-y-6 text-[2.5rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] font-extrabold tracking-[-0.03em] leading-[1.02] text-white mb-6">
+          <h1 className="ct-heading opacity-0 translate-y-6 text-[1.875rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-7xl xl:text-[5.5rem] font-extrabold tracking-[-0.03em] leading-[1.02] text-white mb-6">
             Let&apos;s build something<br />
-            <span className="bg-gradient-to-r from-brand-400 to-brand-300 bg-clip-text text-transparent italic">the market remembers.</span>
+            <span className="bg-linear-to-r from-brand-400 to-brand-300 bg-clip-text text-transparent italic">the market remembers.</span>
           </h1>
           <p className="ct-intro opacity-0 translate-y-6 text-white/55 text-base md:text-xl leading-relaxed max-w-xl mx-auto">
             Fill in the form below or jump straight to booking a discovery call. We respond to every inquiry within one business day, AEST.
@@ -90,27 +108,27 @@ export default function ContactClient() {
             <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
               <div className="grid sm:grid-cols-2 gap-5">
                 <div className="flex flex-col gap-2">
-                  <label className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">Your name</label>
-                  <input type="text" placeholder="Alex Chen" className="w-full rounded-xl border border-white/10 bg-white/[0.03] text-white placeholder:text-white/25 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
+                  <label htmlFor="ct-name" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">Your name</label>
+                  <input id="ct-name" type="text" placeholder="Alex Chen" className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/40 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">Work email</label>
-                  <input type="email" placeholder="alex@company.com.au" className="w-full rounded-xl border border-white/10 bg-white/[0.03] text-white placeholder:text-white/25 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
+                  <label htmlFor="ct-email" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">Work email</label>
+                  <input id="ct-email" type="email" placeholder="alex@company.com.au" className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/40 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
                 </div>
               </div>
               <div className="grid sm:grid-cols-2 gap-5">
                 <div className="flex flex-col gap-2">
-                  <label className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">Company</label>
-                  <input type="text" placeholder="Your company name" className="w-full rounded-xl border border-white/10 bg-white/[0.03] text-white placeholder:text-white/25 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
+                  <label htmlFor="ct-company" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">Company</label>
+                  <input id="ct-company" type="text" placeholder="Your company name" className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/40 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">Website (optional)</label>
-                  <input type="url" placeholder="yoursite.com.au" className="w-full rounded-xl border border-white/10 bg-white/[0.03] text-white placeholder:text-white/25 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
+                  <label htmlFor="ct-website" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">Website (optional)</label>
+                  <input id="ct-website" type="url" placeholder="yoursite.com.au" className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/40 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
                 </div>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">Service you&apos;re interested in</label>
-                <select className="w-full rounded-xl border border-white/10 bg-white/[0.03] text-white/70 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all appearance-none cursor-pointer" style={selectStyle}>
+                <label htmlFor="ct-service" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">Service you&apos;re interested in</label>
+                <select id="ct-service" required className="w-full rounded-xl border border-white/10 bg-white/3 text-white text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all appearance-none cursor-pointer" style={selectStyle}>
                   <option value="" className="bg-brand-ink">Select a service...</option>
                   <option value="web" className="bg-brand-ink">Web Design &amp; Development</option>
                   <option value="social" className="bg-brand-ink">Social Media</option>
@@ -121,8 +139,8 @@ export default function ContactClient() {
                 </select>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">Monthly budget (AUD, ex-GST)</label>
-                <select className="w-full rounded-xl border border-white/10 bg-white/[0.03] text-white/70 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all appearance-none cursor-pointer" style={selectStyle}>
+                <label htmlFor="ct-budget" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">Monthly budget (AUD, ex-GST)</label>
+                <select id="ct-budget" required className="w-full rounded-xl border border-white/10 bg-white/3 text-white text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all appearance-none cursor-pointer" style={selectStyle}>
                   <option value="" className="bg-brand-ink">Select budget range...</option>
                   <option value="2-5" className="bg-brand-ink">$2,000 – $5,000 / month</option>
                   <option value="5-10" className="bg-brand-ink">$5,000 – $10,000 / month</option>
@@ -132,8 +150,8 @@ export default function ContactClient() {
                 </select>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">Tell us about your project</label>
-                <textarea rows={5} placeholder="What are you trying to achieve? Where are you now, and where do you want to be? The more context you share, the better our first conversation will be." className="w-full rounded-xl border border-white/10 bg-white/[0.03] text-white placeholder:text-white/25 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all resize-none leading-relaxed"></textarea>
+                <label htmlFor="ct-message" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">Tell us about your project</label>
+                <textarea id="ct-message" rows={5} placeholder="What are you trying to achieve? Where are you now, and where do you want to be? The more context you share, the better our first conversation will be." className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/40 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all resize-none leading-relaxed"></textarea>
               </div>
               <button type="submit" className="group self-start inline-flex items-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-8 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(33,186,128,0.35)]">
                 Send enquiry
@@ -149,7 +167,7 @@ export default function ContactClient() {
           <div className="ct-sidebar opacity-0 translate-y-8 flex flex-col gap-5 lg:sticky lg:top-24">
 
             {/* Book a call */}
-            <div className="relative rounded-2xl overflow-hidden p-6 bg-gradient-to-br from-brand-400 to-brand-300 text-brand-700">
+            <div className="relative rounded-2xl overflow-hidden p-6 bg-linear-to-br from-brand-400 to-brand-300 text-brand-700">
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_100%_0%,rgba(255,255,255,0.2),transparent_60%)]"></div>
               <div className="relative">
                 <p className="text-[0.65rem] font-black uppercase tracking-[0.2em] opacity-60 mb-3">Skip the form</p>
@@ -171,7 +189,7 @@ export default function ContactClient() {
             </div>
 
             {/* Direct contact */}
-            <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-6 flex flex-col gap-4">
+            <div className="rounded-2xl border border-white/5 bg-white/2 p-6 flex flex-col gap-4">
               <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/40">Or reach us directly</p>
               <a href="mailto:studio@brandmates.com.au" className="group flex items-center gap-3 text-white/70 hover:text-brand-400 transition-colors text-sm">
                 <span className="w-8 h-8 rounded-lg bg-white/5 group-hover:bg-brand-400/10 flex items-center justify-center transition-colors shrink-0"><EmailIcon /></span>
@@ -189,7 +207,7 @@ export default function ContactClient() {
             </div>
 
             {/* Offices */}
-            <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-6 grid grid-cols-2 gap-4">
+            <div className="rounded-2xl border border-white/5 bg-white/2 p-6 grid grid-cols-2 gap-4">
               <div>
                 <p className="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-brand-300 mb-2">Sydney HQ</p>
                 <address className="not-italic text-white/55 text-xs leading-relaxed">Level 3, 56 Foveaux St<br />Surry Hills NSW 2010</address>
