@@ -93,9 +93,9 @@ export default function JournalClient() {
       <section className="px-6 sm:px-10 md:px-16 pb-12">
         <div className="max-w-7xl mx-auto">
           <Link href={`/journal/${featuredArticle.slug}`} className={`jn-featured opacity-0 translate-y-8 group relative block rounded-3xl overflow-hidden bg-linear-to-br ${featuredArticle.gradient}`}>
-            <div className="aspect-16/7 md:aspect-16/6 relative">
+            <div className="aspect-4/3 sm:aspect-16/7 md:aspect-16/6 relative">
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_80%,rgba(255,255,255,0.08),transparent_50%)]"></div>
-              <div className="absolute inset-0 flex items-end p-8 md:p-14">
+              <div className="absolute inset-0 flex items-end p-6 sm:p-8 md:p-14">
                 <div className="max-w-2xl">
                   <div className="flex flex-wrap items-center gap-3 mb-5">
                     <span className="px-3 py-1 rounded-full bg-brand-400/20 border border-brand-400/30 text-brand-300 text-xs font-bold uppercase tracking-wider">{featuredArticle.tag}</span>
