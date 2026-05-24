@@ -390,7 +390,7 @@ export default function HomeClient() {
           <div className="flex flex-col gap-12 md:gap-24">
             {/* Project 01, Aura */}
             <article className="project group grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center opacity-0 translate-y-8">
-              <Link href="/work/aura" className="block md:col-span-7 relative aspect-[4/3] rounded-2xl overflow-hidden bg-linear-to-br from-brand-700 via-brand-500 to-brand-400 cursor-pointer">
+              <Link href="/work/aura" className="block md:col-span-7 relative aspect-4/3 rounded-2xl overflow-hidden bg-linear-to-br from-brand-700 via-brand-500 to-brand-400 cursor-pointer">
                 <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full border border-white/15"></div>
                 <div className="absolute -top-10 -right-10 w-60 h-60 rounded-full border border-white/10"></div>
                 <div className="absolute top-8 right-8 w-24 h-24 rounded-full bg-brand-300/30 blur-2xl"></div>
@@ -431,7 +431,7 @@ export default function HomeClient() {
                   ))}
                 </div>
               </div>
-              <Link href="/work/meridian" className="order-1 block md:col-span-7 md:order-2 relative aspect-[4/3] rounded-2xl overflow-hidden bg-linear-to-br from-zinc-900 via-brand-700 to-zinc-800 cursor-pointer">
+              <Link href="/work/meridian" className="order-1 block md:col-span-7 md:order-2 relative aspect-4/3 rounded-2xl overflow-hidden bg-linear-to-br from-zinc-900 via-brand-700 to-zinc-800 cursor-pointer">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(245,158,11,0.35)_0%,transparent_45%)]"></div>
                 <div className="absolute left-8 top-8 flex flex-col gap-1 text-amber-200/50 text-[0.65rem] tracking-[0.2em] uppercase">
                   <span>Est. 2024</span><span>14 Suites</span>
@@ -448,7 +448,7 @@ export default function HomeClient() {
 
             {/* Project 03, Forge */}
             <article className="project group grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center opacity-0 translate-y-8">
-              <Link href="/work/forge" className="block md:col-span-7 relative aspect-[4/3] rounded-2xl overflow-hidden bg-brand-ink cursor-pointer">
+              <Link href="/work/forge" className="block md:col-span-7 relative aspect-4/3 rounded-2xl overflow-hidden bg-brand-ink cursor-pointer">
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(33,186,128,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(33,186,128,0.12)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
                 <div className="absolute inset-0 bg-[linear-gradient(135deg,transparent_0%,transparent_40%,rgba(33,186,128,0.2)_40%,rgba(33,186,128,0.2)_50%,transparent_50%)]"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -489,7 +489,7 @@ export default function HomeClient() {
                   ))}
                 </div>
               </div>
-              <Link href="/work/clarity" className="order-1 block md:col-span-7 md:order-2 relative aspect-[4/3] rounded-2xl overflow-hidden bg-linear-to-br from-brand-50 via-brand-100 to-brand-200 cursor-pointer">
+              <Link href="/work/clarity" className="order-1 block md:col-span-7 md:order-2 relative aspect-4/3 rounded-2xl overflow-hidden bg-linear-to-br from-brand-50 via-brand-100 to-brand-200 cursor-pointer">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[55%] aspect-square rounded-full border-[12px] border-brand-500/25"></div>
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30%] aspect-square rounded-full bg-brand-500/30"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
