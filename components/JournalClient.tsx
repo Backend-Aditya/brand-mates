@@ -184,7 +184,10 @@ export default function JournalClient() {
                 <p className="text-white/55 text-base">What&apos;s working in AU digital marketing right now, no filler, no agency self-promotion. Just the stuff worth knowing.</p>
               </div>
               <form className="flex flex-col sm:flex-row gap-3 shrink-0 w-full md:w-auto" onSubmit={(e) => e.preventDefault()}>
+                <label htmlFor="newsletter-email" className="sr-only">Email address</label>
                 <input
+                  id="newsletter-email"
+                  name="email"
                   type="email"
                   placeholder="you@company.com.au"
                   className="flex-1 md:w-64 rounded-full border border-white/15 bg-white/10 text-white placeholder:text-white/40 text-sm px-6 py-3.5 outline-none focus:border-brand-400/60 transition-colors"
