@@ -265,7 +265,7 @@ export default function HomeClient() {
             { target: "98",  suffix: "%", label: "Client Retention"   },
             { target: "40",  suffix: "+", label: "AGDA & Award Wins"  },
           ].map(({ target, suffix, label }, i) => (
-            <div key={label} className={`stat flex flex-col gap-2 py-8 md:py-10 px-6 md:px-10${i > 0 ? " border-l border-white/5" : ""}${i >= 2 ? " border-t border-white/5 md:border-t-0" : ""}`}>
+            <div key={label} className={`stat flex flex-col gap-2 py-8 md:py-10 px-6 md:px-10${i % 2 !== 0 ? " border-l border-white/5" : i >= 2 ? " md:border-l" : ""}${i >= 2 ? " border-t border-white/5 md:border-t-0" : ""}`}>
               <div className="flex items-end gap-0.5 leading-none">
                 <span className="stat-number text-[2.5rem] md:text-5xl font-black text-white tracking-tight leading-none" data-target={target}>0</span>
                 <span className="text-2xl md:text-3xl font-black text-brand-400 tracking-tight leading-none pb-1">{suffix}</span>

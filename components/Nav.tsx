@@ -136,6 +136,9 @@ export default function Nav() {
         }
         isMenuOpen.current = !isMenuOpen.current;
         navToggler!.classList.toggle("open", isMenuOpen.current);
+        navToggler!.setAttribute("aria-expanded", String(isMenuOpen.current));
+        const navMenu = document.getElementById("nav-menu");
+        if (navMenu) navMenu.setAttribute("aria-hidden", String(!isMenuOpen.current));
       }
 
       navToggler.addEventListener("click", handleClick);
@@ -157,6 +160,8 @@ export default function Nav() {
       isMenuOpen.current = false;
       const toggler = document.querySelector<HTMLButtonElement>(".nav-toggler");
       toggler?.classList.remove("open");
+      toggler?.setAttribute("aria-expanded", "false");
+      document.getElementById("nav-menu")?.setAttribute("aria-hidden", "true");
     }
   }, [pathname]);
 
@@ -182,7 +187,7 @@ export default function Nav() {
         </button>
       </nav>
 
-      <div className="nav-content fixed inset-0 w-full h-svh pointer-events-none z-90 overflow-hidden">
+      <div id="nav-menu" aria-hidden="true" className="nav-content fixed inset-0 w-full h-svh pointer-events-none z-90 overflow-hidden">
         <div className="nav-bg absolute inset-0 -z-10 origin-top scale-y-0 will-change-transform bg-brand-300"></div>
         <div className="nav-bg absolute inset-0 -z-10 origin-top scale-y-0 will-change-transform bg-brand-700"></div>
         <div className="nav-bg absolute inset-0 -z-10 origin-top scale-y-0 will-change-transform bg-brand-500"></div>
