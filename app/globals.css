@@ -40,19 +40,27 @@
   z-index: 1;
 }
 
-/* Nav toggler transforms */
-.nav-toggler span {
-  transition: transform 0.4s ease;
-}
-.nav-toggler.open span:first-child {
-  transform: translateY(3.5px) rotate(45deg) scaleX(0.75);
-}
-.nav-toggler.open span:nth-child(2) {
-  transform: translateY(-3.5px) rotate(-45deg) scaleX(0.75);
+/* Nav auto-hide on scroll */
+.nav-autohide {
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
-/* SplitText line hidden state */
-.nav-content a .line {
+/* Nav toggler transforms */
+.nav-toggler svg rect {
+  transition: transform 0.4s ease;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.nav-toggler.open .bar-top {
+  transform: translateY(5px) rotate(45deg) scaleX(0.75);
+}
+.nav-toggler.open .bar-bottom {
+  transform: translateY(-5px) rotate(-45deg) scaleX(0.75);
+}
+
+/* Nav link initial hidden state */
+.nav-primary-links a {
   display: block;
   transform: translateY(100%);
   will-change: transform;
@@ -80,6 +88,11 @@
 .link-underline:hover::after {
   transform: scaleX(1);
   transform-origin: left;
+}
+
+/* Select placeholder vs filled state */
+select:invalid {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 /* FAQ toggle chip */

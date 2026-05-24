@@ -43,44 +43,51 @@ export default function StudioClient() {
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
       gsap.registerPlugin(ScrollTrigger);
 
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.querySelectorAll<HTMLElement>(".opacity-0").forEach((el) => {
+          el.style.opacity = "1";
+          el.style.translate = "none";
+          el.style.transform = "none";
+        });
+        return;
+      }
+
+      const mobile = ScrollTrigger.isTouch === 1;
+
+      document.querySelectorAll<HTMLElement>(".opacity-0").forEach((el) => {
+        [...el.classList].filter(c => c.startsWith("translate-y-") || c.startsWith("-translate-y-")).forEach(c => el.classList.remove(c));
+        el.style.transition = "none";
+      });
+
       ctx = gsap.context(() => {
         const ease = "power4.out";
+        const y    = mobile ? 10 : 20;
+        const dur  = mobile ? 0.45 : 0.65;
+        const ST   = { start: "top bottom+=150" as const, once: true };
+        const from = { opacity: 0, y };
+        const to   = { opacity: 1, y: 0, duration: dur, ease, force3D: true, clearProps: "translate,transition" };
 
-        // Hero entrance
         const tl = gsap.timeline({ defaults: { ease } });
-        tl.fromTo(".st-eyebrow", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.55 }, 0.3);
-        tl.fromTo(".st-heading", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.9, ease: "expo.out" }, 0.45);
-        tl.fromTo(".st-intro",   { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7 }, 0.65);
+        tl.fromTo(".st-eyebrow", from, to, 0.3);
+        tl.fromTo(".st-heading", from, to, 0.4);
+        tl.fromTo(".st-intro",   from, to, 0.5);
 
-        // Values
-        gsap.fromTo(".st-values-head", { opacity: 0, y: 12 }, {
-          opacity: 1, y: 0, duration: 0.55, ease,
-          scrollTrigger: { trigger: ".st-values-head", start: "top bottom", once: true },
-        });
+        gsap.fromTo(".st-values-head", from, { ...to, scrollTrigger: { trigger: ".st-values-head", ...ST } });
         ScrollTrigger.batch(".st-value", {
-          onEnter: (els) => gsap.fromTo(els, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.65, stagger: 0.06, ease }),
-          start: "top bottom", once: true,
+          onEnter: (els) => gsap.fromTo(els, from, { ...to, stagger: 0.07 }),
+          ...ST,
         });
 
-        // Team
-        gsap.fromTo(".st-team-head", { opacity: 0, y: 12 }, {
-          opacity: 1, y: 0, duration: 0.55, ease,
-          scrollTrigger: { trigger: ".st-team-head", start: "top bottom", once: true },
-        });
+        gsap.fromTo(".st-team-head", from, { ...to, scrollTrigger: { trigger: ".st-team-head", ...ST } });
         ScrollTrigger.batch(".st-card", {
-          onEnter: (els) => gsap.fromTo(els, { opacity: 0, y: 20, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.06, ease }),
-          start: "top bottom", once: true,
+          onEnter: (els) => gsap.fromTo(els, from, { ...to, stagger: 0.07 }),
+          ...ST,
         });
 
-        // Careers
-        gsap.fromTo(".st-careers-head", { opacity: 0, y: 12 }, {
-          opacity: 1, y: 0, duration: 0.55, ease,
-          scrollTrigger: { trigger: ".st-careers-head", start: "top bottom", once: true },
-        });
-
+        gsap.fromTo(".st-careers-head", from, { ...to, scrollTrigger: { trigger: ".st-careers-head", ...ST } });
         ScrollTrigger.batch(".st-role", {
-          onEnter: (els) => gsap.fromTo(els, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.07, ease }),
-          start: "top bottom", once: true,
+          onEnter: (els) => gsap.fromTo(els, from, { ...to, stagger: 0.07 }),
+          ...ST,
         });
 
         ScrollTrigger.refresh();
@@ -95,18 +102,16 @@ export default function StudioClient() {
     <>
       {/* PAGE HERO */}
       <section className="relative w-full pt-36 md:pt-44 pb-20 md:pb-28 px-6 sm:px-10 md:px-16 overflow-hidden">
-        <div className="pointer-events-none absolute -top-40 right-0 w-[500px] h-[500px] rounded-full bg-brand-400/6 blur-[100px]"></div>
         <div className="relative max-w-7xl mx-auto">
           <div className="st-eyebrow opacity-0 translate-y-4 flex items-center gap-2.5 mb-6">
-            <span className="w-8 h-px bg-brand-400"></span>
             <span className="text-xs font-medium tracking-[0.08em] uppercase text-brand-400">The Studio · Est. Sydney 2017</span>
           </div>
-          <h1 className="st-heading opacity-0 translate-y-6 text-[2.5rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] font-extrabold tracking-[-0.03em] leading-[1.02] text-white max-w-3xl mb-8">
+          <h1 className="st-heading opacity-0 translate-y-6 text-[1.875rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-7xl xl:text-[5.5rem] font-extrabold tracking-[-0.03em] leading-[1.02] text-white max-w-3xl mb-8">
             We&apos;re BrandMates.<br />
-            <span className="bg-gradient-to-r from-brand-400 to-brand-300 bg-clip-text text-transparent">We give a damn.</span>
+            <span className="bg-linear-to-r from-brand-400 to-brand-300 bg-clip-text text-transparent">We give a damn.</span>
           </h1>
           <p className="st-intro opacity-0 translate-y-6 text-white/55 text-base md:text-xl leading-relaxed max-w-2xl">
-            Founded in Surry Hills in 2017, BrandMates is the studio ambitious Australian founders and CMOs call when they&apos;re done with average. We&apos;re six senior creatives who moved here from big-agency land because we believed smaller teams do better work — and after 150+ projects, we still believe it.
+            Founded in Surry Hills in 2017, BrandMates is the studio Australian founders and CMOs call when the brief is too important for a junior account manager. We&apos;re six senior creatives who left big-agency land because we believed smaller teams do better work, and after 150+ projects, we still believe it.
           </p>
         </div>
       </section>
@@ -135,7 +140,7 @@ export default function StudioClient() {
                 </svg>
               </div>
               <h3 className="text-white font-bold text-xl mb-3">Restlessly curious</h3>
-              <p className="text-white/55 text-sm leading-relaxed">The Australian market moves fast. We stay ahead of platform changes, cultural shifts, and what&apos;s working in market — not in a New York case study.</p>
+              <p className="text-white/55 text-sm leading-relaxed">The Australian market moves fast. We stay ahead of platform changes, cultural shifts, and what&apos;s working in market, not in a New York case study.</p>
             </div>
             <div className="st-value opacity-0 translate-y-6 bg-brand-ink p-8 md:p-10">
               <div className="w-10 h-10 rounded-lg bg-brand-400/10 border border-brand-400/20 flex items-center justify-center text-brand-400 mb-6">
@@ -147,7 +152,7 @@ export default function StudioClient() {
                 </svg>
               </div>
               <h3 className="text-white font-bold text-xl mb-3">Genuinely local</h3>
-              <p className="text-white/55 text-sm leading-relaxed">We live, eat, and commute in the same cities as your customers. That local understanding isn&apos;t a differentiator — it&apos;s a prerequisite.</p>
+              <p className="text-white/55 text-sm leading-relaxed">We live, eat, and commute in the same cities as your customers. That local understanding isn&apos;t a differentiator, it&apos;s a prerequisite.</p>
             </div>
           </div>
         </div>
@@ -164,12 +169,12 @@ export default function StudioClient() {
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">Six humans.<br />Zero hand-offs.</h2>
             </div>
-            <p className="text-white/50 text-sm leading-relaxed max-w-sm">Every client has a dedicated point of contact and a team that actually does the work — no account managers passing briefs to juniors.</p>
+            <p className="text-white/50 text-sm leading-relaxed max-w-sm">Every client has a dedicated point of contact and a team that actually does the work, no account managers passing briefs to juniors.</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 rounded-3xl overflow-hidden border border-white/5">
             {teamMembers.map((member) => (
               <div key={member.name} className="st-card opacity-0 translate-y-6 group bg-brand-700 p-8 hover:bg-brand-ink/80 transition-colors duration-500">
-                <div className={`relative aspect-square w-full mb-6 rounded-2xl overflow-hidden bg-gradient-to-br ${member.gradient}`}>
+                <div className={`relative aspect-square w-full mb-6 rounded-2xl overflow-hidden bg-linear-to-br ${member.gradient}`}>
                   <div className="absolute inset-0 flex items-center justify-center">
                     <span className="text-white/95 font-black text-7xl tracking-tighter drop-shadow-lg">{member.initials}</span>
                   </div>
@@ -181,7 +186,7 @@ export default function StudioClient() {
                 <p className="text-brand-300 text-sm font-medium mt-1">{member.role}</p>
                 <p className="text-white/50 text-sm leading-relaxed mt-4">{member.bio}</p>
                 <div className="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
-                  <span className="text-xs text-white/40 uppercase tracking-wider">{member.location}</span>
+                  <span className="text-xs text-white/50 uppercase tracking-wider">{member.location}</span>
                   <a href="#" className="w-8 h-8 rounded-full bg-white/5 hover:bg-brand-400 hover:text-brand-700 text-white/60 flex items-center justify-center transition-all duration-300">
                     <LinkedInIcon />
                   </a>
@@ -201,10 +206,10 @@ export default function StudioClient() {
               <span className="text-xs font-medium tracking-[0.08em] uppercase text-brand-400">Open Roles · 2 positions</span>
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">Come work with us.</h2>
-            <p className="text-white/50 text-base leading-relaxed mt-4 max-w-xl">We hire experienced people who are tired of big-agency politics and want to do the best work of their careers on interesting Australian brands.</p>
+            <p className="text-white/50 text-base leading-relaxed mt-4 max-w-xl">We hire experienced people who are tired of big-agency politics and want to work on fewer, more considered Australian brands.</p>
           </div>
           <div className="flex flex-col gap-4">
-            <div className="st-role opacity-0 translate-y-6 group flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 md:p-8 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-brand-400/30 hover:bg-brand-400/5 transition-all duration-300">
+            <div className="st-role opacity-0 translate-y-6 group flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 md:p-8 rounded-2xl border border-white/5 bg-white/2 hover:border-brand-400/30 hover:bg-brand-400/5 transition-all duration-300">
               <div>
                 <h3 className="text-white font-bold text-lg">Senior Web Developer</h3>
                 <div className="flex flex-wrap gap-2 mt-2">
@@ -217,7 +222,7 @@ export default function StudioClient() {
                 Apply now <ArrowRight />
               </Link>
             </div>
-            <div className="st-role opacity-0 translate-y-6 group flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 md:p-8 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-brand-400/30 hover:bg-brand-400/5 transition-all duration-300">
+            <div className="st-role opacity-0 translate-y-6 group flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 md:p-8 rounded-2xl border border-white/5 bg-white/2 hover:border-brand-400/30 hover:bg-brand-400/5 transition-all duration-300">
               <div>
                 <h3 className="text-white font-bold text-lg">Social Media Manager</h3>
                 <div className="flex flex-wrap gap-2 mt-2">

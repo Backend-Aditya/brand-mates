@@ -20,7 +20,7 @@ const ArrowIcon = ({ size = 14 }: { size?: number }) => (
 );
 
 const SocialIcon = ({ children, label }: { children: React.ReactNode; label: string }) => (
-  <a href="#" aria-label={label} className="w-10 h-10 rounded-full border border-white/10 bg-white/[0.02] text-white/60 hover:text-brand-700 hover:bg-brand-400 hover:border-brand-400 flex items-center justify-center transition-all duration-300">
+  <a href="#" aria-label={label} className="w-10 h-10 rounded-full border border-white/10 bg-white/2 text-white/60 hover:text-brand-700 hover:bg-brand-400 hover:border-brand-400 flex items-center justify-center transition-all duration-300">
     {children}
   </a>
 );
@@ -28,20 +28,18 @@ const SocialIcon = ({ children, label }: { children: React.ReactNode; label: str
 export default function Footer() {
   return (
     <footer id="footer" className="relative w-full overflow-hidden bg-[#0a0a0a] border-t border-white/5">
-      <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-brand-400/10 blur-[120px]"></div>
-
       {/* Giant wordmark */}
       <div className="relative border-b border-white/5 overflow-hidden">
-        <div className="ft-mark opacity-0 translate-y-10 py-10 md:py-14 px-6 sm:px-10 md:px-16 max-w-[1600px] mx-auto">
+        <div className="ft-mark opacity-0 translate-y-10 py-10 md:py-14 px-6 sm:px-10 md:px-16 max-w-400 mx-auto">
           <div className="flex items-center gap-4 md:gap-8">
             <span
-              className="font-black leading-none tracking-[-0.06em] bg-gradient-to-br from-white via-white/90 to-brand-400 bg-clip-text text-transparent whitespace-nowrap pr-[0.08em]"
+              className="font-black leading-none tracking-[-0.06em] bg-linear-to-br from-white via-white/90 to-brand-400 bg-clip-text text-transparent whitespace-nowrap pr-[0.08em]"
               style={{ fontSize: "clamp(3.5rem, 12vw, 12rem)" }}
             >
               BrandMates
             </span>
             <div className="hidden md:flex flex-1 items-center justify-end gap-6">
-              <div className="h-px bg-white/10 flex-1 max-w-[240px]"></div>
+              <div className="h-px bg-white/10 flex-1 max-w-60"></div>
               <div className="flex flex-col items-end shrink-0">
                 <span className="text-[0.65rem] font-bold uppercase tracking-[0.25em] text-brand-300">Est. 2017</span>
                 <span className="text-[0.65rem] font-bold uppercase tracking-[0.25em] text-white/40 mt-1">Sydney · Melbourne</span>
@@ -64,11 +62,11 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-white/55 text-sm leading-relaxed max-w-xs">
-              An Australian brand studio for founders and CMOs who refuse to blend in. Strategy, identity, and launch — end to end, in your timezone.
+              An Australian brand studio for founders and CMOs who need the work to actually hold up. Strategy, identity, and launch, end to end, in your timezone.
             </p>
             <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
               <label className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-300">Studio dispatch</label>
-              <div className="flex items-center gap-0 rounded-full border border-white/10 bg-white/[0.02] focus-within:border-brand-400/60 transition-colors overflow-hidden pl-5 pr-1 py-1">
+              <div className="flex items-center gap-0 rounded-full border border-white/10 bg-white/2 focus-within:border-brand-400/60 transition-colors overflow-hidden pl-5 pr-1 py-1">
                 <input type="email" placeholder="you@company.com.au" className="flex-1 bg-transparent border-0 outline-none text-white placeholder:text-white/30 text-sm py-2" />
                 <button type="submit" className="shrink-0 w-9 h-9 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 flex items-center justify-center transition-colors">
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -76,7 +74,7 @@ export default function Footer() {
                   </svg>
                 </button>
               </div>
-              <span className="text-white/35 text-[0.7rem]">One thoughtful email a month. No spam, no lead-magnets.</span>
+              <span className="text-white/35 text-[0.7rem]">One email a month. What&apos;s working in AU digital marketing right now.</span>
             </form>
           </div>
 
@@ -176,9 +174,9 @@ export default function Footer() {
       <div className="relative border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-16 py-8">
           <div className="ft-ack opacity-0 flex items-start gap-4 text-white/55 text-xs md:text-sm leading-relaxed max-w-3xl">
-            <span className="shrink-0 mt-0.5 w-1 h-10 bg-gradient-to-b from-brand-400 via-orange-400 to-red-500 rounded-full"></span>
+            <span className="shrink-0 mt-0.5 w-1 h-10 bg-linear-to-b from-brand-400 via-orange-400 to-red-500 rounded-full"></span>
             <p>
-              BrandMates acknowledges the Gadigal people of the Eora Nation and the Wurundjeri people of the Kulin Nation — the Traditional Custodians of the lands on which our studios are built. We pay our respects to Elders past, present, and emerging, and extend that respect to all Aboriginal and Torres Strait Islander peoples.
+              BrandMates acknowledges the Gadigal people of the Eora Nation and the Wurundjeri people of the Kulin Nation, the Traditional Custodians of the lands on which our studios are built. We pay our respects to Elders past, present, and emerging, and extend that respect to all Aboriginal and Torres Strait Islander peoples.
             </p>
           </div>
         </div>
