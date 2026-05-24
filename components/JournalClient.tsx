@@ -93,15 +93,21 @@ export default function JournalClient() {
       <section className="px-6 sm:px-10 md:px-16 pb-12">
         <div className="max-w-7xl mx-auto">
           <Link href={`/journal/${featuredArticle.slug}`} className={`jn-featured opacity-0 translate-y-8 group relative block rounded-3xl overflow-hidden bg-linear-to-br ${featuredArticle.gradient}`}>
-            <div className="aspect-4/3 sm:aspect-16/7 md:aspect-16/6 relative">
+            {/* Gradient image area */}
+            <div className="aspect-video sm:aspect-16/7 md:aspect-16/6 relative">
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_80%,rgba(255,255,255,0.08),transparent_50%)]"></div>
-              <div className="absolute inset-0 flex items-end p-6 sm:p-8 md:p-14">
+              {/* Centered initials watermark */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-white/10 font-black text-8xl tracking-tighter select-none">{featuredArticle.initials}</span>
+              </div>
+              {/* Overlay text — tablet+ only */}
+              <div className="absolute inset-0 hidden sm:flex items-end p-8 md:p-14">
                 <div className="max-w-2xl">
                   <div className="flex flex-wrap items-center gap-3 mb-5">
                     <span className="px-3 py-1 rounded-full bg-brand-400/20 border border-brand-400/30 text-brand-300 text-xs font-bold uppercase tracking-wider">{featuredArticle.tag}</span>
                     <span className="text-white/45 text-xs">{featuredArticle.date} · {featuredArticle.readTime}</span>
                   </div>
-                  <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight mb-4">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight mb-4">
                     {featuredArticle.title}
                   </h2>
                   <p className="text-white/65 text-base leading-relaxed hidden md:block">
@@ -113,6 +119,18 @@ export default function JournalClient() {
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                   <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
+              </span>
+            </div>
+            {/* Card body — mobile only, matches grid article style */}
+            <div className="sm:hidden flex flex-col gap-3 p-5 bg-brand-700/70">
+              <div className="flex items-center gap-2">
+                <span className="px-2.5 py-0.5 rounded-full bg-brand-400/20 text-brand-300 text-[0.65rem] font-bold uppercase tracking-wider">{featuredArticle.tag}</span>
+                <span className="text-white/30 text-xs">{featuredArticle.date}</span>
+              </div>
+              <h2 className="text-white font-bold text-lg leading-snug group-hover:text-brand-300 transition-colors">{featuredArticle.title}</h2>
+              <p className="text-white/50 text-sm leading-relaxed">{featuredArticle.excerpt}</p>
+              <span className="inline-flex items-center gap-2 text-xs font-semibold text-brand-400 mt-1">
+                Read article <ReadMoreArrow />
               </span>
             </div>
           </Link>

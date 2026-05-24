@@ -110,7 +110,7 @@ export default function WorkClient() {
 
           {/* Project 1, Saltbush (full width) */}
           <Link href={`/work/${workProjects[0].slug}`} className="wk-project group relative rounded-3xl overflow-hidden bg-linear-to-br from-brand-700 via-brand-500 to-brand-400 opacity-0 translate-y-8">
-            <div className="aspect-video sm:aspect-16/7 relative">
+            <div className="aspect-4/3 sm:aspect-16/7 relative">
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_60%,rgba(255,255,255,0.12),transparent_60%)]"></div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <span className="text-white/10 font-black text-[20vw] leading-none tracking-tighter select-none">SB</span>
@@ -137,7 +137,7 @@ export default function WorkClient() {
           {/* Projects 2 + 3 */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <Link href={`/work/${workProjects[1].slug}`} className="wk-project group relative rounded-3xl overflow-hidden bg-linear-to-br from-zinc-900 via-brand-700 to-zinc-800 opacity-0 translate-y-8">
-              <div className="aspect-video sm:aspect-4/3 relative">
+              <div className="aspect-4/3 relative">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(33,186,128,0.2),transparent_60%)]"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-white/8 font-black text-[18vw] md:text-[10vw] leading-none tracking-tighter select-none">KR</span>
@@ -157,7 +157,7 @@ export default function WorkClient() {
             </Link>
 
             <Link href={`/work/${workProjects[2].slug}`} className="wk-project group relative rounded-3xl overflow-hidden bg-linear-to-br from-brand-50 via-brand-100 to-brand-200 opacity-0 translate-y-8">
-              <div className="aspect-video sm:aspect-4/3 relative">
+              <div className="aspect-4/3 relative">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-brand-700/10 font-black text-[18vw] md:text-[10vw] leading-none tracking-tighter select-none">HC</span>
                 </div>
@@ -179,7 +179,7 @@ export default function WorkClient() {
           {/* Projects 4 + 5 */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <Link href={`/work/${workProjects[3].slug}`} className="wk-project group relative rounded-3xl overflow-hidden opacity-0 translate-y-8" style={{ background: "linear-gradient(135deg, #1a0a2e 0%, #2d1b69 50%, #1a0a2e 100%)" }}>
-              <div className="aspect-video sm:aspect-4/3 relative">
+              <div className="aspect-4/3 relative">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(87,206,165,0.15),transparent_60%)]"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-white/8 font-black text-[18vw] md:text-[10vw] leading-none tracking-tighter select-none">TC</span>
@@ -199,7 +199,7 @@ export default function WorkClient() {
             </Link>
 
             <Link href={`/work/${workProjects[4].slug}`} className="wk-project group relative rounded-3xl overflow-hidden bg-linear-to-br from-orange-950 via-amber-900 to-orange-950 opacity-0 translate-y-8">
-              <div className="aspect-video sm:aspect-4/3 relative">
+              <div className="aspect-4/3 relative">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(251,146,60,0.2),transparent_60%)]"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-white/8 font-black text-[18vw] md:text-[10vw] leading-none tracking-tighter select-none">BL</span>
