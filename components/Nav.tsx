@@ -8,7 +8,6 @@ import { usePathname } from "next/navigation";
 export default function Nav() {
   const pathname = usePathname();
   const isMenuOpen = useRef(false);
-  const isAnimating = useRef(false);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
   const navRef = useRef<HTMLElement>(null);
 
@@ -112,14 +111,7 @@ export default function Nav() {
 
       const linkEls = document.querySelectorAll<HTMLElement>(".nav-primary-links a");
 
-      const tl = gsap.timeline({
-        paused: true,
-        onStart: () => { isAnimating.current = true; },
-        onComplete: () => { isAnimating.current = false; },
-        onReverseComplete: () => {
-          isAnimating.current = false;
-        },
-      });
+      const tl = gsap.timeline({ paused: true });
 
       tl.to(navBgs, { scaleY: 1, duration: 0.75, stagger: 0.1, ease: "power3.inOut" });
       tl.to(".nav-items", { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 0.75, ease: "power3.inOut" }, "-=0.6");
@@ -128,7 +120,6 @@ export default function Nav() {
       tlRef.current = tl;
 
       function handleClick() {
-        if (isAnimating.current) return;
         if (!isMenuOpen.current) {
           tl.play();
           document.body.style.overflow = "hidden";
