@@ -119,13 +119,23 @@ export default function Nav() {
 
       tlRef.current = tl;
 
+      const lockScroll = () => {
+        const sb = window.innerWidth - document.documentElement.clientWidth;
+        document.body.style.overflow = "hidden";
+        document.body.style.paddingRight = sb > 0 ? `${sb}px` : "";
+      };
+      const unlockScroll = () => {
+        document.body.style.overflow = "";
+        document.body.style.paddingRight = "";
+      };
+
       function handleClick() {
         if (!isMenuOpen.current) {
           tl.play();
-          document.body.style.overflow = "hidden";
+          lockScroll();
         } else {
           tl.reverse();
-          document.body.style.overflow = "";
+          unlockScroll();
         }
         isMenuOpen.current = !isMenuOpen.current;
         navToggler!.classList.toggle("open", isMenuOpen.current);
@@ -152,6 +162,7 @@ export default function Nav() {
       tlRef.current.reverse();
       isMenuOpen.current = false;
       document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
       const toggler = document.querySelector<HTMLButtonElement>(".nav-toggler");
       toggler?.classList.remove("open");
       toggler?.setAttribute("aria-expanded", "false");
