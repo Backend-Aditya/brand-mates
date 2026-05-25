@@ -107,11 +107,12 @@ select:invalid {
 }
 
 /* Custom scrollbar */
+:root { --scrollbar-w: 8px; }
 html, body {
   scrollbar-width: thin;
   scrollbar-color: #4caf50 #141414;
 }
-::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar { width: var(--scrollbar-w); height: var(--scrollbar-w); }
 ::-webkit-scrollbar-track { background: #141414; }
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, #4caf50, #2e7d32);

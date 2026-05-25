@@ -120,13 +120,21 @@ export default function Nav() {
       tlRef.current = tl;
 
       const lockScroll = () => {
-        const sb = window.innerWidth - document.documentElement.clientWidth;
+        const sb = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--scrollbar-w")) || 0;
+        if (sb <= 0) return;
         document.body.style.overflow = "hidden";
-        document.body.style.paddingRight = sb > 0 ? `${sb}px` : "";
+        document.body.style.paddingRight = `${sb}px`;
+        const navEl = navRef.current;
+        if (navEl) {
+          const pr = parseFloat(getComputedStyle(navEl).paddingRight) || 0;
+          navEl.style.paddingRight = `${pr + sb}px`;
+        }
       };
       const unlockScroll = () => {
         document.body.style.overflow = "";
         document.body.style.paddingRight = "";
+        const navEl = navRef.current;
+        if (navEl) navEl.style.paddingRight = "";
       };
 
       function handleClick() {
@@ -163,6 +171,7 @@ export default function Nav() {
       isMenuOpen.current = false;
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
+      if (navRef.current) navRef.current.style.paddingRight = "";
       const toggler = document.querySelector<HTMLButtonElement>(".nav-toggler");
       toggler?.classList.remove("open");
       toggler?.setAttribute("aria-expanded", "false");
