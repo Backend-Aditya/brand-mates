@@ -187,7 +187,7 @@ export default function Nav() {
         </button>
       </nav>
 
-      <div id="nav-menu" aria-hidden="true" className="nav-content fixed inset-0 w-full h-svh pointer-events-none z-90 overflow-hidden">
+      <div id="nav-menu" aria-hidden="true" className="nav-content fixed inset-0 w-full pointer-events-none z-90 overflow-hidden">
         <div className="nav-bg absolute inset-0 -z-10 origin-top scale-y-0 will-change-transform bg-brand-300"></div>
         <div className="nav-bg absolute inset-0 -z-10 origin-top scale-y-0 will-change-transform bg-brand-700"></div>
         <div className="nav-bg absolute inset-0 -z-10 origin-top scale-y-0 will-change-transform bg-brand-500"></div>

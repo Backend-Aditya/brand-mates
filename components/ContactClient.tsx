@@ -83,7 +83,7 @@ export default function ContactClient() {
   return (
     <>
       {/* PAGE HERO */}
-      <section className="relative w-full pt-36 md:pt-44 pb-16 px-6 sm:px-10 md:px-16 overflow-hidden">
+      <section className="relative w-full pt-36 md:pt-44 pb-16 px-6 sm:px-10 md:px-16 overflow-x-hidden">
         <div className="relative max-w-7xl mx-auto text-center">
           <div className="ct-badge opacity-0 translate-y-4 inline-flex items-center gap-2.5 mb-8">
             <span className="w-2 h-2 rounded-full bg-brand-400 shrink-0"></span>
