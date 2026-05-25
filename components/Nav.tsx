@@ -129,10 +129,7 @@ export default function Nav() {
         if (navEl) navEl.style.paddingRight = "";
       };
 
-      const tl = gsap.timeline({
-        paused: true,
-        onReverseComplete: () => unlockScroll(),
-      });
+      const tl = gsap.timeline({ paused: true });
 
       tl.to(navBgs, { scaleY: 1, duration: 0.75, stagger: 0.1, ease: "power3.inOut" });
       tl.to(".nav-items", { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 0.75, ease: "power3.inOut" }, "-=0.6");
@@ -146,6 +143,7 @@ export default function Nav() {
           lockScroll();
         } else {
           tl.reverse();
+          unlockScroll();
         }
         isMenuOpen.current = !isMenuOpen.current;
         navToggler!.classList.toggle("open", isMenuOpen.current);
