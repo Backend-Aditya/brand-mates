@@ -193,7 +193,7 @@ export default function Nav() {
         <div className="nav-bg absolute inset-0 -z-10 origin-top scale-y-0 will-change-transform bg-brand-500"></div>
         <div className="nav-bg absolute inset-0 -z-10 origin-top scale-y-0 will-change-transform bg-brand-400"></div>
 
-        <div className="nav-items min-h-dvh flex flex-col justify-center pointer-events-auto bg-brand-600 p-8 md:p-32 md:flex-row md:items-center md:gap-8 [clip-path:polygon(0%_0%,100%_0%,100%_0%,0%_0%)]">
+        <div className="nav-items absolute inset-0 flex flex-col justify-center pointer-events-auto bg-brand-600 p-8 md:p-32 md:flex-row md:items-center md:gap-8 [clip-path:polygon(0%_0%,100%_0%,100%_0%,0%_0%)]">
           <div className="nav-primary-links flex flex-col">
             {navLinks.map(({ href, label }) => (
               <div key={href} className="overflow-hidden">
