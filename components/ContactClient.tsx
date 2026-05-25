@@ -91,7 +91,7 @@ export default function ContactClient() {
           </div>
           <h1 className="ct-heading opacity-0 translate-y-6 text-[1.875rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-7xl xl:text-[5.5rem] font-extrabold tracking-[-0.03em] leading-[1.02] text-white mb-6">
             Let&apos;s build something<br />
-            <span className="bg-linear-to-r from-brand-400 to-brand-300 bg-clip-text text-transparent italic">the market remembers.</span>
+            <span className="inline-block pb-1 bg-linear-to-r from-brand-400 to-brand-300 bg-clip-text text-transparent italic">the market remembers.</span>
           </h1>
           <p className="ct-intro opacity-0 translate-y-6 text-white/55 text-base md:text-xl leading-relaxed max-w-xl mx-auto">
             Fill in the form below or jump straight to booking a discovery call. We respond to every inquiry within one business day, AEST.
