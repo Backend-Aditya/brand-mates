@@ -111,14 +111,6 @@ export default function Nav() {
 
       const linkEls = document.querySelectorAll<HTMLElement>(".nav-primary-links a");
 
-      const tl = gsap.timeline({ paused: true });
-
-      tl.to(navBgs, { scaleY: 1, duration: 0.75, stagger: 0.1, ease: "power3.inOut" });
-      tl.to(".nav-items", { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 0.75, ease: "power3.inOut" }, "-=0.6");
-      tl.fromTo(linkEls, { y: "100%" }, { y: "0%", duration: 0.6, stagger: 0.05, ease: "power3.out" }, "-=0.35");
-
-      tlRef.current = tl;
-
       const lockScroll = () => {
         const sb = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--scrollbar-w")) || 0;
         if (sb <= 0) return;
@@ -137,13 +129,23 @@ export default function Nav() {
         if (navEl) navEl.style.paddingRight = "";
       };
 
+      const tl = gsap.timeline({
+        paused: true,
+        onReverseComplete: () => unlockScroll(),
+      });
+
+      tl.to(navBgs, { scaleY: 1, duration: 0.75, stagger: 0.1, ease: "power3.inOut" });
+      tl.to(".nav-items", { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 0.75, ease: "power3.inOut" }, "-=0.6");
+      tl.fromTo(linkEls, { y: "100%" }, { y: "0%", duration: 0.6, stagger: 0.05, ease: "power3.out" }, "-=0.35");
+
+      tlRef.current = tl;
+
       function handleClick() {
         if (!isMenuOpen.current) {
           tl.play();
           lockScroll();
         } else {
           tl.reverse();
-          unlockScroll();
         }
         isMenuOpen.current = !isMenuOpen.current;
         navToggler!.classList.toggle("open", isMenuOpen.current);
