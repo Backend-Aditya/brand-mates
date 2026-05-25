@@ -346,7 +346,7 @@ export default function HomeClient() {
                   <h3 className="text-white font-extrabold text-2xl sm:text-3xl md:text-4xl tracking-tight leading-[1.1] mb-4">
                     20 minutes. We&apos;ll tell you exactly<br className="hidden sm:block" /> which service fits.
                   </h3>
-                  <div className="flex flex-wrap gap-2.5 mt-5">
+                  <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2.5 mt-5">
                     {["No pitch deck", "AEST hours", "Honest advice", "Free of charge"].map((pill) => (
                       <span key={pill} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/55 text-xs font-medium">
                         <span className="w-1.5 h-1.5 rounded-full bg-brand-400 shrink-0"></span>

@@ -131,8 +131,10 @@ export default function Nav() {
         if (isAnimating.current) return;
         if (!isMenuOpen.current) {
           tl.play();
+          document.body.style.overflow = "hidden";
         } else {
           tl.reverse();
+          document.body.style.overflow = "";
         }
         isMenuOpen.current = !isMenuOpen.current;
         navToggler!.classList.toggle("open", isMenuOpen.current);
@@ -158,6 +160,7 @@ export default function Nav() {
     if (isMenuOpen.current && tlRef.current) {
       tlRef.current.reverse();
       isMenuOpen.current = false;
+      document.body.style.overflow = "";
       const toggler = document.querySelector<HTMLButtonElement>(".nav-toggler");
       toggler?.classList.remove("open");
       toggler?.setAttribute("aria-expanded", "false");
