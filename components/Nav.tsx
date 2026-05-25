@@ -12,6 +12,18 @@ export default function Nav() {
   const tlRef = useRef<gsap.core.Timeline | null>(null);
   const navRef = useRef<HTMLElement>(null);
 
+  // Keep nav overlay height in sync with visual viewport (mobile chrome hide/show)
+  useEffect(() => {
+    const overlay = document.getElementById("nav-menu") as HTMLElement | null;
+    if (!overlay) return;
+    const setH = () => {
+      overlay.style.height = `${window.visualViewport?.height ?? window.innerHeight}px`;
+    };
+    setH();
+    window.visualViewport?.addEventListener("resize", setH);
+    return () => window.visualViewport?.removeEventListener("resize", setH);
+  }, []);
+
   // Hide on scroll down, show on scroll up or when stopped
   useEffect(() => {
     const nav = navRef.current;
@@ -193,7 +205,7 @@ export default function Nav() {
         <div className="nav-bg absolute inset-0 -z-10 origin-top scale-y-0 will-change-transform bg-brand-500"></div>
         <div className="nav-bg absolute inset-0 -z-10 origin-top scale-y-0 will-change-transform bg-brand-400"></div>
 
-        <div className="nav-items absolute inset-0 flex flex-col justify-center pointer-events-auto bg-brand-600 p-8 md:p-32 md:flex-row md:items-center md:gap-8 [clip-path:polygon(0%_0%,100%_0%,100%_0%,0%_0%)]">
+        <div className="nav-items h-full flex flex-col pointer-events-auto bg-brand-600 p-8 md:p-32 md:flex-row md:items-center md:gap-8 [clip-path:polygon(0%_0%,100%_0%,100%_0%,0%_0%)]">
           <div className="nav-primary-links flex flex-col">
             {navLinks.map(({ href, label }) => (
               <div key={href} className="overflow-hidden">
