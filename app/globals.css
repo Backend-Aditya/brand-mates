@@ -1,18 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-50: #e8f7f0;
-  --color-brand-100: #c5ebd7;
-  --color-brand-200: #8fd5b0;
-  --color-brand-300: #57cea5;
-  --color-brand-400: #21ba80;
-  --color-brand-500: #0b5c43;
-  --color-brand-600: #084331;
-  --color-brand-700: #063124;
-  --color-brand-ink: #141414;
+  /* Trust + professionalism: navy-black body, slate-navy surfaces,
+     deep sapphire gradients, bright azure accent, white text. */
+  --color-brand-50: #fdf7e3;   /* lightest gold tint */
+  --color-brand-100: #f9ecc4;
+  --color-brand-200: #f4dd94;
+  --color-brand-300: #e8c45e;  /* light gold (hover) */
+  --color-brand-400: #d4af37;  /* gold (primary accent) */
+  --color-brand-500: #1e3a8a;  /* royal navy (gradients, secondary) */
+  --color-brand-600: #15295a;  /* mid navy (section) */
+  --color-brand-700: #0f2147;  /* deep navy (section + ink-on-accent) */
+  --color-brand-ink: #0a1733;  /* navy body */
 
   --animate-pulse-ring: pulseRing 2s ease-in-out infinite;
   --animate-scroll-down: scrollDown 2s ease-in-out infinite;
+}
+
+/* Decorative color channels (space-separated RGB for alpha compositing).
+   Theme changes only touch this file — components reference these vars. */
+:root {
+  --accent-rgb: 212 175 55;  /* gold — ambient glows / grids */
+  --ink-rgb: 10 23 51;       /* matches --color-brand-ink */
+  --surface-rgb: 15 33 71;   /* matches --color-brand-700 */
 }
 
 @theme inline {
@@ -98,6 +108,18 @@ select:invalid {
 /* Balanced heading line lengths */
 h1, h2, h3 {
   text-wrap: balance;
+}
+
+/* FAQ open/close: native CSS height animation (no JS). Browsers without
+   ::details-content / interpolate-size just toggle instantly. */
+@media (prefers-reduced-motion: no-preference) {
+  :root { interpolate-size: allow-keywords; }
+  #faq details::details-content {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.35s ease, content-visibility 0.35s allow-discrete;
+  }
+  #faq details[open]::details-content { height: auto; }
 }
 
 /* FAQ toggle chip */

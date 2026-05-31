@@ -174,7 +174,7 @@ export default function Footer() {
       <div className="relative border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-16 py-8">
           <div className="ft-ack opacity-0 flex items-start gap-4 text-white/72 text-xs md:text-sm leading-relaxed max-w-3xl">
-            <span className="shrink-0 mt-0.5 w-1 h-10 bg-linear-to-b from-brand-400 via-orange-400 to-red-500 rounded-full"></span>
+            <span className="shrink-0 mt-0.5 w-1 h-10 bg-linear-to-b from-yellow-400 via-orange-500 to-red-600 rounded-full"></span>
             <p>
               BrandMates acknowledges the Gadigal people of the Eora Nation and the Wurundjeri people of the Kulin Nation, the Traditional Custodians of the lands on which our studios are built. We pay our respects to Elders past, present, and emerging, and extend that respect to all Aboriginal and Torres Strait Islander peoples.
             </p>

@@ -111,30 +111,6 @@ export default function HomeClient() {
           gsap.fromTo(row, from, { ...to, scrollTrigger: { trigger: row, ...ST } });
         });
 
-        // ── FAQ accordion ─────────────────────────────────────────
-        document.querySelectorAll<HTMLDetailsElement>("#faq details.faq-item").forEach((el) => {
-          const summary = el.querySelector("summary");
-          const content = summary?.nextElementSibling as HTMLElement | null;
-          if (!summary || !content) return;
-          content.style.overflow = "hidden";
-          summary.addEventListener("click", (e) => {
-            e.preventDefault();
-            if (el.open) {
-              gsap.to(content, {
-                height: 0, opacity: 0, duration: 0.35, ease: "power3.inOut", overwrite: true,
-                onComplete: () => { el.open = false; gsap.set(content, { height: "auto", opacity: 1 }); },
-              });
-            } else {
-              gsap.set(content, { height: 0, opacity: 0 });
-              el.open = true;
-              gsap.to(content, {
-                height: "auto", opacity: 1, duration: 0.5, ease: "power3.out", overwrite: true,
-                onComplete: () => gsap.set(content, { clearProps: "height" }),
-              });
-            }
-          });
-        });
-
         ScrollTrigger.refresh();
       });
     }
@@ -156,7 +132,7 @@ export default function HomeClient() {
           sizes="100vw"
           aria-hidden="true"
         />
-        <div className="absolute inset-0 z-0 bg-[linear-gradient(135deg,rgba(6,49,36,0.82)_0%,rgba(20,20,20,0.75)_50%,rgba(20,20,20,0.55)_100%)]"></div>
+        <div className="absolute inset-0 z-0 bg-[linear-gradient(135deg,rgb(var(--surface-rgb)/0.85)_0%,rgb(var(--ink-rgb)/0.78)_50%,rgb(var(--ink-rgb)/0.55)_100%)]"></div>
 
         <div className="relative z-[2] w-full px-6 sm:px-10 md:px-16 flex flex-col lg:flex-row lg:items-center lg:gap-10 xl:gap-14">
           {/* Content */}
@@ -341,7 +317,7 @@ export default function HomeClient() {
 
           <div className="services-cta mt-16 md:mt-20 opacity-0 translate-y-4">
             <div className="relative rounded-2xl overflow-hidden border border-brand-400/20 bg-linear-to-br from-brand-400/8 via-transparent to-transparent p-8 md:p-12">
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_0%_50%,rgba(33,186,128,0.12),transparent_60%)]"></div>
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_0%_50%,rgb(var(--accent-rgb)/0.12),transparent_60%)]"></div>
               <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-8">
                 <div className="max-w-xl">
                   <p className="text-brand-400 text-xs font-bold uppercase tracking-[0.15em] mb-3">Not sure where to start?</p>
@@ -448,8 +424,8 @@ export default function HomeClient() {
             {/* Project 03, Forge */}
             <article className="project group grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center opacity-0 translate-y-8">
               <Link href="/work/forge" className="block md:col-span-7 relative aspect-4/3 rounded-2xl overflow-hidden bg-brand-ink cursor-pointer">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(33,186,128,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(33,186,128,0.12)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-                <div className="absolute inset-0 bg-[linear-gradient(135deg,transparent_0%,transparent_40%,rgba(33,186,128,0.2)_40%,rgba(33,186,128,0.2)_50%,transparent_50%)]"></div>
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgb(var(--accent-rgb)/0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgb(var(--accent-rgb)/0.12)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+                <div className="absolute inset-0 bg-[linear-gradient(135deg,transparent_0%,transparent_40%,rgb(var(--accent-rgb)/0.2)_40%,rgb(var(--accent-rgb)/0.2)_50%,transparent_50%)]"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-[18vw] md:text-[11rem] font-black tracking-tighter text-brand-400 leading-none select-none">F<span className="text-white">:</span></span>
                 </div>

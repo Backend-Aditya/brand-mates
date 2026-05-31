@@ -176,7 +176,7 @@ export default function JournalClient() {
       <section className="px-6 sm:px-10 md:px-16 pb-24 md:pb-36">
         <div className="max-w-7xl mx-auto">
           <div className="jn-newsletter opacity-0 translate-y-6 relative rounded-3xl overflow-hidden bg-linear-to-br from-brand-600 to-brand-700 p-10 md:p-16">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_100%_0%,rgba(33,186,128,0.2),transparent_60%)]"></div>
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_100%_0%,rgb(var(--accent-rgb)/0.2),transparent_60%)]"></div>
             <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-8">
               <div className="max-w-lg">
                 <p className="text-brand-300 text-sm font-bold uppercase tracking-[0.15em] mb-3">Studio dispatch</p>

@@ -5,9 +5,9 @@ import Link from "next/link";
 
 const CheckItem = ({ children }: { children: React.ReactNode }) => (
   <li className="flex items-start gap-3">
-    <span className="mt-1 w-4 h-4 shrink-0 rounded-full bg-brand-400/15 border border-brand-400/30 flex items-center justify-center">
+    <span className="mt-1 w-4 h-4 shrink-0 rounded-full bg-brand-400/15 border border-brand-400/30 flex items-center justify-center text-brand-400">
       <svg width="8" height="8" viewBox="0 0 10 10" fill="none">
-        <path d="M2 5l2.5 2.5L8 3" stroke="#21ba80" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M2 5l2.5 2.5L8 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     </span>
     <span>{children}</span>
@@ -15,7 +15,7 @@ const CheckItem = ({ children }: { children: React.ReactNode }) => (
 );
 
 const BoltIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#21ba80" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 mt-0.5">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 mt-0.5 text-brand-400">
     <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
   </svg>
 );

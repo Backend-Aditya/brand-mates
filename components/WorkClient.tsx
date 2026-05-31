@@ -138,7 +138,7 @@ export default function WorkClient() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <Link href={`/work/${workProjects[1].slug}`} className="wk-project group relative rounded-3xl overflow-hidden bg-linear-to-br from-zinc-900 via-brand-700 to-zinc-800 opacity-0 translate-y-8">
               <div className="aspect-4/3 relative">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(33,186,128,0.2),transparent_60%)]"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgb(var(--accent-rgb)/0.2),transparent_60%)]"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-white/8 font-black text-[18vw] md:text-[10vw] leading-none tracking-tighter select-none">KR</span>
                 </div>
@@ -225,7 +225,7 @@ export default function WorkClient() {
       <section className="px-6 sm:px-10 md:px-16 pb-24 md:pb-36">
         <div className="max-w-7xl mx-auto">
           <div className="wk-cta opacity-0 translate-y-6 relative rounded-3xl overflow-hidden bg-linear-to-br from-brand-600 to-brand-700 p-10 md:p-16 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_0%_0%,rgba(33,186,128,0.2),transparent_60%)]"></div>
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_0%_0%,rgb(var(--accent-rgb)/0.2),transparent_60%)]"></div>
             <div className="relative">
               <p className="text-brand-300 text-sm font-bold uppercase tracking-[0.15em] mb-3">Ready to be next?</p>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">Your project could live here.</h2>
