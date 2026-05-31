@@ -60,10 +60,9 @@ export default function ServicesClient() {
         const to   = { opacity: 1, y: 0, duration: dur, ease, force3D: true, clearProps: "translate,transition" };
 
         const tl = gsap.timeline({ defaults: { ease } });
-        tl.fromTo(".sv-eyebrow", from, to, 0.3);
-        tl.fromTo(".sv-heading", from, to, 0.4);
-        tl.fromTo(".sv-intro",   from, to, 0.5);
-        tl.fromTo(".sv-anchors", from, to, 0.6);
+        tl.fromTo(".sv-heading", from, to, 0.3);
+        tl.fromTo(".sv-intro",   from, to, 0.4);
+        tl.fromTo(".sv-anchors", from, to, 0.5);
 
         gsap.utils.toArray<HTMLElement>(".sv-block").forEach((el) => {
           gsap.fromTo(el, from, { ...to, scrollTrigger: { trigger: el, ...ST } });
@@ -84,15 +83,12 @@ export default function ServicesClient() {
       {/* PAGE HERO */}
       <section className="relative w-full pt-36 md:pt-44 pb-20 md:pb-28 px-6 sm:px-10 md:px-16 bg-brand-ink overflow-hidden">
         <div className="relative max-w-7xl mx-auto">
-          <div className="sv-eyebrow opacity-0 translate-y-4 flex items-center gap-2.5 mb-6">
-            <span className="text-xs font-medium tracking-[0.08em] uppercase text-brand-400">What We Do</span>
-          </div>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
             <h1 className="sv-heading opacity-0 translate-y-6 text-[1.875rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-7xl xl:text-[5.5rem] font-extrabold tracking-[-0.03em] leading-[1.02] text-white max-w-2xl">
               Four ways<br />
-              <span className="bg-linear-to-r from-brand-400 to-brand-300 bg-clip-text text-transparent">we work.</span>
+              <span className="text-brand-400">we work.</span>
             </h1>
-            <p className="sv-intro opacity-0 translate-y-6 text-white/55 text-base md:text-lg leading-relaxed max-w-sm md:text-right">
+            <p className="sv-intro opacity-0 translate-y-6 text-white/75 text-base md:text-lg leading-relaxed max-w-sm md:text-right">
               Focused disciplines, tight execution, everything your brand needs to compete in the Australian market, and nothing you don&apos;t.
             </p>
           </div>
@@ -109,22 +105,21 @@ export default function ServicesClient() {
       <section id="web" className="relative px-6 sm:px-10 md:px-16 py-20 md:py-28 border-t border-white/5">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 md:gap-20 items-start">
           <div className="sv-block opacity-0 translate-y-8">
-            <div className="flex items-center gap-3 mb-8">
-              <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/40">01</span>
-              <span className="text-xs font-bold uppercase tracking-[0.15em] text-brand-400">Web Design &amp; Development</span>
+            <div className="mb-8">
+              <span className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-400">Web Design &amp; Development</span>
             </div>
             <h2 className="text-3xl sm:text-[2.5rem] md:text-5xl lg:text-[3.25rem] font-extrabold tracking-[-0.03em] leading-[1.05] text-white mb-6">Sites that convert,<br />not just impress.</h2>
-            <p className="text-white/60 text-base md:text-lg leading-relaxed mb-8">
+            <p className="text-white/75 text-base md:text-lg leading-relaxed mb-8">
               From Figma concept to live code, we design and build websites that load fast, convert well, and your team can actually maintain without calling us every month. Australian hosting options available if your lawyers care about data residency.
             </p>
-            <Link href="/contact" className="group inline-flex items-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-7 py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(33,186,128,0.3)]">
+            <Link href="/contact" className="group inline-flex items-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-7 py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-(--shadow-brand-md)">
               Start a web project <ArrowRight />
             </Link>
           </div>
           <div className="sv-block opacity-0 translate-y-8 flex flex-col gap-4">
             <div className="rounded-2xl border border-white/5 bg-white/2 p-6">
               <h3 className="text-white font-bold mb-4 text-sm uppercase tracking-wider">What&apos;s included</h3>
-              <ul className="flex flex-col gap-3 text-white/65 text-sm">
+              <ul className="flex flex-col gap-3 text-white/75 text-sm">
                 <CheckItem>Custom Figma design, desktop, tablet &amp; mobile</CheckItem>
                 <CheckItem>Next.js / React, Webflow, or Framer, you choose</CheckItem>
                 <CheckItem>On-page SEO foundation baked in from day one</CheckItem>
@@ -137,7 +132,7 @@ export default function ServicesClient() {
               <BoltIcon />
               <div>
                 <p className="text-white font-semibold text-sm mb-1">Typical result</p>
-                <p className="text-white/60 text-sm leading-relaxed">Tallow &amp; Co saw a 340% increase in organic sessions in 6 months after launch.</p>
+                <p className="text-white/75 text-sm leading-relaxed">Tallow &amp; Co saw a 340% increase in organic sessions in 6 months after launch.</p>
               </div>
             </div>
           </div>
@@ -150,7 +145,7 @@ export default function ServicesClient() {
           <div className="sv-block opacity-0 translate-y-8 order-2 md:order-1 flex flex-col gap-4">
             <div className="rounded-2xl border border-white/5 bg-brand-ink p-6">
               <h3 className="text-white font-bold mb-4 text-sm uppercase tracking-wider">What&apos;s included</h3>
-              <ul className="flex flex-col gap-3 text-white/65 text-sm">
+              <ul className="flex flex-col gap-3 text-white/75 text-sm">
                 <CheckItem>Profile audit &amp; strategy document</CheckItem>
                 <CheckItem>Monthly content calendar (30+ posts)</CheckItem>
                 <CheckItem>Instagram, TikTok, LinkedIn &amp; Facebook</CheckItem>
@@ -163,20 +158,19 @@ export default function ServicesClient() {
               <BoltIcon />
               <div>
                 <p className="text-white font-semibold text-sm mb-1">Typical result</p>
-                <p className="text-white/60 text-sm leading-relaxed">Harbour Co grew from 4K to 31K Instagram followers in 9 months with zero paid follower spend.</p>
+                <p className="text-white/75 text-sm leading-relaxed">Harbour Co grew from 4K to 31K Instagram followers in 9 months with zero paid follower spend.</p>
               </div>
             </div>
           </div>
           <div className="sv-block opacity-0 translate-y-8 order-1 md:order-2">
-            <div className="flex items-center gap-3 mb-8">
-              <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/40">02</span>
-              <span className="text-xs font-bold uppercase tracking-[0.15em] text-brand-400">Social Media</span>
+            <div className="mb-8">
+              <span className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-400">Social Media</span>
             </div>
             <h2 className="text-3xl sm:text-[2.5rem] md:text-5xl lg:text-[3.25rem] font-extrabold tracking-[-0.03em] leading-[1.05] text-white mb-6">Feeds that build<br />community, not noise.</h2>
-            <p className="text-white/60 text-base md:text-lg leading-relaxed mb-8">
+            <p className="text-white/75 text-base md:text-lg leading-relaxed mb-8">
               We manage your social presence end-to-end, strategy, content, scheduling, and community. No juniors, no offshore teams. Your account is handled by experienced Australian creatives who understand local culture, slang, and the moments that matter to your audience.
             </p>
-            <Link href="/contact" className="group inline-flex items-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-7 py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(33,186,128,0.3)]">
+            <Link href="/contact" className="group inline-flex items-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-7 py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-(--shadow-brand-md)">
               Grow my social <ArrowRight />
             </Link>
           </div>
@@ -187,22 +181,21 @@ export default function ServicesClient() {
       <section id="ads" className="relative px-6 sm:px-10 md:px-16 py-20 md:py-28 border-t border-white/5">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 md:gap-20 items-start">
           <div className="sv-block opacity-0 translate-y-8">
-            <div className="flex items-center gap-3 mb-8">
-              <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/40">03</span>
-              <span className="text-xs font-bold uppercase tracking-[0.15em] text-brand-400">Paid Ads</span>
+            <div className="mb-8">
+              <span className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-400">Paid Ads</span>
             </div>
             <h2 className="text-3xl sm:text-[2.5rem] md:text-5xl lg:text-[3.25rem] font-extrabold tracking-[-0.03em] leading-[1.05] text-white mb-6">Ad spend that<br />actually pays back.</h2>
-            <p className="text-white/60 text-base md:text-lg leading-relaxed mb-8">
+            <p className="text-white/75 text-base md:text-lg leading-relaxed mb-8">
               We run performance campaigns on Meta, Google, and TikTok. Every dollar is tracked, every creative is tested, and every fortnightly report tells you exactly what&apos;s driving revenue, and what to cut. Attributed to actual purchases, not reach numbers.
             </p>
-            <Link href="/contact" className="group inline-flex items-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-7 py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(33,186,128,0.3)]">
+            <Link href="/contact" className="group inline-flex items-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-7 py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-(--shadow-brand-md)">
               Audit my ad account <ArrowRight />
             </Link>
           </div>
           <div className="sv-block opacity-0 translate-y-8 flex flex-col gap-4">
             <div className="rounded-2xl border border-white/5 bg-white/2 p-6">
               <h3 className="text-white font-bold mb-4 text-sm uppercase tracking-wider">What&apos;s included</h3>
-              <ul className="flex flex-col gap-3 text-white/65 text-sm">
+              <ul className="flex flex-col gap-3 text-white/75 text-sm">
                 <CheckItem>Meta Ads (Facebook &amp; Instagram) management</CheckItem>
                 <CheckItem>Google Ads, Search, Shopping &amp; Display</CheckItem>
                 <CheckItem>TikTok Ads for Aussie audiences</CheckItem>
@@ -215,7 +208,7 @@ export default function ServicesClient() {
               <BoltIcon />
               <div>
                 <p className="text-white font-semibold text-sm mb-1">Typical result</p>
-                <p className="text-white/60 text-sm leading-relaxed">Koorang achieved 4.2× ROAS on $820K media spend across Meta &amp; Google in 12 months.</p>
+                <p className="text-white/75 text-sm leading-relaxed">Koorang achieved 4.2× ROAS on $820K media spend across Meta &amp; Google in 12 months.</p>
               </div>
             </div>
           </div>
@@ -228,7 +221,7 @@ export default function ServicesClient() {
           <div className="sv-block opacity-0 translate-y-8 order-2 md:order-1 flex flex-col gap-4">
             <div className="rounded-2xl border border-white/5 bg-brand-ink p-6">
               <h3 className="text-white font-bold mb-4 text-sm uppercase tracking-wider">What&apos;s included</h3>
-              <ul className="flex flex-col gap-3 text-white/65 text-sm">
+              <ul className="flex flex-col gap-3 text-white/75 text-sm">
                 <CheckItem>Brand &amp; product photography</CheckItem>
                 <CheckItem>Short-form video (Reels, TikTok, YouTube Shorts)</CheckItem>
                 <CheckItem>Copywriting, web, ads, email, socials</CheckItem>
@@ -241,20 +234,19 @@ export default function ServicesClient() {
               <BoltIcon />
               <div>
                 <p className="text-white font-semibold text-sm mb-1">Typical result</p>
-                <p className="text-white/60 text-sm leading-relaxed">Saltbush&apos;s content suite generated 2.8M organic impressions in its first quarter across platforms.</p>
+                <p className="text-white/75 text-sm leading-relaxed">Saltbush&apos;s content suite generated 2.8M organic impressions in its first quarter across platforms.</p>
               </div>
             </div>
           </div>
           <div className="sv-block opacity-0 translate-y-8 order-1 md:order-2">
-            <div className="flex items-center gap-3 mb-8">
-              <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/40">04</span>
-              <span className="text-xs font-bold uppercase tracking-[0.15em] text-brand-400">Content Creation</span>
+            <div className="mb-8">
+              <span className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-400">Content Creation</span>
             </div>
             <h2 className="text-3xl sm:text-[2.5rem] md:text-5xl lg:text-[3.25rem] font-extrabold tracking-[-0.03em] leading-[1.05] text-white mb-6">Content made for<br />your specific audience.</h2>
-            <p className="text-white/60 text-base md:text-lg leading-relaxed mb-8">
+            <p className="text-white/75 text-base md:text-lg leading-relaxed mb-8">
               Photo, video, and copy shot on location across Australia, edited in-house, and delivered ready to publish. No stock photos, no AI-generated filler, everything is specific to your brand, your product, and your audience.
             </p>
-            <Link href="/contact" className="group inline-flex items-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-7 py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(33,186,128,0.3)]">
+            <Link href="/contact" className="group inline-flex items-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-7 py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-(--shadow-brand-md)">
               Book a content shoot <ArrowRight />
             </Link>
           </div>
@@ -268,11 +260,11 @@ export default function ServicesClient() {
             <div className="relative">
               <p className="text-brand-300 text-sm font-bold uppercase tracking-[0.15em] mb-3">Still deciding?</p>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">Not sure which service fits?</h2>
-              <p className="text-white/55 text-base mt-3 max-w-md">Book a 30-minute call. We&apos;ll tell you what we think, including whether another studio would serve you better.</p>
+              <p className="text-white/75 text-base mt-3 max-w-md">Book a 30-minute call. We&apos;ll tell you what we think, including whether another studio would serve you better.</p>
             </div>
             <Link
               href="/contact"
-              className="relative group inline-flex items-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-8 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(33,186,128,0.35)] shrink-0"
+              className="relative group inline-flex items-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-8 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-(--shadow-brand-lg) shrink-0"
             >
               Book a discovery call
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="transition-transform duration-300 group-hover:translate-x-1">

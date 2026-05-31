@@ -24,13 +24,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${onest.variable} scroll-smooth`}>
-      <head>
-        <link rel="preload" href="/hero.jpg" as="image" fetchPriority="high" />
-      </head>
       <body suppressHydrationWarning className="bg-brand-ink font-sans text-white overflow-x-hidden antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-200 focus:bg-brand-400 focus:text-brand-700 focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold focus:text-sm focus:outline-none"
+        >
+          Skip to main content
+        </a>
         <SmoothScroll />
-<Nav />
-        {children}
+        <Nav />
+        <main id="main-content">{children}</main>
       </body>
     </html>
   );

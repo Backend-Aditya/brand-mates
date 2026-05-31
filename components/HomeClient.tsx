@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const ArrowRight = ({ size = 16, className = "" }: { size?: number; className?: string }) => (
   <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className={className}>
@@ -78,19 +79,18 @@ export default function HomeClient() {
 
         // Section headers
         ([
-          [".services-eyebrow", ".services-heading", ".services-intro"],
-          [".work-eyebrow",     ".work-heading",     ".work-viewall"  ],
-          [".tm-eyebrow",       ".tm-heading",       null             ],
-          [".pr-eyebrow",       ".pr-heading",       ".pr-intro"      ],
-          [".team-eyebrow",     ".team-heading",     ".team-intro"    ],
-          [".faq-eyebrow",      ".faq-heading",      ".faq-intro"     ],
-          [".contact-eyebrow",  ".contact-heading",  ".contact-intro" ],
-        ] as (string | null)[][]).forEach(([ew, hd, intro]) => {
-          if (!ew || !document.querySelector(ew)) return;
-          const tl = gsap.timeline({ scrollTrigger: { trigger: ew, ...ST } });
-          tl.fromTo(ew,   from, to);
-          tl.fromTo(hd!,  from, to, "-=0.25");
-          if (intro) tl.fromTo(intro, from, to, "-=0.25");
+          [".services-heading", ".services-intro"],
+          [".work-heading",     ".work-viewall"  ],
+          [".tm-heading",       null             ],
+          [".pr-heading",       ".pr-intro"      ],
+          [".team-heading",     ".team-intro"    ],
+          [".faq-heading",      ".faq-intro"     ],
+          [".contact-heading",  ".contact-intro" ],
+        ] as (string | null)[][]).forEach(([hd, extra]) => {
+          if (!hd || !document.querySelector(hd)) return;
+          const tl = gsap.timeline({ scrollTrigger: { trigger: hd, ...ST } });
+          tl.fromTo(hd,  from, to);
+          if (extra) tl.fromTo(extra, from, to, "-=0.25");
         });
 
         // Batched cards
@@ -103,7 +103,7 @@ export default function HomeClient() {
 
         // Individual blocks
         [".tm-featured", ".tm-stats", ".services-cta", ".work-footer",
-         ".pr-footer", ".team-principles", ".contact-offices"].forEach((sel) => {
+         ".pr-footer", ".team-principles", ".contact-offices", ".contact-badge"].forEach((sel) => {
           gsap.fromTo(sel, from, { ...to, scrollTrigger: { trigger: sel, ...ST } });
         });
 
@@ -146,7 +146,16 @@ export default function HomeClient() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="hero grain relative z-0 w-full min-h-svh flex flex-col justify-center overflow-hidden bg-[url('/hero.jpg')] bg-cover bg-center pt-24 md:pt-28 pb-24 md:pb-32">
+      <section className="hero grain relative z-0 w-full min-h-svh flex flex-col justify-center overflow-hidden pt-24 md:pt-28 pb-24 md:pb-32">
+        <Image
+          src="/hero.jpg"
+          alt=""
+          fill
+          priority
+          className="object-cover object-center"
+          sizes="100vw"
+          aria-hidden="true"
+        />
         <div className="absolute inset-0 z-0 bg-[linear-gradient(135deg,rgba(6,49,36,0.82)_0%,rgba(20,20,20,0.75)_50%,rgba(20,20,20,0.55)_100%)]"></div>
 
         <div className="relative z-[2] w-full px-6 sm:px-10 md:px-16 flex flex-col lg:flex-row lg:items-center lg:gap-10 xl:gap-14">
@@ -164,20 +173,20 @@ export default function HomeClient() {
               <span className="h-line block overflow-hidden"><span className="h-inner block translate-y-[110%] will-change-transform">Australia&apos;s best</span></span>
               <span className="h-line block overflow-hidden"><span className="h-inner block translate-y-[110%] will-change-transform">don&apos;t just build brands.</span></span>
               <span className="h-line block overflow-hidden">
-                <span className="h-inner block translate-y-[110%] will-change-transform bg-linear-to-r from-brand-400 to-brand-300 bg-clip-text text-transparent">
+                <span className="h-inner block translate-y-[110%] will-change-transform text-brand-400">
                   They build belief.
                 </span>
               </span>
             </h1>
 
             {/* Subtext */}
-            <p className="hero-subtext max-w-[560px] text-sm sm:text-base md:text-lg font-normal leading-relaxed text-white/65 opacity-0 translate-y-4">
+            <p className="hero-subtext max-w-[560px] text-sm sm:text-base md:text-lg font-normal leading-relaxed text-white/80 opacity-0 translate-y-4">
               From Surry Hills seed rounds to ASX-listed rebrands, the studio Australian founders and CMOs call when the brand needs to work harder than it does.
             </p>
 
             {/* CTA */}
             <div className="hero-cta flex items-center flex-wrap gap-4 md:gap-5 opacity-0 translate-y-4">
-              <a href="#services" className="group inline-flex items-center gap-2.5 rounded-full bg-brand-400 text-brand-700 font-bold text-sm tracking-tight px-6 md:px-7 py-3 md:py-3.5 transition-all duration-300 hover:bg-brand-300 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(33,186,128,0.3)]">
+              <a href="#services" className="group inline-flex items-center gap-2.5 rounded-full bg-brand-400 text-brand-700 font-bold text-sm tracking-tight px-6 md:px-7 py-3 md:py-3.5 transition-all duration-300 hover:bg-brand-300 hover:-translate-y-0.5 hover:shadow-(--shadow-brand-md)">
                 <span>Book an Aussie Discovery Call</span>
                 <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
               </a>
@@ -188,12 +197,12 @@ export default function HomeClient() {
 
             {/* Trust bar */}
             <div className="hero-trust flex flex-col gap-2.5 opacity-0 translate-y-4">
-              <span className="text-[0.6rem] font-medium tracking-[0.2em] uppercase text-white/45">Trusted by Australian brands</span>
+              <span className="text-[0.6rem] font-medium tracking-[0.2em] uppercase text-white/65">Trusted by Australian brands</span>
               <div className="flex flex-wrap items-center gap-y-2">
                 {["Saltbush", "Koorang", "Harbour Co", "Tallow & Co", "Bushline"].map((name, i) => (
                   <span key={name} className="flex items-center">
                     {i > 0 && <span className="mx-3 text-white/15 text-[0.55rem] select-none">&#9679;</span>}
-                    <span className="text-[0.73rem] font-semibold tracking-[0.1em] uppercase text-white/50 hover:text-white/75 transition-colors cursor-default">{name}</span>
+                    <span className="text-[0.73rem] font-semibold tracking-[0.1em] uppercase text-white/65 hover:text-white/85 transition-colors cursor-default">{name}</span>
                   </span>
                 ))}
               </div>
@@ -208,23 +217,23 @@ export default function HomeClient() {
                 <span className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-brand-400">2 slots left this quarter</span>
               </div>
               <h3 className="text-white font-bold text-xl tracking-tight mt-2">Start a project</h3>
-              <p className="text-white/45 text-xs leading-relaxed mt-1">We&apos;ll reply within 1 business day, AEST.</p>
+              <p className="text-white/65 text-xs leading-relaxed mt-1">We&apos;ll reply within 1 business day, AEST.</p>
             </div>
             <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="hero-name" className="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-white/50">Name</label>
-                  <input id="hero-name" type="text" placeholder="Alex Chen" className="rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-white/40 text-sm px-3.5 py-2.5 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all" />
+                  <label htmlFor="hero-name" className="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-white/65">Name</label>
+                  <input id="hero-name" type="text" placeholder="Alex Chen" className="rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-white/55 text-sm px-3.5 py-2.5 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all" />
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="hero-email" className="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-white/50">Email</label>
-                  <input id="hero-email" type="email" placeholder="you@co.com.au" className="rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-white/40 text-sm px-3.5 py-2.5 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all" />
+                  <label htmlFor="hero-email" className="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-white/65">Email</label>
+                  <input id="hero-email" type="email" placeholder="you@co.com.au" className="rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-white/55 text-sm px-3.5 py-2.5 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all" />
                 </div>
               </div>
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="hero-service" className="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-white/50">I need help with</label>
+                <label htmlFor="hero-service" className="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-white/65">I need help with</label>
                 <div className="relative">
-                  <select id="hero-service" className="w-full rounded-lg border border-white/10 bg-white/5 text-white/40 text-sm px-3.5 py-2.5 pr-9 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all appearance-none cursor-pointer [&>option]:bg-zinc-900 [&>option]:text-white">
+                  <select id="hero-service" className="w-full rounded-lg border border-white/10 bg-white/5 text-white/60 text-sm px-3.5 py-2.5 pr-9 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all appearance-none cursor-pointer [&>option]:bg-zinc-900 [&>option]:text-white">
                     <option value="">Select a service...</option>
                     <option value="web">Web Design &amp; Development</option>
                     <option value="social">Social Media</option>
@@ -238,17 +247,17 @@ export default function HomeClient() {
                 </div>
               </div>
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="hero-message" className="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-white/50">Message</label>
-                <textarea id="hero-message" rows={3} placeholder="Tell us about your project…" className="rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-white/35 text-sm px-3.5 py-2.5 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all resize-none leading-relaxed"></textarea>
+                <label htmlFor="hero-message" className="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-white/65">Message</label>
+                <textarea id="hero-message" rows={3} placeholder="Tell us about your project…" className="rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-white/55 text-sm px-3.5 py-2.5 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all resize-none leading-relaxed"></textarea>
               </div>
-              <button type="submit" className="group w-full flex items-center justify-center gap-2 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(33,186,128,0.35)] mt-1">
+              <button type="submit" className="group w-full flex items-center justify-center gap-2 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-(--shadow-brand-md) mt-1">
                 Send enquiry
                 <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
               </button>
             </form>
             <div className="flex items-center gap-3 pt-1">
               <div className="flex-1 h-px bg-white/8"></div>
-              <Link href="/contact" className="text-white/35 hover:text-white/65 text-[0.7rem] transition-colors shrink-0">or book a call instead →</Link>
+              <Link href="/contact" className="inline-flex items-center min-h-11 sm:min-h-0 text-white/55 hover:text-white/80 text-[0.7rem] transition-colors shrink-0">or book a call instead →</Link>
               <div className="flex-1 h-px bg-white/8"></div>
             </div>
           </div>
@@ -270,7 +279,7 @@ export default function HomeClient() {
                 <span className="stat-number text-[2.5rem] md:text-5xl font-black text-white tracking-tight leading-none" data-target={target}>0</span>
                 <span className="text-2xl md:text-3xl font-black text-brand-400 tracking-tight leading-none pb-1">{suffix}</span>
               </div>
-              <span className="text-[0.65rem] font-bold tracking-[0.15em] uppercase text-white/45">{label}</span>
+              <span className="text-[0.65rem] font-bold tracking-[0.15em] uppercase text-white/65">{label}</span>
             </div>
           ))}
         </div>
@@ -281,15 +290,12 @@ export default function HomeClient() {
         <div className="relative max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 md:mb-24">
             <div className="max-w-2xl">
-              <div className="services-eyebrow flex items-center gap-2.5 mb-6 opacity-0 translate-y-3">
-                <span className="text-xs font-medium tracking-[0.08em] uppercase text-brand-400">What We Do · For Aussie Teams</span>
-              </div>
               <h2 className="services-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05] text-white opacity-0 translate-y-4">
                 Four disciplines.<br />
                 <span className="text-brand-400">One studio.</span>
               </h2>
             </div>
-            <p className="services-intro max-w-md text-white/60 text-base md:text-lg leading-relaxed opacity-0 translate-y-4">
+            <p className="services-intro max-w-md text-white/75 text-base md:text-lg leading-relaxed opacity-0 translate-y-4">
               Design, content, and media built for the Australian market, delivered in your timezone by the same senior team you brief.
             </p>
           </div>
@@ -298,41 +304,37 @@ export default function HomeClient() {
             {[
               {
                 href: "/services#web", num: "01",
-                icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M2 9h20" /><path d="m9 14 2 2 4-4" /></svg>,
                 title: "Web Design & Development",
                 desc: "Fast, considered sites and product experiences built to load, convert, and hold up under real Aussie traffic.",
               },
               {
                 href: "/services#social", num: "02",
-                icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" /></svg>,
                 title: "Social Media",
                 desc: "Feeds, stories, and community that grow genuine audiences, run by Aussies who know the local calendar.",
               },
               {
                 href: "/services#ads", num: "03",
-                icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg>,
                 title: "Paid Ads",
                 desc: "Meta, Google, TikTok, fortnightly reporting, nothing left untracked, no offshore bidding teams.",
               },
               {
                 href: "/services#content", num: "04",
-                icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M23 7 16 12l7 5V7z" /><rect x="1" y="5" width="15" height="14" rx="2" /></svg>,
                 title: "Content Creation",
                 desc: "Photo, video, and copy shot on location across Australia, delivered ready to publish, no stock photos.",
               },
-            ].map(({ href, num, icon, title, desc }) => (
-              <Link key={num} href={href} className="service-card group relative flex flex-col gap-6 p-8 md:p-10 bg-brand-ink transition-colors duration-500 hover:bg-brand-700/40 opacity-0 translate-y-6">
-                <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-brand-400/10 border border-brand-400/20 text-brand-400 transition-all duration-500 group-hover:bg-brand-400 group-hover:text-brand-700 group-hover:-translate-y-1">
-                  {icon}
+            ].map(({ href, num, title, desc }) => (
+              <Link key={num} href={href} className="service-card group relative flex flex-col justify-between gap-8 p-8 md:p-10 bg-brand-ink transition-colors duration-500 hover:bg-brand-700/40 opacity-0 translate-y-6">
+                <div className="flex flex-col gap-3">
+                  <h3 className="text-xl sm:text-2xl md:text-[1.7rem] font-bold text-white tracking-tight leading-snug">{title}</h3>
+                  <p className="text-white/70 leading-relaxed text-[0.95rem]">{desc}</p>
                 </div>
-                <div className="flex flex-col gap-2">
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight">{title}</h3>
-                  <p className="text-white/55 leading-relaxed text-[0.95rem]">{desc}</p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-brand-400 font-semibold text-sm opacity-70 group-hover:opacity-100 transition-all duration-300 group-hover:gap-3">
+                    <span>Explore</span>
+                    <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+                  </div>
+                  <span className="text-[0.65rem] font-medium text-white/25">{num}</span>
                 </div>
-                <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-brand-400 mt-auto opacity-0 group-hover:opacity-100 transition-all duration-500 -translate-x-2 group-hover:translate-x-0">
-                  Learn more <ArrowRight size={14} />
-                </span>
-                <span className="absolute top-8 right-8 text-xs font-mono text-white/20">{num}</span>
               </Link>
             ))}
           </div>
@@ -348,7 +350,7 @@ export default function HomeClient() {
                   </h3>
                   <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2.5 mt-5">
                     {["No pitch deck", "AEST hours", "Honest advice", "Free of charge"].map((pill) => (
-                      <span key={pill} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/55 text-xs font-medium">
+                      <span key={pill} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70 text-xs font-medium">
                         <span className="w-1.5 h-1.5 rounded-full bg-brand-400 shrink-0"></span>
                         {pill}
                       </span>
@@ -356,7 +358,7 @@ export default function HomeClient() {
                   </div>
                 </div>
                 <div className="flex flex-col gap-3 shrink-0">
-                  <a href="#contact" className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-8 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(33,186,128,0.3)]">
+                  <a href="#contact" className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-8 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-(--shadow-brand-md)">
                     <span>Book a discovery call</span>
                     <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
                   </a>
@@ -373,9 +375,6 @@ export default function HomeClient() {
         <div className="relative max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 md:mb-20">
             <div className="max-w-3xl">
-              <div className="work-eyebrow flex items-center gap-2.5 mb-6 opacity-0 translate-y-3">
-                <span className="text-xs font-medium tracking-[0.08em] uppercase text-brand-400">Selected Work</span>
-              </div>
               <h2 className="work-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05] text-white opacity-0 translate-y-4">
                 Work we&apos;re proud<br className="hidden md:block" />
                 <span className="text-white">to put our name on.</span>
@@ -402,15 +401,15 @@ export default function HomeClient() {
                 </div>
               </Link>
               <div className="md:col-span-5 flex flex-col gap-3">
-                <div className="flex items-center gap-3 text-xs font-mono text-white/40">
+                <div className="flex items-center gap-3 text-xs font-medium text-white/55">
                   <span>01</span><span className="w-4 h-px bg-white/20"></span>
                   <span className="uppercase tracking-wider">Sydney Fintech · ASX · 2024</span>
                 </div>
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white">Aura</h3>
-                <p className="text-white/60 leading-relaxed text-base md:text-lg">A full identity system for an Aussie digital bank, built calm enough to reassure nervous first-time investors, robust enough for every APRA-licensed touchpoint across five capitals.</p>
+                <p className="text-white/75 leading-relaxed text-base md:text-lg">A full identity system for an Aussie digital bank, built calm enough to reassure nervous first-time investors, robust enough for every APRA-licensed touchpoint across five capitals.</p>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {["Strategy", "Identity", "Product"].map((tag) => (
-                    <span key={tag} className="px-3 py-1 text-[0.7rem] font-medium tracking-wider uppercase rounded-full bg-white/5 border border-white/10 text-white/60">{tag}</span>
+                    <span key={tag} className="px-3 py-1 text-[0.7rem] font-medium tracking-wider uppercase rounded-full bg-white/5 border border-white/10 text-white/75">{tag}</span>
                   ))}
                 </div>
               </div>
@@ -419,15 +418,15 @@ export default function HomeClient() {
             {/* Project 02, Meridian */}
             <article className="project group grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center opacity-0 translate-y-8">
               <div className="order-2 md:col-span-5 md:order-1 flex flex-col gap-3">
-                <div className="flex items-center gap-3 text-xs font-mono text-white/40">
+                <div className="flex items-center gap-3 text-xs font-medium text-white/55">
                   <span>02</span><span className="w-4 h-px bg-white/20"></span>
                   <span className="uppercase tracking-wider">Hospitality · Byron &amp; Hobart · 2024</span>
                 </div>
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white">Meridian</h3>
-                <p className="text-white/60 leading-relaxed text-base md:text-lg">A launch identity for a boutique hotel group across Byron Bay and Hobart, pairing timeless typography with warm, coastal art direction.</p>
+                <p className="text-white/75 leading-relaxed text-base md:text-lg">A launch identity for a boutique hotel group across Byron Bay and Hobart, pairing timeless typography with warm, coastal art direction.</p>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {["Branding", "Print", "Web"].map((tag) => (
-                    <span key={tag} className="px-3 py-1 text-[0.7rem] font-medium tracking-wider uppercase rounded-full bg-white/5 border border-white/10 text-white/60">{tag}</span>
+                    <span key={tag} className="px-3 py-1 text-[0.7rem] font-medium tracking-wider uppercase rounded-full bg-white/5 border border-white/10 text-white/75">{tag}</span>
                   ))}
                 </div>
               </div>
@@ -460,15 +459,15 @@ export default function HomeClient() {
                 </div>
               </Link>
               <div className="md:col-span-5 flex flex-col gap-3">
-                <div className="flex items-center gap-3 text-xs font-mono text-white/40">
+                <div className="flex items-center gap-3 text-xs font-medium text-white/55">
                   <span>03</span><span className="w-4 h-px bg-white/20"></span>
                   <span className="uppercase tracking-wider">Melbourne Dev Tools · 2023</span>
                 </div>
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white">Forge</h3>
-                <p className="text-white/60 leading-relaxed text-base md:text-lg">Positioning a Melbourne dev-tools startup from Blackbird-backed Series A to category leader, voice, site, and a docs system built to convert Aussie and US engineers alike.</p>
+                <p className="text-white/75 leading-relaxed text-base md:text-lg">Positioning a Melbourne dev-tools startup from Blackbird-backed Series A to category leader, voice, site, and a docs system built to convert Aussie and US engineers alike.</p>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {["Positioning", "Web", "Motion"].map((tag) => (
-                    <span key={tag} className="px-3 py-1 text-[0.7rem] font-medium tracking-wider uppercase rounded-full bg-white/5 border border-white/10 text-white/60">{tag}</span>
+                    <span key={tag} className="px-3 py-1 text-[0.7rem] font-medium tracking-wider uppercase rounded-full bg-white/5 border border-white/10 text-white/75">{tag}</span>
                   ))}
                 </div>
               </div>
@@ -477,15 +476,15 @@ export default function HomeClient() {
             {/* Project 04, Clarity */}
             <article className="project group grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center opacity-0 translate-y-8">
               <div className="order-2 md:col-span-5 md:order-1 flex flex-col gap-3">
-                <div className="flex items-center gap-3 text-xs font-mono text-white/40">
+                <div className="flex items-center gap-3 text-xs font-medium text-white/55">
                   <span>04</span><span className="w-4 h-px bg-white/20"></span>
                   <span className="uppercase tracking-wider">Medicare Telehealth · 2023</span>
                 </div>
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white">Clarity</h3>
-                <p className="text-white/60 leading-relaxed text-base md:text-lg">A full rebrand for a Medicare-integrated telehealth platform, making bulk-billed consultations feel less like a waiting room across every consult, pamphlet, and follow-up call from Cairns to Perth.</p>
+                <p className="text-white/75 leading-relaxed text-base md:text-lg">A full rebrand for a Medicare-integrated telehealth platform, making bulk-billed consultations feel less like a waiting room across every consult, pamphlet, and follow-up call from Cairns to Perth.</p>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {["Strategy", "Identity", "Campaign"].map((tag) => (
-                    <span key={tag} className="px-3 py-1 text-[0.7rem] font-medium tracking-wider uppercase rounded-full bg-white/5 border border-white/10 text-white/60">{tag}</span>
+                    <span key={tag} className="px-3 py-1 text-[0.7rem] font-medium tracking-wider uppercase rounded-full bg-white/5 border border-white/10 text-white/75">{tag}</span>
                   ))}
                 </div>
               </div>
@@ -504,7 +503,7 @@ export default function HomeClient() {
           </div>
 
           <div className="work-footer mt-20 md:mt-28 flex flex-col md:flex-row md:items-center md:justify-between gap-6 pt-10 border-t border-white/5 opacity-0 translate-y-4">
-            <p className="text-white/40 text-sm"><span className="text-white font-semibold">150+</span> Australian brands transformed since 2017. ABN 88 612 334 901.</p>
+            <p className="text-white/65 text-sm"><span className="text-white font-semibold">150+</span> Australian brands transformed since 2017. ABN 88 612 334 901.</p>
             <Link href="/work" className="group inline-flex items-center gap-2.5 text-sm font-semibold text-white hover:text-brand-400 transition-colors">
               <span>Explore the full archive</span>
               <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
@@ -517,9 +516,6 @@ export default function HomeClient() {
       <section id="testimonials" className="relative w-full py-24 md:py-36 px-6 sm:px-10 md:px-16 bg-brand-700 overflow-hidden border-t border-white/5">
         <div className="relative max-w-7xl mx-auto">
           <div className="max-w-3xl mb-16 md:mb-20">
-            <div className="tm-eyebrow flex items-center gap-2.5 mb-6 opacity-0 translate-y-3">
-              <span className="text-xs font-medium tracking-[0.08em] uppercase text-brand-400">Client Voices</span>
-            </div>
             <h2 className="tm-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05] text-white opacity-0 translate-y-4">
               Aussie founders,<br className="hidden md:block" />
               <span className="text-white">in their own words.</span>
@@ -537,17 +533,12 @@ export default function HomeClient() {
                   <div className="shrink-0 w-14 h-14 rounded-full bg-linear-to-br from-brand-400 to-brand-300 flex items-center justify-center font-bold text-brand-700 text-lg">SM</div>
                   <div className="flex flex-col">
                     <span className="text-white font-bold text-base">Sarah Mitchell</span>
-                    <span className="text-white/50 text-sm">Head of Brand, Aura Financial · Sydney</span>
+                    <span className="text-white/65 text-sm">Head of Brand, Aura Financial · Sydney</span>
                   </div>
                 </div>
-                <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/10">
-                  {[{ val: "+340%", label: "Aussie Signups" }, { val: "+12pts", label: "NPS" }, { val: "A$58M", label: "Series B" }].map(({ val, label }) => (
-                    <div key={label} className="flex flex-col gap-0.5">
-                      <span className="text-2xl md:text-3xl font-extrabold text-brand-400 tracking-tight leading-none">{val}</span>
-                      <span className="text-[0.65rem] text-white/50 tracking-wider uppercase">{label}</span>
-                    </div>
-                  ))}
-                </div>
+                <p className="text-white/60 text-sm leading-relaxed pt-6 border-t border-white/10">
+                  Relaunched to +340% Australian signups, +12 NPS points, and a A$58M Series B the same quarter.
+                </p>
               </div>
             </div>
           </div>
@@ -566,7 +557,7 @@ export default function HomeClient() {
                   <div className={`shrink-0 w-10 h-10 rounded-full bg-linear-to-br ${gradient} flex items-center justify-center font-bold text-brand-700 text-sm`}>{initials}</div>
                   <div className="flex flex-col">
                     <span className="text-white font-semibold text-sm">{name}</span>
-                    <span className="text-white/45 text-xs">{role}</span>
+                    <span className="text-white/65 text-xs">{role}</span>
                   </div>
                 </figcaption>
               </figure>
@@ -579,7 +570,7 @@ export default function HomeClient() {
               <FiveStars size={18} />
               <div className="flex flex-col">
                 <span className="text-white font-bold text-lg">4.9 out of 5</span>
-                <span className="text-white/50 text-xs">Average rating across 120+ Aussie reviews</span>
+                <span className="text-white/65 text-xs">Average rating across 120+ Aussie reviews</span>
               </div>
             </div>
             <div className="hidden md:block w-px h-12 bg-white/10"></div>
@@ -587,7 +578,7 @@ export default function HomeClient() {
               {[{ val: "98%", label: "Referral rate" }, { val: "12yr", label: "Avg. retention" }, { val: "A$3.2B", label: "Client valuations" }].map(({ val, label }) => (
                 <div key={label} className="flex flex-col">
                   <span className="text-white font-extrabold text-2xl">{val}</span>
-                  <span className="text-white/50 text-xs tracking-wider uppercase">{label}</span>
+                  <span className="text-white/65 text-xs tracking-wider uppercase">{label}</span>
                 </div>
               ))}
             </div>
@@ -604,15 +595,12 @@ export default function HomeClient() {
         <div className="relative max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 md:mb-24">
             <div className="max-w-2xl">
-              <div className="pr-eyebrow flex items-center gap-2.5 mb-6 opacity-0 translate-y-3">
-                <span className="text-xs font-medium tracking-[0.08em] uppercase text-brand-400">How We Work</span>
-              </div>
               <h2 className="pr-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05] text-white opacity-0 translate-y-4">
                 From g&apos;day to market <br className="hidden md:block" />
                 <span className="text-brand-400">in 12 weeks.</span>
               </h2>
             </div>
-            <p className="pr-intro max-w-md text-white/60 text-base md:text-lg leading-relaxed opacity-0 translate-y-4">
+            <p className="pr-intro max-w-md text-white/75 text-base md:text-lg leading-relaxed opacity-0 translate-y-4">
               Four phases, built across 150+ Australian brands, so you always know what&apos;s happening, who&apos;s responsible, and when it&apos;s landing in your inbox.
             </p>
           </div>
@@ -627,7 +615,7 @@ export default function HomeClient() {
                 { num: "04", week: "Week 10–12", title: "Deploy", desc: "We hand over a brand your team can run without us: files, templates, and a training session so nothing goes dark after we leave.", items: ["Rollout & launch", "Team training", "Governance & ongoing care"], icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="text-brand-400"><path d="M5 12l5 5L20 7" /></svg>, highlight: true },
               ].map(({ num, week, title, desc, items, icon, highlight }) => (
                 <div key={num} className="pr-step relative md:pl-0 opacity-0 translate-y-6">
-                  <div className={`mb-5 md:mb-0 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center ${highlight ? "bg-brand-400 border border-brand-400 shadow-[0_0_24px_rgba(33,186,128,0.4)]" : "bg-brand-ink border border-brand-400/30"}`}>
+                  <div className={`mb-5 md:mb-0 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center ${highlight ? "bg-brand-400 border border-brand-400 shadow-(--shadow-brand-glow)" : "bg-brand-ink border border-brand-400/30"}`}>
                     <span className={`font-mono font-bold text-sm tracking-wider ${highlight ? "text-brand-700" : "text-brand-400"}`}>{num}</span>
                   </div>
                   <div className="md:mt-10 flex flex-col gap-3">
@@ -636,7 +624,7 @@ export default function HomeClient() {
                       <span className="text-[0.7rem] font-medium tracking-[0.08em] uppercase text-white/40">{week}</span>
                     </div>
                     <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight">{title}</h3>
-                    <p className="text-white/55 leading-relaxed text-[0.95rem]">{desc}</p>
+                    <p className="text-white/70 leading-relaxed text-[0.95rem]">{desc}</p>
                     <ul className="flex flex-col gap-1.5 mt-2 text-xs text-white/40">
                       {items.map((item) => (
                         <li key={item} className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-brand-400"></span>{item}</li>
@@ -658,7 +646,7 @@ export default function HomeClient() {
                 <p className="text-white/55 text-sm leading-relaxed">ASX-listed transformations and trans-Tasman rebrands can run 3–6 months. We scope every engagement in AUD before we quote it, no surprises, no offshore sticker shock.</p>
               </div>
             </div>
-            <a href="#contact" className="group shrink-0 inline-flex items-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-7 py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(33,186,128,0.3)] w-fit">
+            <a href="#contact" className="group shrink-0 inline-flex items-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-7 py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-(--shadow-brand-md) w-fit">
               <span>Book a discovery call</span>
               <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
             </a>
@@ -671,23 +659,20 @@ export default function HomeClient() {
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 mb-16 md:mb-20">
             <div className="lg:col-span-7">
-              <div className="team-eyebrow opacity-0 translate-y-4 flex items-center gap-3 mb-6">
-                <span className="text-brand-300 text-xs font-semibold uppercase tracking-[0.2em]">Meet the Mates</span>
-              </div>
               <h2 className="team-heading opacity-0 translate-y-6 text-white font-bold leading-[1.02] tracking-tight" style={{ fontSize: "clamp(2.5rem, 5.5vw, 4.5rem)" }}>
                 Small team.<br />
                 <span className="text-white">Six capital cities.</span>
               </h2>
             </div>
             <div className="lg:col-span-5 lg:pt-6">
-              <p className="team-intro opacity-0 translate-y-6 text-white/60 text-base md:text-lg leading-relaxed max-w-md">
+              <p className="team-intro opacity-0 translate-y-6 text-white/75 text-base md:text-lg leading-relaxed max-w-md">
                 Six senior Aussies (plus two Aussie-by-choice). No juniors thrown at your account, no offshore hand-offs. Every project runs AEST/AEDT with the mates whose names you read below.
               </p>
               <div className="team-intro opacity-0 translate-y-6 flex gap-6 mt-8 pt-8 border-t border-white/10">
                 {[{ val: "6", label: "Senior leads" }, { val: "14yrs", label: "Avg. experience" }, { val: "0", label: "Account managers" }].map(({ val, label }, i) => (
                   <div key={label} className={`flex flex-col${i > 0 ? " pl-6 border-l border-white/10" : ""}`}>
                     <div className="text-2xl font-bold text-white">{val}</div>
-                    <div className="text-xs text-white/50 uppercase tracking-wider mt-1">{label}</div>
+                    <div className="text-xs text-white/65 uppercase tracking-wider mt-1">{label}</div>
                   </div>
                 ))}
               </div>
@@ -713,7 +698,7 @@ export default function HomeClient() {
                 </div>
                 <h3 className="text-white font-bold text-xl md:text-2xl">{name}</h3>
                 <p className="text-brand-300 text-sm font-medium mt-1">{role}</p>
-                <p className="text-white/50 text-sm leading-relaxed mt-4">{bio}</p>
+                <p className="text-white/72 text-sm leading-relaxed mt-4">{bio}</p>
                 <div className="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
                   <span className="text-xs text-white/40 uppercase tracking-wider">{city}</span>
                   <div className="flex gap-2">
@@ -742,7 +727,7 @@ export default function HomeClient() {
                 <div key={num} className="flex flex-col sm:flex-row sm:items-baseline sm:gap-8 py-5 gap-1">
                   <span className="text-brand-400/50 font-mono text-xs tracking-widest shrink-0 sm:w-5">{num}</span>
                   <dt className="text-white font-semibold text-sm sm:w-52 sm:shrink-0">{title}</dt>
-                  <dd className="text-white/45 text-sm leading-relaxed">{desc}</dd>
+                  <dd className="text-white/70 text-sm leading-relaxed">{desc}</dd>
                 </div>
               ))}
             </dl>
@@ -755,14 +740,11 @@ export default function HomeClient() {
         <div className="relative z-10 max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 mb-16 md:mb-20">
             <div className="lg:col-span-5">
-              <div className="faq-eyebrow opacity-0 translate-y-4 flex items-center gap-3 mb-6">
-                <span className="text-brand-300 text-xs font-semibold uppercase tracking-[0.2em]">Questions, answered</span>
-              </div>
               <h2 className="faq-heading opacity-0 translate-y-6 text-white font-bold leading-[1.02] tracking-tight" style={{ fontSize: "clamp(2.5rem, 5.5vw, 4.5rem)" }}>
                 Before you<br />
                 <span className="text-white">shoot us a DM.</span>
               </h2>
-              <p className="faq-intro opacity-0 translate-y-6 text-white/55 text-base md:text-lg leading-relaxed mt-8 max-w-sm">
+              <p className="faq-intro opacity-0 translate-y-6 text-white/75 text-base md:text-lg leading-relaxed mt-8 max-w-sm">
                 The questions we get most often from Aussie founders and CMOs in your exact seat.
               </p>
               <div className="faq-intro opacity-0 translate-y-6 mt-10 rounded-2xl border border-white/10 bg-white/2 p-6">
@@ -799,7 +781,7 @@ export default function HomeClient() {
                         </span>
                       </span>
                     </summary>
-                    <div className="pl-10 pr-12 pt-4 text-white/60 text-sm md:text-base leading-relaxed">{a}</div>
+                    <div className="pl-10 pr-12 pt-4 text-white/80 text-sm md:text-base leading-relaxed">{a}</div>
                   </details>
                 ))}
               </div>
@@ -816,20 +798,23 @@ export default function HomeClient() {
 
         <div className="relative z-10 max-w-6xl mx-auto">
           <div className="text-center max-w-4xl mx-auto mb-16 md:mb-20">
-            <div className="contact-eyebrow opacity-0 translate-y-4 inline-flex items-center gap-3 mb-8">
-              <span className="text-brand-400 text-[0.7rem] font-semibold uppercase tracking-[0.2em]">Booking Q2 · 2 slots left</span>
+            <div className="contact-badge opacity-0 translate-y-4 flex justify-center mb-8">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-400/15 border border-brand-400/25 text-brand-400 text-xs font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-400 animate-pulse shrink-0"></span>
+                Booking Q2 2025 · 2 spots remain
+              </span>
             </div>
             <h2 className="contact-heading opacity-0 translate-y-6 text-white font-bold leading-[1.1] tracking-[-0.03em]" style={{ fontSize: "clamp(2.75rem, 7vw, 6rem)" }}>
               Let&apos;s build something<br />
-              <span className="bg-linear-to-r from-brand-300 via-brand-400 to-brand-300 bg-clip-text text-transparent italic inline-block pb-2">your competitors notice.</span>
+              <span className="text-brand-400 italic inline-block pb-2">your competitors notice.</span>
             </h2>
-            <p className="contact-intro opacity-0 translate-y-6 text-white/60 text-base md:text-xl leading-relaxed mt-8 max-w-2xl mx-auto">
+            <p className="contact-intro opacity-0 translate-y-6 text-white/75 text-base md:text-xl leading-relaxed mt-8 max-w-2xl mx-auto">
               A 20-minute call. We&apos;ll tell you honestly whether we&apos;re the right studio for the job, and point you to someone better if we&apos;re not.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-5 md:gap-6 mb-14 md:mb-20">
-            <Link href="/contact" className="contact-card opacity-0 translate-y-6 group relative overflow-hidden rounded-3xl p-8 md:p-10 bg-linear-to-br from-brand-400 to-brand-300 text-brand-700 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_80px_-20px_rgba(33,186,128,0.5)]">
+            <Link href="/contact" className="contact-card opacity-0 translate-y-6 group relative overflow-hidden rounded-3xl p-8 md:p-10 bg-linear-to-br from-brand-400 to-brand-300 text-brand-700 transition-all duration-500 hover:-translate-y-1 hover:shadow-(--shadow-brand-xl)">
               <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-white/20 blur-3xl opacity-50 group-hover:opacity-80 transition-opacity duration-500"></div>
               <div className="relative flex flex-col gap-8 h-full">
                 <div className="flex items-start justify-between">
@@ -904,7 +889,7 @@ export default function HomeClient() {
                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm">
                   <a href={`tel:${tel}`} className="text-white/70 hover:text-brand-300 transition-colors">{phone}</a>
                   <span className="hidden sm:block w-px h-4 bg-white/10"></span>
-                  <span className="text-white/45">Mon–Fri · 9–6 AEST</span>
+                  <span className="text-white/65">Mon–Fri · 9–6 AEST</span>
                 </div>
               </div>
             ))}

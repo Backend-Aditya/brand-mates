@@ -129,33 +129,63 @@ export default function Nav() {
         if (navEl) navEl.style.paddingRight = "";
       };
 
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
       const tl = gsap.timeline({ paused: true });
 
-      tl.to(navBgs, { scaleY: 1, duration: 0.75, stagger: 0.1, ease: "power3.inOut" });
-      tl.to(".nav-items", { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 0.75, ease: "power3.inOut" }, "-=0.6");
-      tl.fromTo(linkEls, { y: "100%" }, { y: "0%", duration: 0.6, stagger: 0.05, ease: "power3.out" }, "-=0.35");
+      if (reducedMotion) {
+        tl.set(navBgs, { scaleY: 1 });
+        tl.set(".nav-items", { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)" });
+        tl.set(linkEls, { y: "0%" });
+      } else {
+        tl.to(navBgs, { scaleY: 1, duration: 0.75, stagger: 0.1, ease: "power3.inOut" });
+        tl.to(".nav-items", { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 0.75, ease: "power3.inOut" }, "-=0.6");
+        tl.fromTo(linkEls, { y: "100%" }, {
+          y: "0%", duration: 0.6, stagger: 0.05, ease: "power3.out",
+          onComplete: () => { if (isMenuOpen.current) linkEls[0]?.focus({ preventScroll: true }); },
+        }, "-=0.35");
+      }
 
       tlRef.current = tl;
+
+      const mainContent = document.getElementById("main-content");
+
+      function closeMenu() {
+        tl.reverse();
+        unlockScroll();
+        isMenuOpen.current = false;
+        navToggler!.classList.remove("open");
+        navToggler!.setAttribute("aria-expanded", "false");
+        document.getElementById("nav-menu")?.setAttribute("aria-hidden", "true");
+        if (mainContent) mainContent.removeAttribute("inert");
+        navToggler!.focus();
+      }
 
       function handleClick() {
         if (!isMenuOpen.current) {
           tl.play();
           lockScroll();
+          isMenuOpen.current = true;
+          navToggler!.classList.add("open");
+          navToggler!.setAttribute("aria-expanded", "true");
+          document.getElementById("nav-menu")?.setAttribute("aria-hidden", "false");
+          if (mainContent) mainContent.setAttribute("inert", "");
+          if (reducedMotion) linkEls[0]?.focus({ preventScroll: true });
         } else {
-          tl.reverse();
-          unlockScroll();
+          closeMenu();
         }
-        isMenuOpen.current = !isMenuOpen.current;
-        navToggler!.classList.toggle("open", isMenuOpen.current);
-        navToggler!.setAttribute("aria-expanded", String(isMenuOpen.current));
-        const navMenu = document.getElementById("nav-menu");
-        if (navMenu) navMenu.setAttribute("aria-hidden", String(!isMenuOpen.current));
       }
 
+      const handleKeydown = (e: KeyboardEvent) => {
+        if (e.key === "Escape" && isMenuOpen.current) closeMenu();
+      };
+
+      document.addEventListener("keydown", handleKeydown);
       navToggler.addEventListener("click", handleClick);
 
       cleanup = () => {
         navToggler.removeEventListener("click", handleClick);
+        document.removeEventListener("keydown", handleKeydown);
         tl.kill();
       };
     }
@@ -176,6 +206,7 @@ export default function Nav() {
       toggler?.classList.remove("open");
       toggler?.setAttribute("aria-expanded", "false");
       document.getElementById("nav-menu")?.setAttribute("aria-hidden", "true");
+      document.getElementById("main-content")?.removeAttribute("inert");
     }
   }, [pathname]);
 

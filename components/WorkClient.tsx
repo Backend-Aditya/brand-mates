@@ -232,7 +232,7 @@ export default function WorkClient() {
             </div>
             <Link
               href="/contact"
-              className="relative group inline-flex items-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-8 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(33,186,128,0.35)] shrink-0"
+              className="relative group inline-flex items-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-8 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-(--shadow-brand-lg) shrink-0"
             >
               Start a conversation
               <span className="transition-transform duration-300 group-hover:translate-x-1"><ArrowRight size={16} /></span>

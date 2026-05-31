@@ -92,7 +92,12 @@
 
 /* Select placeholder vs filled state */
 select:invalid {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Balanced heading line lengths */
+h1, h2, h3 {
+  text-wrap: balance;
 }
 
 /* FAQ toggle chip */
@@ -106,19 +111,38 @@ select:invalid {
   transform: scale(1.06);
 }
 
+/* Brand shadow tokens */
+:root {
+  --shadow-brand-md: 0 12px 32px color-mix(in srgb, var(--color-brand-400) 30%, transparent);
+  --shadow-brand-lg: 0 16px 40px color-mix(in srgb, var(--color-brand-400) 35%, transparent);
+  --shadow-brand-xl: 0 30px 80px -20px color-mix(in srgb, var(--color-brand-400) 50%, transparent);
+  --shadow-brand-glow: 0 0 24px color-mix(in srgb, var(--color-brand-400) 40%, transparent);
+}
+
+/* Reduced motion: show all reveal-animated elements instantly */
+@media (prefers-reduced-motion: reduce) {
+  .opacity-0 { opacity: 1 !important; }
+  .translate-y-3, .translate-y-4, .translate-y-5,
+  .translate-y-6, .translate-y-8, .translate-y-10 { transform: none !important; }
+  .nav-primary-links a { transform: none !important; }
+  .nav-items { clip-path: none !important; }
+  .nav-bg { transform: none !important; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
 /* Custom scrollbar */
 :root { --scrollbar-w: 8px; }
 html, body {
   scrollbar-width: thin;
-  scrollbar-color: #4caf50 #141414;
+  scrollbar-color: var(--color-brand-400) var(--color-brand-ink);
 }
 ::-webkit-scrollbar { width: var(--scrollbar-w); height: var(--scrollbar-w); }
-::-webkit-scrollbar-track { background: #141414; }
+::-webkit-scrollbar-track { background: var(--color-brand-ink); }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #4caf50, #2e7d32);
+  background: var(--color-brand-400);
   border-radius: 10px;
-  border: 2px solid #141414;
+  border: 2px solid var(--color-brand-ink);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #66bb6a, #388e3c);
+  background: var(--color-brand-300);
 }

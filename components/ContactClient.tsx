@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const selectStyle = {
   backgroundImage: `url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23ffffff60' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`,
@@ -36,6 +36,15 @@ const ClockIcon = () => (
 );
 
 export default function ContactClient() {
+  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "sent">("idle");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setFormStatus("sending");
+    await new Promise(r => setTimeout(r, 900));
+    setFormStatus("sent");
+  }
+
   useEffect(() => {
     let ctx: ReturnType<typeof import("gsap").gsap.context> | null = null;
 
@@ -85,15 +94,17 @@ export default function ContactClient() {
       {/* PAGE HERO */}
       <section className="relative w-full pt-36 md:pt-44 pb-16 px-6 sm:px-10 md:px-16 overflow-x-hidden">
         <div className="relative max-w-7xl mx-auto text-center">
-          <div className="ct-badge opacity-0 translate-y-4 inline-flex items-center gap-2.5 mb-8">
-            <span className="w-2 h-2 rounded-full bg-brand-400 shrink-0"></span>
-            <span className="text-[0.72rem] font-medium tracking-[0.08em] uppercase text-brand-400">Booking Q2 · 2 slots left</span>
+          <div className="ct-badge opacity-0 translate-y-4 flex justify-center mb-8">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-400/15 border border-brand-400/25 text-brand-400 text-xs font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-400 animate-pulse shrink-0"></span>
+              Booking Q2 2025 · 2 spots remain
+            </span>
           </div>
           <h1 className="ct-heading opacity-0 translate-y-6 text-[1.875rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-7xl xl:text-[5.5rem] font-extrabold tracking-[-0.03em] leading-[1.02] text-white mb-6">
             Let&apos;s build something<br />
-            <span className="inline-block pb-1 bg-linear-to-r from-brand-400 to-brand-300 bg-clip-text text-transparent italic">the market remembers.</span>
+            <span className="inline-block pb-1 text-brand-400 italic">the market remembers.</span>
           </h1>
-          <p className="ct-intro opacity-0 translate-y-6 text-white/55 text-base md:text-xl leading-relaxed max-w-xl mx-auto">
+          <p className="ct-intro opacity-0 translate-y-6 text-white/75 text-base md:text-xl leading-relaxed max-w-xl mx-auto">
             Fill in the form below or jump straight to booking a discovery call. We respond to every inquiry within one business day, AEST.
           </p>
         </div>
@@ -105,29 +116,33 @@ export default function ContactClient() {
 
           {/* FORM */}
           <div className="ct-form opacity-0 translate-y-8">
-            <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
+            <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+              {formStatus === "sending" && "Sending your enquiry..."}
+              {formStatus === "sent" && "Enquiry sent. We will reply within 1 business day, AEST."}
+            </div>
+            <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
               <div className="grid sm:grid-cols-2 gap-5">
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="ct-name" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">Your name</label>
-                  <input id="ct-name" type="text" placeholder="Alex Chen" className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/40 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
+                  <label htmlFor="ct-name" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/65">Your name</label>
+                  <input id="ct-name" type="text" placeholder="Alex Chen" className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/55 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="ct-email" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">Work email</label>
-                  <input id="ct-email" type="email" placeholder="alex@company.com.au" className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/40 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
+                  <label htmlFor="ct-email" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/65">Work email</label>
+                  <input id="ct-email" type="email" placeholder="alex@company.com.au" className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/55 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
                 </div>
               </div>
               <div className="grid sm:grid-cols-2 gap-5">
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="ct-company" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">Company</label>
-                  <input id="ct-company" type="text" placeholder="Your company name" className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/40 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
+                  <label htmlFor="ct-company" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/65">Company</label>
+                  <input id="ct-company" type="text" placeholder="Your company name" className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/55 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="ct-website" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">Website (optional)</label>
-                  <input id="ct-website" type="url" placeholder="yoursite.com.au" className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/40 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
+                  <label htmlFor="ct-website" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/65">Website (optional)</label>
+                  <input id="ct-website" type="url" placeholder="yoursite.com.au" className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/55 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
                 </div>
               </div>
               <div className="flex flex-col gap-2">
-                <label htmlFor="ct-service" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">Service you&apos;re interested in</label>
+                <label htmlFor="ct-service" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/65">Service you&apos;re interested in <span aria-hidden="true" className="text-brand-400">*</span></label>
                 <select id="ct-service" required className="w-full rounded-xl border border-white/10 bg-white/3 text-white text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all appearance-none cursor-pointer" style={selectStyle}>
                   <option value="" className="bg-brand-ink">Select a service...</option>
                   <option value="web" className="bg-brand-ink">Web Design &amp; Development</option>
@@ -139,7 +154,7 @@ export default function ContactClient() {
                 </select>
               </div>
               <div className="flex flex-col gap-2">
-                <label htmlFor="ct-budget" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">Monthly budget (AUD, ex-GST)</label>
+                <label htmlFor="ct-budget" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/65">Monthly budget (AUD, ex-GST) <span aria-hidden="true" className="text-brand-400">*</span></label>
                 <select id="ct-budget" required className="w-full rounded-xl border border-white/10 bg-white/3 text-white text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all appearance-none cursor-pointer" style={selectStyle}>
                   <option value="" className="bg-brand-ink">Select budget range...</option>
                   <option value="2-5" className="bg-brand-ink">$2,000 – $5,000 / month</option>
@@ -150,16 +165,29 @@ export default function ContactClient() {
                 </select>
               </div>
               <div className="flex flex-col gap-2">
-                <label htmlFor="ct-message" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/50">Tell us about your project</label>
-                <textarea id="ct-message" rows={5} placeholder="What are you trying to achieve? Where are you now, and where do you want to be? The more context you share, the better our first conversation will be." className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/40 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all resize-none leading-relaxed"></textarea>
+                <label htmlFor="ct-message" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/65">Tell us about your project</label>
+                <textarea id="ct-message" rows={5} placeholder="What are you trying to achieve? Where are you now, and where do you want to be? The more context you share, the better our first conversation will be." className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/55 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all resize-none leading-relaxed"></textarea>
               </div>
-              <button type="submit" className="group self-start inline-flex items-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-8 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(33,186,128,0.35)]">
-                Send enquiry
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="transition-transform group-hover:translate-x-1">
-                  <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-              <p className="text-white/35 text-xs">We respond within 1 business day (AEST). Your details are never shared with third parties.</p>
+              <div className="flex flex-col gap-3">
+                <p className="text-white/55 text-xs"><span aria-hidden="true" className="text-brand-400">*</span> Required fields</p>
+                <button
+                  type="submit"
+                  disabled={formStatus === "sending" || formStatus === "sent"}
+                  className="group self-start inline-flex items-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:bg-brand-400 disabled:hover:translate-y-0 text-brand-700 font-bold text-sm px-8 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-(--shadow-brand-lg)"
+                >
+                  {formStatus === "sending" && "Sending..."}
+                  {formStatus === "sent" && "Enquiry sent"}
+                  {formStatus === "idle" && (
+                    <>
+                      Send enquiry
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="transition-transform group-hover:translate-x-1">
+                        <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </>
+                  )}
+                </button>
+              </div>
+              <p className="text-white/60 text-xs">We respond within 1 business day (AEST). Your details are never shared with third parties.</p>
             </form>
           </div>
 
@@ -203,18 +231,18 @@ export default function ContactClient() {
                 <span className="w-8 h-8 rounded-lg bg-white/5 group-hover:bg-brand-400/10 flex items-center justify-center transition-colors shrink-0"><PhoneIcon /></span>
                 +61 3 9432 1234 (Melbourne)
               </a>
-              <div className="pt-3 mt-1 border-t border-white/5 text-white/35 text-xs">Mon – Fri · 9am – 6pm AEST/AEDT</div>
+              <div className="pt-3 mt-1 border-t border-white/5 text-white/60 text-xs">Mon – Fri · 9am – 6pm AEST/AEDT</div>
             </div>
 
             {/* Offices */}
             <div className="rounded-2xl border border-white/5 bg-white/2 p-6 grid grid-cols-2 gap-4">
               <div>
                 <p className="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-brand-300 mb-2">Sydney HQ</p>
-                <address className="not-italic text-white/55 text-xs leading-relaxed">Level 3, 56 Foveaux St<br />Surry Hills NSW 2010</address>
+                <address className="not-italic text-white/70 text-xs leading-relaxed">Level 3, 56 Foveaux St<br />Surry Hills NSW 2010</address>
               </div>
               <div>
                 <p className="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-brand-300 mb-2">Melbourne Studio</p>
-                <address className="not-italic text-white/55 text-xs leading-relaxed">Suite 12, 112 Brunswick St<br />Fitzroy VIC 3065</address>
+                <address className="not-italic text-white/70 text-xs leading-relaxed">Suite 12, 112 Brunswick St<br />Fitzroy VIC 3065</address>
               </div>
             </div>
           </div>

@@ -27,13 +27,13 @@ const SocialIcon = ({ children, label }: { children: React.ReactNode; label: str
 
 export default function Footer() {
   return (
-    <footer id="footer" className="relative w-full overflow-hidden bg-[#0a0a0a] border-t border-white/5">
+    <footer id="footer" className="relative w-full overflow-hidden bg-brand-ink border-t border-white/5">
       {/* Giant wordmark */}
       <div className="relative border-b border-white/5 overflow-hidden">
         <div className="ft-mark opacity-0 translate-y-10 py-10 md:py-14 px-6 sm:px-10 md:px-16 max-w-400 mx-auto">
           <div className="flex items-center gap-4 md:gap-8">
             <span
-              className="font-black leading-none tracking-[-0.06em] bg-linear-to-br from-white via-white/90 to-brand-400 bg-clip-text text-transparent whitespace-nowrap pr-[0.08em]"
+              className="font-black leading-none tracking-[-0.06em] text-white whitespace-nowrap pr-[0.08em]"
               style={{ fontSize: "clamp(3.5rem, 12vw, 12rem)" }}
             >
               BrandMates
@@ -58,29 +58,29 @@ export default function Footer() {
               <Image src="/logo.png" alt="BrandMates" width={40} height={40} className="w-10 h-10" />
               <div className="flex flex-col leading-tight">
                 <span className="text-white font-bold text-base">BrandMates</span>
-                <span className="text-white/45 text-xs">We build belief.</span>
+                <span className="text-white/65 text-xs">We build belief.</span>
               </div>
             </div>
-            <p className="text-white/55 text-sm leading-relaxed max-w-xs">
+            <p className="text-white/72 text-sm leading-relaxed max-w-xs">
               An Australian brand studio for founders and CMOs who need the work to actually hold up. Strategy, identity, and launch, end to end, in your timezone.
             </p>
             <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
               <label className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-300">Studio dispatch</label>
               <div className="flex items-center gap-0 rounded-full border border-white/10 bg-white/2 focus-within:border-brand-400/60 transition-colors overflow-hidden pl-5 pr-1 py-1">
-                <input type="email" placeholder="you@company.com.au" className="flex-1 bg-transparent border-0 outline-none text-white placeholder:text-white/30 text-sm py-2" />
+                <input type="email" placeholder="you@company.com.au" className="flex-1 bg-transparent border-0 outline-none text-white placeholder:text-white/55 text-sm py-2" />
                 <button type="submit" className="shrink-0 w-9 h-9 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 flex items-center justify-center transition-colors">
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                     <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </button>
               </div>
-              <span className="text-white/35 text-[0.7rem]">One email a month. What&apos;s working in AU digital marketing right now.</span>
+              <span className="text-white/60 text-[0.7rem]">One email a month. What&apos;s working in AU digital marketing right now.</span>
             </form>
           </div>
 
           {/* Studio */}
           <div className="col-span-1 md:col-span-2 flex flex-col gap-5">
-            <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/40">Studio</span>
+            <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/60">Studio</span>
             <ul className="flex flex-col gap-3 text-sm">
               {[
                 { href: "/work", label: "Selected Work" },
@@ -91,7 +91,7 @@ export default function Footer() {
                 { href: "/studio#careers", label: "Careers", badge: "+2" },
               ].map(({ href, label, badge }) => (
                 <li key={href}>
-                  <Link href={href} className="text-white/75 hover:text-brand-300 transition-colors">
+                  <Link href={href} className="flex items-center min-h-11 sm:min-h-0 text-white/75 hover:text-brand-300 transition-colors">
                     {label}{badge && <span className="ml-1 text-[0.6rem] text-brand-400">{badge}</span>}
                   </Link>
                 </li>
@@ -101,7 +101,7 @@ export default function Footer() {
 
           {/* Services */}
           <div className="col-span-1 md:col-span-2 flex flex-col gap-5">
-            <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/40">Services</span>
+            <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/60">Services</span>
             <ul className="flex flex-col gap-3 text-sm">
               {[
                 { href: "/services#web", label: "Web Design & Development" },
@@ -110,7 +110,7 @@ export default function Footer() {
                 { href: "/services#content", label: "Content Creation" },
               ].map(({ href, label }) => (
                 <li key={href}>
-                  <Link href={href} className="text-white/75 hover:text-brand-300 transition-colors">{label}</Link>
+                  <Link href={href} className="flex items-center min-h-11 sm:min-h-0 text-white/75 hover:text-brand-300 transition-colors">{label}</Link>
                 </li>
               ))}
             </ul>
@@ -118,7 +118,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div className="col-span-2 md:col-span-4 flex flex-col gap-5">
-            <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/40">Say g&apos;day</span>
+            <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/60">Say g&apos;day</span>
             <div className="flex flex-col gap-4 text-sm">
               <a href="mailto:studio@brandmates.com.au" className="group inline-flex items-center gap-2 text-white font-semibold text-base md:text-lg hover:text-brand-300 transition-colors">
                 <span>studio@brandmates.com.au</span>
@@ -129,14 +129,14 @@ export default function Footer() {
               <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/10">
                 <div>
                   <div className="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-brand-300 mb-1">Sydney</div>
-                  <address className="not-italic text-white/60 text-xs leading-relaxed">
+                  <address className="not-italic text-white/72 text-xs leading-relaxed">
                     Level 3, 56 Foveaux St<br />Surry Hills NSW 2010<br />
                     <a href="tel:+61282345678" className="text-white/75 hover:text-brand-300 transition-colors">+61 2 8234 5678</a>
                   </address>
                 </div>
                 <div>
                   <div className="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-brand-300 mb-1">Melbourne</div>
-                  <address className="not-italic text-white/60 text-xs leading-relaxed">
+                  <address className="not-italic text-white/72 text-xs leading-relaxed">
                     Suite 12, 112 Brunswick St<br />Fitzroy VIC 3065<br />
                     <a href="tel:+61394321234" className="text-white/75 hover:text-brand-300 transition-colors">+61 3 9432 1234</a>
                   </address>
@@ -144,7 +144,7 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="flex items-center gap-2 mt-2">
+            <div className="flex items-center gap-2 mt-2" aria-hidden="true">
               <SocialIcon label="Instagram">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
@@ -173,7 +173,7 @@ export default function Footer() {
       {/* Acknowledgment of Country */}
       <div className="relative border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-16 py-8">
-          <div className="ft-ack opacity-0 flex items-start gap-4 text-white/55 text-xs md:text-sm leading-relaxed max-w-3xl">
+          <div className="ft-ack opacity-0 flex items-start gap-4 text-white/72 text-xs md:text-sm leading-relaxed max-w-3xl">
             <span className="shrink-0 mt-0.5 w-1 h-10 bg-linear-to-b from-brand-400 via-orange-400 to-red-500 rounded-full"></span>
             <p>
               BrandMates acknowledges the Gadigal people of the Eora Nation and the Wurundjeri people of the Kulin Nation, the Traditional Custodians of the lands on which our studios are built. We pay our respects to Elders past, present, and emerging, and extend that respect to all Aboriginal and Torres Strait Islander peoples.
@@ -185,7 +185,7 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="relative border-t border-white/5 bg-black/20">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-16 py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs">
-          <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-5 text-white/40">
+          <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-5 text-white/60">
             <span>© 2017–2025 BrandMates Pty Ltd</span>
             <span className="hidden md:inline w-1 h-1 rounded-full bg-white/20"></span>
             <span>ABN 88 612 334 901</span>
@@ -196,11 +196,11 @@ export default function Footer() {
             </span>
           </div>
           <div className="flex items-center gap-5 text-white/50">
-            <a href="#" className="hover:text-brand-300 transition-colors">Privacy</a>
+            <span className="cursor-default">Privacy</span>
             <span className="w-1 h-1 rounded-full bg-white/20"></span>
-            <a href="#" className="hover:text-brand-300 transition-colors">Terms</a>
+            <span className="cursor-default">Terms</span>
             <span className="w-1 h-1 rounded-full bg-white/20"></span>
-            <a href="#" className="hover:text-brand-300 transition-colors">Accessibility</a>
+            <span className="cursor-default">Accessibility</span>
           </div>
         </div>
       </div>
