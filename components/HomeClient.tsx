@@ -10,18 +10,6 @@ const ArrowRight = ({ size = 16, className = "" }: { size?: number; className?: 
   </svg>
 );
 
-const StarIcon = ({ size = 14 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 2l3 7h7l-5.5 4.5L18 22l-6-4-6 4 1.5-8.5L2 9h7z" />
-  </svg>
-);
-
-const FiveStars = ({ size = 14 }: { size?: number }) => (
-  <div className="flex gap-0.5 text-brand-400">
-    {Array.from({ length: 5 }).map((_, i) => <StarIcon key={i} size={size} />)}
-  </div>
-);
-
 export default function HomeClient() {
   useEffect(() => {
     let ctx: ReturnType<typeof import("gsap").gsap.context> | null = null;
@@ -81,10 +69,7 @@ export default function HomeClient() {
         ([
           [".services-heading", ".services-intro"],
           [".work-heading",     ".work-viewall"  ],
-          [".tm-heading",       null             ],
           [".pr-heading",       ".pr-intro"      ],
-          [".team-heading",     ".team-intro"    ],
-          [".faq-heading",      ".faq-intro"     ],
           [".contact-heading",  ".contact-intro" ],
         ] as (string | null)[][]).forEach(([hd, extra]) => {
           if (!hd || !document.querySelector(hd)) return;
@@ -94,7 +79,7 @@ export default function HomeClient() {
         });
 
         // Batched cards
-        [".service-card", ".tm-card", ".pr-step", ".team-card", ".faq-item", ".contact-card"].forEach((sel) => {
+        [".service-card", ".pr-step", ".contact-card"].forEach((sel) => {
           ScrollTrigger.batch(sel, {
             onEnter: (els) => gsap.fromTo(els, from, { ...to, stagger: 0.07 }),
             ...ST,
@@ -102,8 +87,7 @@ export default function HomeClient() {
         });
 
         // Individual blocks
-        [".tm-featured", ".tm-stats", ".services-cta", ".work-footer",
-         ".pr-footer", ".team-principles", ".contact-offices", ".contact-badge"].forEach((sel) => {
+        [".services-cta", ".work-footer", ".pr-footer", ".contact-offices", ".contact-badge"].forEach((sel) => {
           gsap.fromTo(sel, from, { ...to, scrollTrigger: { trigger: sel, ...ST } });
         });
 
@@ -134,7 +118,7 @@ export default function HomeClient() {
         />
         <div className="absolute inset-0 z-0 bg-[linear-gradient(135deg,rgb(var(--surface-rgb)/0.85)_0%,rgb(var(--ink-rgb)/0.78)_50%,rgb(var(--ink-rgb)/0.55)_100%)]"></div>
 
-        <div className="relative z-[2] w-full px-6 sm:px-10 md:px-16 flex flex-col lg:flex-row lg:items-center lg:gap-10 xl:gap-14">
+        <div className="relative z-2 w-full px-6 sm:px-10 md:px-16 flex flex-col lg:flex-row lg:items-center lg:gap-10 xl:gap-14">
           {/* Content */}
           <div className="hero-content flex flex-col lg:flex-1 gap-5 md:gap-6">
             {/* Badge */}
@@ -156,7 +140,7 @@ export default function HomeClient() {
             </h1>
 
             {/* Subtext */}
-            <p className="hero-subtext max-w-[560px] text-sm sm:text-base md:text-lg font-normal leading-relaxed text-white/80 opacity-0 translate-y-4">
+            <p className="hero-subtext max-w-140 text-sm sm:text-base md:text-lg font-normal leading-relaxed text-white/80 opacity-0 translate-y-4">
               From Surry Hills seed rounds to ASX-listed rebrands, the studio Australian founders and CMOs call when the brand needs to work harder than it does.
             </p>
 
@@ -178,7 +162,7 @@ export default function HomeClient() {
                 {["Saltbush", "Koorang", "Harbour Co", "Tallow & Co", "Bushline"].map((name, i) => (
                   <span key={name} className="flex items-center">
                     {i > 0 && <span className="mx-3 text-white/15 text-[0.55rem] select-none">&#9679;</span>}
-                    <span className="text-[0.73rem] font-semibold tracking-[0.1em] uppercase text-white/65 hover:text-white/85 transition-colors cursor-default">{name}</span>
+                    <span className="text-[0.73rem] font-semibold tracking-widest uppercase text-white/65 hover:text-white/85 transition-colors cursor-default">{name}</span>
                   </span>
                 ))}
               </div>
@@ -186,7 +170,7 @@ export default function HomeClient() {
           </div>
 
           {/* Floating contact form */}
-          <div className="hero-form mt-10 lg:mt-0 flex flex-col w-full lg:w-[320px] xl:w-[360px] lg:shrink-0 rounded-2xl border border-white/10 bg-brand-ink p-5 sm:p-6 gap-4 sm:gap-5 opacity-0 translate-y-8">
+          <div className="hero-form mt-10 lg:mt-0 flex flex-col w-full lg:w-[320px] xl:w-90 lg:shrink-0 rounded-2xl border border-white/10 bg-brand-ink p-5 sm:p-6 gap-4 sm:gap-5 opacity-0 translate-y-8">
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <span className="w-2 h-2 rounded-full bg-brand-400 shrink-0"></span>
@@ -250,8 +234,8 @@ export default function HomeClient() {
             { target: "98",  suffix: "%", label: "Client Retention"   },
             { target: "40",  suffix: "+", label: "AGDA & Award Wins"  },
           ].map(({ target, suffix, label }, i) => (
-            <div key={label} className={`stat flex flex-col gap-2 py-8 md:py-10 px-6 md:px-10${i % 2 !== 0 ? " border-l border-white/5" : i >= 2 ? " md:border-l" : ""}${i >= 2 ? " border-t border-white/5 md:border-t-0" : ""}`}>
-              <div className="flex items-end gap-0.5 leading-none">
+            <div key={label} className={`stat flex flex-col items-center text-center gap-2 py-8 md:py-10 px-6 md:px-10${i % 2 !== 0 ? " border-l border-white/5" : i >= 2 ? " md:border-l" : ""}${i >= 2 ? " border-t border-white/5 md:border-t-0" : ""}`}>
+              <div className="flex items-end justify-center gap-0.5 leading-none">
                 <span className="stat-number text-[2.5rem] md:text-5xl font-black text-white tracking-tight leading-none" data-target={target}>0</span>
                 <span className="text-2xl md:text-3xl font-black text-brand-400 tracking-tight leading-none pb-1">{suffix}</span>
               </div>
@@ -262,9 +246,9 @@ export default function HomeClient() {
       </section>
 
       {/* ── SERVICES ── */}
-      <section id="services" className="relative w-full py-24 md:py-36 px-6 sm:px-10 md:px-16 bg-brand-ink overflow-hidden">
+      <section id="services" className="relative w-full py-(--space-section) px-6 sm:px-10 md:px-16 bg-brand-ink overflow-hidden">
         <div className="relative max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 md:mb-24">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-(--space-head)">
             <div className="max-w-2xl">
               <h2 className="services-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05] text-white opacity-0 translate-y-4">
                 Four disciplines.<br />
@@ -315,7 +299,7 @@ export default function HomeClient() {
             ))}
           </div>
 
-          <div className="services-cta mt-16 md:mt-20 opacity-0 translate-y-4">
+          <div className="services-cta mt-12 md:mt-16 opacity-0 translate-y-4">
             <div className="relative rounded-2xl overflow-hidden border border-brand-400/20 bg-linear-to-br from-brand-400/8 via-transparent to-transparent p-8 md:p-12">
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_0%_50%,rgb(var(--accent-rgb)/0.12),transparent_60%)]"></div>
               <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-8">
@@ -347,13 +331,13 @@ export default function HomeClient() {
       </section>
 
       {/* ── SELECTED WORK ── */}
-      <section id="work" className="relative w-full py-24 md:py-36 px-6 sm:px-10 md:px-16 bg-brand-ink overflow-hidden border-t border-white/5">
+      <section id="work" className="relative w-full py-(--space-section) px-6 sm:px-10 md:px-16 bg-brand-ink overflow-hidden border-t border-white/5">
         <div className="relative max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 md:mb-20">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-(--space-head)">
             <div className="max-w-3xl">
               <h2 className="work-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05] text-white opacity-0 translate-y-4">
-                Work we&apos;re proud<br className="hidden md:block" />
-                <span className="text-white">to put our name on.</span>
+                Work we&apos;re proud<span className="text-white">&nbsp;to</span><br className="hidden md:block" />
+                <span className="text-white">put our name on.</span>
               </h2>
             </div>
             <Link href="/work" className="work-viewall group inline-flex items-center gap-2 text-sm font-semibold text-white/60 hover:text-brand-400 transition-colors opacity-0 translate-y-4">
@@ -364,8 +348,8 @@ export default function HomeClient() {
 
           <div className="flex flex-col gap-12 md:gap-24">
             {/* Project 01, Aura */}
-            <article className="project group grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center opacity-0 translate-y-8">
-              <Link href="/work/aura" className="block md:col-span-7 relative aspect-4/3 rounded-2xl overflow-hidden bg-linear-to-br from-brand-700 via-brand-500 to-brand-400 cursor-pointer">
+            <article className="project grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center opacity-0 translate-y-8">
+              <Link href="/work/aura" className="group block md:col-span-7 relative aspect-4/3 rounded-2xl overflow-hidden bg-linear-to-br from-brand-700 via-brand-500 to-brand-400 cursor-pointer">
                 <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full border border-white/15"></div>
                 <div className="absolute -top-10 -right-10 w-60 h-60 rounded-full border border-white/10"></div>
                 <div className="absolute top-8 right-8 w-24 h-24 rounded-full bg-brand-300/30 blur-2xl"></div>
@@ -392,7 +376,7 @@ export default function HomeClient() {
             </article>
 
             {/* Project 02, Meridian */}
-            <article className="project group grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center opacity-0 translate-y-8">
+            <article className="project grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center opacity-0 translate-y-8">
               <div className="order-2 md:col-span-5 md:order-1 flex flex-col gap-3">
                 <div className="flex items-center gap-3 text-xs font-medium text-white/55">
                   <span>02</span><span className="w-4 h-px bg-white/20"></span>
@@ -406,7 +390,7 @@ export default function HomeClient() {
                   ))}
                 </div>
               </div>
-              <Link href="/work/meridian" className="order-1 block md:col-span-7 md:order-2 relative aspect-4/3 rounded-2xl overflow-hidden bg-linear-to-br from-zinc-900 via-brand-700 to-zinc-800 cursor-pointer">
+              <Link href="/work/meridian" className="group order-1 block md:col-span-7 md:order-2 relative aspect-4/3 rounded-2xl overflow-hidden bg-linear-to-br from-zinc-900 via-brand-700 to-zinc-800 cursor-pointer">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(245,158,11,0.35)_0%,transparent_45%)]"></div>
                 <div className="absolute left-8 top-8 flex flex-col gap-1 text-amber-200/50 text-[0.65rem] tracking-[0.2em] uppercase">
                   <span>Est. 2024</span><span>14 Suites</span>
@@ -422,9 +406,9 @@ export default function HomeClient() {
             </article>
 
             {/* Project 03, Forge */}
-            <article className="project group grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center opacity-0 translate-y-8">
-              <Link href="/work/forge" className="block md:col-span-7 relative aspect-4/3 rounded-2xl overflow-hidden bg-brand-ink cursor-pointer">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgb(var(--accent-rgb)/0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgb(var(--accent-rgb)/0.12)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+            <article className="project grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center opacity-0 translate-y-8">
+              <Link href="/work/forge" className="group block md:col-span-7 relative aspect-4/3 rounded-2xl overflow-hidden bg-brand-ink cursor-pointer">
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgb(var(--accent-rgb)/0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgb(var(--accent-rgb)/0.12)_1px,transparent_1px)] bg-size-[40px_40px]"></div>
                 <div className="absolute inset-0 bg-[linear-gradient(135deg,transparent_0%,transparent_40%,rgb(var(--accent-rgb)/0.2)_40%,rgb(var(--accent-rgb)/0.2)_50%,transparent_50%)]"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-[18vw] md:text-[11rem] font-black tracking-tighter text-brand-400 leading-none select-none">F<span className="text-white">:</span></span>
@@ -450,7 +434,7 @@ export default function HomeClient() {
             </article>
 
             {/* Project 04, Clarity */}
-            <article className="project group grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center opacity-0 translate-y-8">
+            <article className="project grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center opacity-0 translate-y-8">
               <div className="order-2 md:col-span-5 md:order-1 flex flex-col gap-3">
                 <div className="flex items-center gap-3 text-xs font-medium text-white/55">
                   <span>04</span><span className="w-4 h-px bg-white/20"></span>
@@ -464,8 +448,8 @@ export default function HomeClient() {
                   ))}
                 </div>
               </div>
-              <Link href="/work/clarity" className="order-1 block md:col-span-7 md:order-2 relative aspect-4/3 rounded-2xl overflow-hidden bg-linear-to-br from-brand-50 via-brand-100 to-brand-200 cursor-pointer">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[55%] aspect-square rounded-full border-[12px] border-brand-500/25"></div>
+              <Link href="/work/clarity" className="group order-1 block md:col-span-7 md:order-2 relative aspect-4/3 rounded-2xl overflow-hidden bg-linear-to-br from-brand-50 via-brand-100 to-brand-200 cursor-pointer">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[55%] aspect-square rounded-full border-12 border-brand-500/25"></div>
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30%] aspect-square rounded-full bg-brand-500/30"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-[16vw] md:text-[9rem] font-black tracking-tighter text-brand-700 leading-none select-none">clarity.</span>
@@ -478,98 +462,25 @@ export default function HomeClient() {
             </article>
           </div>
 
-          <div className="work-footer mt-20 md:mt-28 flex flex-col md:flex-row md:items-center md:justify-between gap-6 pt-10 border-t border-white/5 opacity-0 translate-y-4">
-            <p className="text-white/65 text-sm"><span className="text-white font-semibold">150+</span> Australian brands transformed since 2017. ABN 88 612 334 901.</p>
-            <Link href="/work" className="group inline-flex items-center gap-2.5 text-sm font-semibold text-white hover:text-brand-400 transition-colors">
-              <span>Explore the full archive</span>
-              <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── TESTIMONIALS ── */}
-      <section id="testimonials" className="relative w-full py-24 md:py-36 px-6 sm:px-10 md:px-16 bg-brand-700 overflow-hidden border-t border-white/5">
-        <div className="relative max-w-7xl mx-auto">
-          <div className="max-w-3xl mb-16 md:mb-20">
-            <h2 className="tm-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05] text-white opacity-0 translate-y-4">
-              Aussie founders,<br className="hidden md:block" />
-              <span className="text-white">in their own words.</span>
-            </h2>
-          </div>
-
-          {/* Featured testimonial */}
-          <div className="tm-featured relative rounded-3xl border border-white/10 bg-brand-600 p-8 md:p-14 mb-16 md:mb-20 overflow-hidden opacity-0 translate-y-6">
-            <div className="relative grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 pt-12 md:pt-8">
-              <blockquote className="md:col-span-8 text-xl sm:text-2xl md:text-3xl lg:text-[2.15rem] font-semibold leading-[1.3] tracking-tight text-white">
-                BrandMates didn&apos;t just rebrand us, they rebuilt how we show up across Australia. Our whole team thinks differently now, and the market noticed the week we relaunched.
-              </blockquote>
-              <div className="md:col-span-4 flex flex-col gap-8 justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="shrink-0 w-14 h-14 rounded-full bg-linear-to-br from-brand-400 to-brand-300 flex items-center justify-center font-bold text-brand-700 text-lg">SM</div>
-                  <div className="flex flex-col">
-                    <span className="text-white font-bold text-base">Sarah Mitchell</span>
-                    <span className="text-white/65 text-sm">Head of Brand, Aura Financial · Sydney</span>
-                  </div>
-                </div>
-                <p className="text-white/60 text-sm leading-relaxed pt-6 border-t border-white/10">
-                  Relaunched to +340% Australian signups, +12 NPS points, and a A$58M Series B the same quarter.
-                </p>
+          <div className="work-footer mt-12 md:mt-16 opacity-0 translate-y-4">
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between rounded-2xl border border-white/10 bg-brand-700/40 p-8 md:p-10">
+              <div className="flex flex-col gap-1.5">
+                <p className="text-white font-semibold text-lg md:text-xl tracking-tight"><span className="text-brand-400">150+</span> Australian brands transformed since 2017.</p>
+                <p className="text-white/55 text-xs tracking-wider uppercase">ABN 88 612 334 901</p>
               </div>
+              <Link href="/work" className="group shrink-0 inline-flex items-center justify-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-7 py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-(--shadow-brand-md)">
+                <span>Explore the full archive</span>
+                <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
             </div>
-          </div>
-
-          {/* Smaller testimonial grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-16 md:mb-24">
-            {[
-              { initials: "MH", gradient: "from-brand-500 to-brand-400", quote: '"The most strategic brand partner we\'ve worked with, Aussie or international. Full stop. They treated our Melbourne launch like it was their own."', name: "Mitch Harrington", role: "CEO, Forge · Melbourne" },
-              { initials: "EP", gradient: "from-amber-400 to-amber-200", quote: '"They get it. They really get the Aussie market. Rare in this industry, and worth every dollar we invested in the partnership."', name: "Erin Patel", role: "VP Marketing, Meridian · Byron Bay" },
-              { initials: "JW", gradient: "from-brand-300 to-brand-100", quote: '"Our brand equity doubled in 18 months across every Aussie state we operate in. That\'s not marketing talk, that\'s what Roy Morgan research said."', name: "Jemma Wakefield", role: "CMO, Clarity · Brisbane" },
-            ].map(({ initials, gradient, quote, name, role }) => (
-              <figure key={initials} className="tm-card group relative flex flex-col gap-6 p-8 rounded-2xl border border-white/10 bg-brand-ink hover:border-brand-400/30 transition-all duration-500 opacity-0 translate-y-6">
-                <FiveStars />
-                <blockquote className="text-white/85 leading-relaxed text-base md:text-[1.05rem]">{quote}</blockquote>
-                <figcaption className="flex items-center gap-3 mt-auto pt-6 border-t border-white/5">
-                  <div className={`shrink-0 w-10 h-10 rounded-full bg-linear-to-br ${gradient} flex items-center justify-center font-bold text-brand-700 text-sm`}>{initials}</div>
-                  <div className="flex flex-col">
-                    <span className="text-white font-semibold text-sm">{name}</span>
-                    <span className="text-white/65 text-xs">{role}</span>
-                  </div>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-
-          {/* Trust strip */}
-          <div className="tm-stats flex flex-col md:flex-row md:items-center md:justify-between gap-8 md:gap-4 p-8 md:p-10 rounded-2xl border border-white/10 bg-brand-600 opacity-0 translate-y-4">
-            <div className="flex items-center gap-4">
-              <FiveStars size={18} />
-              <div className="flex flex-col">
-                <span className="text-white font-bold text-lg">4.9 out of 5</span>
-                <span className="text-white/65 text-xs">Average rating across 120+ Aussie reviews</span>
-              </div>
-            </div>
-            <div className="hidden md:block w-px h-12 bg-white/10"></div>
-            <div className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12">
-              {[{ val: "98%", label: "Referral rate" }, { val: "12yr", label: "Avg. retention" }, { val: "A$3.2B", label: "Client valuations" }].map(({ val, label }) => (
-                <div key={label} className="flex flex-col">
-                  <span className="text-white font-extrabold text-2xl">{val}</span>
-                  <span className="text-white/65 text-xs tracking-wider uppercase">{label}</span>
-                </div>
-              ))}
-            </div>
-            <a href="#testimonials" className="group hidden lg:inline-flex items-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-6 py-3 transition-all">
-              <span>Read all reviews</span>
-              <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
           </div>
         </div>
       </section>
 
       {/* ── PROCESS ── */}
-      <section id="process" className="relative w-full py-24 md:py-36 px-6 sm:px-10 md:px-16 bg-brand-ink overflow-hidden border-t border-white/5">
+      <section id="process" className="relative w-full py-(--space-section) px-6 sm:px-10 md:px-16 bg-brand-ink overflow-hidden border-t border-white/5">
         <div className="relative max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 md:mb-24">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-(--space-head)">
             <div className="max-w-2xl">
               <h2 className="pr-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05] text-white opacity-0 translate-y-4">
                 From g&apos;day to market <br className="hidden md:block" />
@@ -630,150 +541,14 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* ── TEAM ── */}
-      <section id="team" className="relative w-full py-24 md:py-36 px-6 sm:px-10 md:px-16 bg-brand-700 overflow-hidden border-t border-white/5">
-        <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 mb-16 md:mb-20">
-            <div className="lg:col-span-7">
-              <h2 className="team-heading opacity-0 translate-y-6 text-white font-bold leading-[1.02] tracking-tight" style={{ fontSize: "clamp(2.5rem, 5.5vw, 4.5rem)" }}>
-                Small team.<br />
-                <span className="text-white">Six capital cities.</span>
-              </h2>
-            </div>
-            <div className="lg:col-span-5 lg:pt-6">
-              <p className="team-intro opacity-0 translate-y-6 text-white/75 text-base md:text-lg leading-relaxed max-w-md">
-                Six senior Aussies (plus two Aussie-by-choice). No juniors thrown at your account, no offshore hand-offs. Every project runs AEST/AEDT with the mates whose names you read below.
-              </p>
-              <div className="team-intro opacity-0 translate-y-6 flex gap-6 mt-8 pt-8 border-t border-white/10">
-                {[{ val: "6", label: "Senior leads" }, { val: "14yrs", label: "Avg. experience" }, { val: "0", label: "Account managers" }].map(({ val, label }, i) => (
-                  <div key={label} className={`flex flex-col${i > 0 ? " pl-6 border-l border-white/10" : ""}`}>
-                    <div className="text-2xl font-bold text-white">{val}</div>
-                    <div className="text-xs text-white/65 uppercase tracking-wider mt-1">{label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 rounded-3xl overflow-hidden border border-white/5">
-            {[
-              { initials: "NA", gradient: "from-brand-400 via-brand-500 to-brand-700", radial: "circle_at_30%_20%", badge: "Founder", name: "Noa Akerman", role: "Brand Strategy · Founder", bio: "Built positioning for two ASX-listed unicorns before 30. Ex-Atlassian. Thinks in narratives, not decks.", city: "Sydney", socials: ["li", "tw"] },
-              { initials: "RC", gradient: "from-orange-400 via-rose-500 to-purple-700", radial: "circle_at_70%_30%", badge: "Creative", name: "Rio Castellanos", role: "Creative Director", bio: "Ex-Interbrand Sydney. The reason our work ends up in Desktop magazine and Brand New twice a year.", city: "Melbourne", socials: ["li", "ig"] },
-              { initials: "YT", gradient: "from-sky-300 via-indigo-500 to-slate-900", radial: "circle_at_20%_80%", badge: "Design", name: "Yuki Takamura", role: "Design Principal", bio: "Typography obsessive. A decade at The Saturday Paper before trading print for product.", city: "Brisbane", socials: ["li", "pi"] },
-              { initials: "DM", gradient: "from-emerald-300 via-teal-600 to-gray-900", radial: "circle_at_50%_10%", badge: "Engineering", name: "Dev Malhotra", role: "Head of Engineering", bio: "Ex-Canva engineer. Ships design systems Aussie devs actually use. Will fight you about animation curves over a long black.", city: "Gold Coast", socials: ["li", "gh"] },
-              { initials: "SL", gradient: "from-amber-300 via-red-500 to-black", radial: "circle_at_80%_70%", badge: "Motion", name: "Simone Laurent", role: "Motion & Film Director", bio: "AACTA winner, Cannes Lion twice. Turns Aussie brand launches into films people actually screenshot.", city: "Perth", socials: ["li", "yt"] },
-              { initials: "PI", gradient: "from-pink-300 via-fuchsia-500 to-brand-600", radial: "circle_at_40%_40%", badge: "Partnership", name: "Priya Iyer", role: "Client Partner", bio: "Your single point of contact. Spent years inside two ASX-IPO'd Aussie scale-ups before crossing the table to client partnerships.", city: "Adelaide", socials: ["li", "tw"] },
-            ].map(({ initials, gradient, radial, badge, name, role, bio, city }) => (
-              <div key={initials} className="team-card opacity-0 translate-y-6 group relative bg-brand-700 p-8 md:p-10 hover:bg-brand-ink/60 transition-colors duration-500">
-                <div className={`relative aspect-square w-full mb-6 rounded-2xl overflow-hidden bg-linear-to-br ${gradient}`}>
-                  <div className={`absolute inset-0 bg-[radial-gradient(${radial},rgba(255,255,255,0.25),transparent_50%)]`}></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-white/95 font-black text-7xl md:text-8xl tracking-tighter drop-shadow-lg">{initials}</span>
-                  </div>
-                  <div className="absolute bottom-4 right-4 px-2.5 py-1 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 text-white text-[10px] font-semibold uppercase tracking-wider">{badge}</div>
-                </div>
-                <h3 className="text-white font-bold text-xl md:text-2xl">{name}</h3>
-                <p className="text-brand-300 text-sm font-medium mt-1">{role}</p>
-                <p className="text-white/72 text-sm leading-relaxed mt-4">{bio}</p>
-                <div className="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
-                  <span className="text-xs text-white/40 uppercase tracking-wider">{city}</span>
-                  <div className="flex gap-2">
-                    <a href="#" aria-label={`${name} on LinkedIn`} className="w-8 h-8 rounded-full bg-white/5 hover:bg-brand-400 hover:text-brand-700 text-white/60 flex items-center justify-center transition-all duration-300">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" /></svg>
-                    </a>
-                    <a href="#" aria-label={`${name} on Twitter`} className="w-8 h-8 rounded-full bg-white/5 hover:bg-brand-400 hover:text-brand-700 text-white/60 flex items-center justify-center transition-all duration-300">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z" /></svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Principles strip */}
-          <div className="team-principles opacity-0 translate-y-6 mt-16 md:mt-20 border-t border-white/10 pt-10">
-            <span className="text-brand-300 text-xs font-semibold uppercase tracking-[0.2em]">How we operate</span>
-            <dl className="mt-6 flex flex-col divide-y divide-white/5">
-              {[
-                { num: "01", title: "Senior-only, Aussie-only", desc: "No juniors, no offshore studios. The people who pitch you do the work from Sydney and Melbourne." },
-                { num: "02", title: "Two projects a quarter", desc: "Max two engagements per quarter. You get focus, not a queue of 40 other accounts." },
-                { num: "03", title: "Fixed scope, fixed AUD fee", desc: "Projects quoted in AUD, ex-GST. Your CFO will appreciate zero USD surprises." },
-                { num: "04", title: "Open by default", desc: "Shared Figma, shared Linear, shared Slack on AEST hours. You see the work as it's made." },
-              ].map(({ num, title, desc }) => (
-                <div key={num} className="flex flex-col sm:flex-row sm:items-baseline sm:gap-8 py-5 gap-1">
-                  <span className="text-brand-400/50 font-mono text-xs tracking-widest shrink-0 sm:w-5">{num}</span>
-                  <dt className="text-white font-semibold text-sm sm:w-52 sm:shrink-0">{title}</dt>
-                  <dd className="text-white/70 text-sm leading-relaxed">{desc}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </div>
-      </section>
-
-      {/* ── FAQ ── */}
-      <section id="faq" className="relative w-full py-24 md:py-36 px-6 sm:px-10 md:px-16 bg-brand-ink overflow-hidden border-t border-white/5">
-        <div className="relative z-10 max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 mb-16 md:mb-20">
-            <div className="lg:col-span-5">
-              <h2 className="faq-heading opacity-0 translate-y-6 text-white font-bold leading-[1.02] tracking-tight" style={{ fontSize: "clamp(2.5rem, 5.5vw, 4.5rem)" }}>
-                Before you<br />
-                <span className="text-white">shoot us a DM.</span>
-              </h2>
-              <p className="faq-intro opacity-0 translate-y-6 text-white/75 text-base md:text-lg leading-relaxed mt-8 max-w-sm">
-                The questions we get most often from Aussie founders and CMOs in your exact seat.
-              </p>
-              <div className="faq-intro opacity-0 translate-y-6 mt-10 rounded-2xl border border-white/10 bg-white/2 p-6">
-                <div className="text-xs text-brand-300 uppercase tracking-wider font-semibold mb-3">Still unsure? Give us a bell.</div>
-                <p className="text-white/70 text-sm leading-relaxed mb-4">Book a 20-minute no-pitch call on AEST hours. We&apos;ll tell you honestly whether we&apos;re the right fit, and point you to another Aussie studio if we aren&apos;t.</p>
-                <a href="#contact" className="group inline-flex items-center gap-2 text-white hover:text-brand-300 font-semibold text-sm transition-colors">
-                  <span>Book the call</span>
-                  <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-                </a>
-              </div>
-            </div>
-
-            <div className="lg:col-span-7">
-              <div className="divide-y divide-white/10 border-y border-white/10">
-                {[
-                  { num: "01", q: "How much does a project cost?", a: <>Most full brand engagements fall between <span className="text-white font-medium">A$95k and A$320k ex-GST</span>, scoped as a fixed fee in AUD. Visual identity–only projects start around A$55k; full platform work (brand + site + launch film) can go higher. We quote after a 30-minute discovery call, no obligation, no overseas pricing games.</> },
-                  { num: "02", q: "What's a typical timeline from kickoff to launch?", a: <>Our default rhythm is <span className="text-white font-medium">12 weeks</span> across Discover → Define → Design → Deploy, planned around EOFY, Christmas shutdown and AFL/NRL season pressures if relevant. Faster sprints (6–8 weeks) are possible; ASX-listed rebrands and APAC rollouts stretch to 4–6 months. We lock the schedule before you sign.</> },
-                  { num: "03", q: "Do you work with early-stage startups or only enterprise?", a: <>Both. Our sweet spot is <span className="text-white font-medium">Blackbird / Square Peg / AirTree-backed Series A–C companies</span> and pre-ASX-IPO rebrands, but we take on a small number of seed-stage Aussie founders each year when the category excites us. We don&apos;t work with pre-product startups or personal brands.</> },
-                  { num: "04", q: "We already have an in-house design team. How does that work?", a: <>Most of our Aussie clients have great in-house teams. We partner on the <span className="text-white font-medium">heavy-lift moments</span>, repositioning, new-state or trans-Tasman launches, rebrands, and build systems your team can run afterward from the Domain or Atlassian office. Shared Figma and Linear from day one; no black boxes.</> },
-                  { num: "05", q: "Do you offer retainers or ongoing work?", a: <>Not in the traditional "X hours a month" sense. After launch we offer a <span className="text-white font-medium">quarterly partnership</span>, scoped around campaigns, new launches, or system expansion, for clients who want us on deck without a full re-engagement. Flat fee, defined deliverables.</> },
-                  { num: "06", q: "Who actually owns the work, us or you?", a: <><span className="text-white font-medium">You own everything.</span> IP transfers on final invoice, files, fonts (where licensing permits), source code, the lot. We keep the right to showcase the work in our portfolio unless you ask us not to, which some clients do and we respect.</> },
-                  { num: "07", q: "How do you handle NDAs and confidentiality?", a: <>Happy to sign a mutual NDA before the first call. We have a <span className="text-white font-medium">standard Australian-law NDA ready</span> (governed by NSW or VIC) that most legal teams approve without edits, or we can redline yours. Most of our work is under wraps until launch.</> },
-                ].map(({ num, q, a }) => (
-                  <details key={num} className="faq-item opacity-0 translate-y-4 group py-6 md:py-7">
-                    <summary className="flex items-center justify-between gap-6 cursor-pointer list-none">
-                      <div className="flex items-start gap-5">
-                        <span className="text-brand-400 font-bold text-sm mt-0.5 shrink-0 tabular-nums">{num}</span>
-                        <h3 className="text-white font-semibold text-lg md:text-xl leading-snug group-hover:text-brand-300 transition-colors">{q}</h3>
-                      </div>
-                      <span className="shrink-0 w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/70 transition-all duration-300 group-open:bg-brand-400 group-open:border-brand-400 group-open:text-brand-700">
-                        <span className="relative block w-3.5 h-3.5">
-                          <span className="absolute top-1/2 left-0 right-0 h-[1.75px] bg-current -translate-y-1/2 rounded-full"></span>
-                          <span className="absolute left-1/2 top-0 bottom-0 w-[1.75px] bg-current -translate-x-1/2 rounded-full transition-transform duration-300 ease-out group-open:scale-y-0"></span>
-                        </span>
-                      </span>
-                    </summary>
-                    <div className="pl-10 pr-12 pt-4 text-white/80 text-sm md:text-base leading-relaxed">{a}</div>
-                  </details>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ── CONTACT ── */}
-      <section id="contact" className="relative w-full py-28 md:py-40 px-6 sm:px-10 md:px-16 overflow-hidden bg-brand-700 border-t border-white/5">
+      <section id="contact" className="relative w-full py-(--space-section) px-6 sm:px-10 md:px-16 overflow-hidden bg-brand-700 border-t border-white/5">
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
-          <span className="select-none font-black tracking-tighter text-white/[0.025] whitespace-nowrap" style={{ fontSize: "clamp(10rem, 22vw, 22rem)" }}>hello.</span>
+          <span className="select-none font-black tracking-tighter text-white/2.5 whitespace-nowrap" style={{ fontSize: "clamp(10rem, 22vw, 22rem)" }}>hello.</span>
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto">
-          <div className="text-center max-w-4xl mx-auto mb-16 md:mb-20">
+          <div className="text-center max-w-4xl mx-auto mb-(--space-head)">
             <div className="contact-badge opacity-0 translate-y-4 flex justify-center mb-8">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-400/15 border border-brand-400/25 text-brand-400 text-xs font-semibold">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-400 animate-pulse shrink-0"></span>
@@ -798,7 +573,7 @@ export default function HomeClient() {
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>
                     <span>Recommended</span>
                   </div>
-                  <div className="w-12 h-12 rounded-full bg-brand-700 text-brand-400 flex items-center justify-center transition-transform duration-500 group-hover:rotate-[-45deg]">
+                  <div className="w-12 h-12 rounded-full bg-brand-700 text-brand-400 flex items-center justify-center transition-transform duration-500 group-hover:-rotate-45">
                     <ArrowRight size={18} />
                   </div>
                 </div>
@@ -827,7 +602,7 @@ export default function HomeClient() {
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16v16H4z" /><path d="m4 4 8 8 8-8" /></svg>
                     <span>Old-school email</span>
                   </div>
-                  <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white/70 flex items-center justify-center transition-all duration-500 group-hover:bg-brand-400 group-hover:border-brand-400 group-hover:text-brand-700 group-hover:rotate-[-45deg]">
+                  <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white/70 flex items-center justify-center transition-all duration-500 group-hover:bg-brand-400 group-hover:border-brand-400 group-hover:text-brand-700 group-hover:-rotate-45">
                     <ArrowRight size={18} />
                   </div>
                 </div>

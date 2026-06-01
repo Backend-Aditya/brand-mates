@@ -72,7 +72,7 @@ export default function JournalClient() {
   return (
     <>
       {/* PAGE HERO */}
-      <section className="relative w-full pt-36 md:pt-44 pb-16 md:pb-20 px-6 sm:px-10 md:px-16 overflow-hidden">
+      <section className="relative w-full pt-(--hero-top) pb-(--space-section) px-6 sm:px-10 md:px-16 overflow-hidden">
         <div className="relative max-w-7xl mx-auto">
           <div className="jn-eyebrow opacity-0 translate-y-4 flex items-center gap-2.5 mb-6">
             <span className="text-xs font-medium tracking-[0.08em] uppercase text-brand-400">Studio Dispatch · Insights &amp; Ideas</span>
@@ -138,7 +138,7 @@ export default function JournalClient() {
       </section>
 
       {/* ARTICLE GRID */}
-      <section className="px-6 sm:px-10 md:px-16 pb-24 md:pb-36">
+      <section className="px-6 sm:px-10 md:px-16 pb-(--space-section)">
         <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {gridArticles.map((article) => (
             <Link key={article.slug} href={`/journal/${article.slug}`} className="jn-article opacity-0 translate-y-8 group flex flex-col rounded-2xl overflow-hidden border border-white/5 bg-white/2 hover:border-brand-400/25 hover:bg-brand-400/5 transition-all duration-300">
@@ -173,7 +173,7 @@ export default function JournalClient() {
       </section>
 
       {/* NEWSLETTER CTA */}
-      <section className="px-6 sm:px-10 md:px-16 pb-24 md:pb-36">
+      <section className="px-6 sm:px-10 md:px-16 pb-(--space-section)">
         <div className="max-w-7xl mx-auto">
           <div className="jn-newsletter opacity-0 translate-y-6 relative rounded-3xl overflow-hidden bg-linear-to-br from-brand-600 to-brand-700 p-10 md:p-16">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_100%_0%,rgb(var(--accent-rgb)/0.2),transparent_60%)]"></div>

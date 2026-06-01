@@ -25,6 +25,16 @@
   --surface-rgb: 15 33 71;   /* matches --color-brand-700 */
 }
 
+/* Spacing hierarchy — one fluid rhythm shared by every section + component.
+   Used via Tailwind arbitrary props, e.g. py-(--space-section). */
+:root {
+  --hero-top:      clamp(8rem, 11vw, 11rem);   /* page-hero top (clears fixed nav) */
+  --space-section: clamp(3.5rem, 6vw, 5.5rem); /* standard section vertical pad */
+  --space-section-sm: clamp(2.5rem, 4vw, 3.5rem); /* tight section vertical pad */
+  --space-head:    clamp(2.25rem, 4vw, 3.25rem);  /* heading block → content */
+  --space-block:   clamp(2rem, 3vw, 3rem);     /* gap between sub-blocks */
+}
+
 @theme inline {
   --font-sans: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
 }
@@ -102,7 +112,7 @@
 
 /* Select placeholder vs filled state */
 select:invalid {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 /* Balanced heading line lengths */
@@ -110,19 +120,30 @@ h1, h2, h3 {
   text-wrap: balance;
 }
 
-/* FAQ open/close: native CSS height animation (no JS). Browsers without
-   ::details-content / interpolate-size just toggle instantly. */
-@media (prefers-reduced-motion: no-preference) {
-  :root { interpolate-size: allow-keywords; }
-  #faq details::details-content {
-    height: 0;
-    overflow: hidden;
-    transition: height 0.35s ease, content-visibility 0.35s allow-discrete;
-  }
-  #faq details[open]::details-content { height: auto; }
+/* FAQ open/close: grid-template-rows 0fr↔1fr (smooth both ways, all browsers).
+   JS toggles .is-open and manages the native open attribute timing. */
+#faq .faq-grid {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.35s ease, opacity 0.3s ease;
+}
+#faq details.is-open .faq-grid {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+#faq .faq-grid > div {
+  overflow: hidden;
 }
 
 /* FAQ toggle chip */
+#faq details > summary {
+  outline: none;
+}
+#faq details > summary:focus-visible {
+  outline: 2px solid var(--color-brand-400);
+  outline-offset: 2px;
+}
 #faq details > summary > span:last-child {
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
@@ -154,6 +175,10 @@ h1, h2, h3 {
 
 /* Custom scrollbar */
 :root { --scrollbar-w: 8px; }
+/* Reserve the scrollbar gutter permanently so toggling overflow (nav menu
+   open/close) never reflows the page. overflow-y:scroll keeps html a scroll
+   container in the default state so the stable gutter applies even when closed. */
+html { overflow-y: scroll; scrollbar-gutter: stable; }
 html, body {
   scrollbar-width: thin;
   scrollbar-color: var(--color-brand-400) var(--color-brand-ink);

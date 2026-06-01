@@ -101,7 +101,7 @@ export default function StudioClient() {
   return (
     <>
       {/* PAGE HERO */}
-      <section className="relative w-full pt-36 md:pt-44 pb-20 md:pb-28 px-6 sm:px-10 md:px-16 overflow-hidden">
+      <section className="relative w-full pt-(--hero-top) pb-(--space-section) px-6 sm:px-10 md:px-16 overflow-hidden">
         <div className="relative max-w-7xl mx-auto">
           <div className="st-eyebrow opacity-0 translate-y-4 flex items-center gap-2.5 mb-6">
             <span className="text-xs font-medium tracking-[0.08em] uppercase text-brand-400">The Studio · Est. Sydney 2017</span>
@@ -117,9 +117,9 @@ export default function StudioClient() {
       </section>
 
       {/* VALUES */}
-      <section className="px-6 sm:px-10 md:px-16 py-16 md:py-24 border-t border-white/5">
+      <section className="px-6 sm:px-10 md:px-16 py-(--space-section) border-t border-white/5">
         <div className="max-w-7xl mx-auto">
-          <div className="st-values-head opacity-0 translate-y-4 mb-12">
+          <div className="st-values-head opacity-0 translate-y-4 mb-(--space-head)">
             <span className="text-xs font-medium tracking-[0.08em] uppercase text-brand-400">How we work</span>
           </div>
           <div className="grid sm:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/5">
@@ -159,9 +159,9 @@ export default function StudioClient() {
       </section>
 
       {/* TEAM */}
-      <section id="team" className="px-6 sm:px-10 md:px-16 py-16 md:py-24 border-t border-white/5">
+      <section id="team" className="px-6 sm:px-10 md:px-16 py-(--space-section) border-t border-white/5">
         <div className="max-w-7xl mx-auto">
-          <div className="st-team-head opacity-0 translate-y-4 flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+          <div className="st-team-head opacity-0 translate-y-4 flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-(--space-head)">
             <div>
               <div className="flex items-center gap-2.5 mb-4">
                 <span className="w-6 h-px bg-brand-400"></span>
@@ -198,9 +198,9 @@ export default function StudioClient() {
       </section>
 
       {/* CAREERS */}
-      <section id="careers" className="px-6 sm:px-10 md:px-16 py-16 md:py-24 border-t border-white/5">
+      <section id="careers" className="px-6 sm:px-10 md:px-16 py-(--space-section) border-t border-white/5">
         <div className="max-w-7xl mx-auto">
-          <div className="st-careers-head opacity-0 translate-y-4 mb-12">
+          <div className="st-careers-head opacity-0 translate-y-4 mb-(--space-head)">
             <div className="flex items-center gap-2.5 mb-4">
               <span className="w-6 h-px bg-brand-400"></span>
               <span className="text-xs font-medium tracking-[0.08em] uppercase text-brand-400">Open Roles · 2 positions</span>

@@ -45,6 +45,36 @@ export default function ContactClient() {
     setFormStatus("sent");
   }
 
+  // FAQ accordion: toggle .is-open (CSS animates grid-rows), keep content
+  // mounted through the close so the collapse animates both ways.
+  useEffect(() => {
+    const items = document.querySelectorAll<HTMLDetailsElement>("#faq details.faq-item");
+    const cleanups: Array<() => void> = [];
+    items.forEach((d) => {
+      const summary = d.querySelector("summary");
+      const grid = d.querySelector<HTMLElement>(".faq-grid");
+      if (!summary || !grid) return;
+      const onClick = (e: Event) => {
+        e.preventDefault();
+        if (d.open) {
+          d.classList.remove("is-open");
+          const done = (ev: TransitionEvent) => {
+            if (ev.propertyName !== "grid-template-rows") return;
+            d.open = false;
+            grid.removeEventListener("transitionend", done);
+          };
+          grid.addEventListener("transitionend", done);
+        } else {
+          d.open = true;
+          requestAnimationFrame(() => d.classList.add("is-open"));
+        }
+      };
+      summary.addEventListener("click", onClick);
+      cleanups.push(() => summary.removeEventListener("click", onClick));
+    });
+    return () => cleanups.forEach((fn) => fn());
+  }, []);
+
   useEffect(() => {
     let ctx: ReturnType<typeof import("gsap").gsap.context> | null = null;
 
@@ -92,7 +122,7 @@ export default function ContactClient() {
   return (
     <>
       {/* PAGE HERO */}
-      <section className="relative w-full pt-36 md:pt-44 pb-16 px-6 sm:px-10 md:px-16 overflow-x-hidden">
+      <section className="relative w-full pt-(--hero-top) pb-(--space-section) px-6 sm:px-10 md:px-16 overflow-x-hidden">
         <div className="relative max-w-7xl mx-auto text-center">
           <div className="ct-badge opacity-0 translate-y-4 flex justify-center mb-8">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-400/15 border border-brand-400/25 text-brand-400 text-xs font-semibold">
@@ -111,7 +141,7 @@ export default function ContactClient() {
       </section>
 
       {/* FORM + SIDEBAR */}
-      <section className="px-6 sm:px-10 md:px-16 pb-24 md:pb-36">
+      <section className="px-6 sm:px-10 md:px-16 pb-(--space-section)">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-[1fr_380px] gap-10 md:gap-16 items-start">
 
           {/* FORM */}
@@ -247,6 +277,50 @@ export default function ContactClient() {
             </div>
           </div>
 
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="relative w-full py-(--space-section) px-6 sm:px-10 md:px-16 border-t border-white/5">
+        <div className="relative z-10 max-w-3xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-[-0.03em] leading-[1.05] text-white mb-3">
+            Questions, <span className="text-brand-400">answered.</span>
+          </h2>
+          <p className="text-white/70 text-base md:text-lg leading-relaxed mb-(--space-head) max-w-xl">
+            The ones we get most often from Aussie founders and CMOs before the first call.
+          </p>
+
+          <div className="divide-y divide-white/10 border-y border-white/10">
+            {[
+              { num: "01", q: "How much does a project cost?", a: <>Most full brand engagements fall between <span className="text-white font-medium">A$95k and A$320k ex-GST</span>, scoped as a fixed fee in AUD. Visual identity&ndash;only projects start around A$55k; full platform work (brand + site + launch film) can go higher. We quote after a 30-minute discovery call, no obligation.</> },
+              { num: "02", q: "What's a typical timeline from kickoff to launch?", a: <>Our default rhythm is <span className="text-white font-medium">12 weeks</span> across Discover &rarr; Define &rarr; Design &rarr; Deploy, planned around EOFY and Christmas shutdown if relevant. Faster sprints (6&ndash;8 weeks) are possible; ASX-listed rebrands and APAC rollouts stretch to 4&ndash;6 months. We lock the schedule before you sign.</> },
+              { num: "03", q: "Do you work with early-stage startups or only enterprise?", a: <>Both. Our sweet spot is <span className="text-white font-medium">Blackbird / Square Peg / AirTree-backed Series A&ndash;C companies</span> and pre-ASX-IPO rebrands, but we take on a small number of seed-stage Aussie founders each year when the category excites us. We don&apos;t work with pre-product startups or personal brands.</> },
+              { num: "04", q: "We already have an in-house design team. How does that work?", a: <>Most of our clients do. We partner on the <span className="text-white font-medium">heavy-lift moments</span>, repositioning, new-state or trans-Tasman launches, rebrands, and build systems your team can run afterward. Shared Figma and Linear from day one; no black boxes.</> },
+              { num: "05", q: "Do you offer retainers or ongoing work?", a: <>Not in the traditional &ldquo;X hours a month&rdquo; sense. After launch we offer a <span className="text-white font-medium">quarterly partnership</span>, scoped around campaigns, new launches, or system expansion. Flat fee, defined deliverables.</> },
+              { num: "06", q: "Who actually owns the work, us or you?", a: <><span className="text-white font-medium">You own everything.</span> IP transfers on final invoice, files, fonts (where licensing permits), source code, the lot. We keep the right to showcase the work in our portfolio unless you ask us not to.</> },
+              { num: "07", q: "How do you handle NDAs and confidentiality?", a: <>Happy to sign a mutual NDA before the first call. We have a <span className="text-white font-medium">standard Australian-law NDA ready</span> (governed by NSW or VIC) that most legal teams approve without edits, or we can redline yours.</> },
+            ].map(({ num, q, a }) => (
+              <details key={num} className="faq-item group py-6 md:py-7">
+                <summary className="flex items-center justify-between gap-6 cursor-pointer list-none">
+                  <div className="flex items-start gap-5">
+                    <span className="text-brand-400 font-bold text-sm mt-0.5 shrink-0 tabular-nums">{num}</span>
+                    <h3 className="text-white font-semibold text-lg md:text-xl leading-snug group-hover:text-brand-300 transition-colors">{q}</h3>
+                  </div>
+                  <span className="shrink-0 w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/70 transition-all duration-300 group-open:bg-brand-400 group-open:border-brand-400 group-open:text-brand-700">
+                    <span className="relative block w-3.5 h-3.5">
+                      <span className="absolute top-1/2 left-0 right-0 h-[1.75px] bg-current -translate-y-1/2 rounded-full"></span>
+                      <span className="absolute left-1/2 top-0 bottom-0 w-[1.75px] bg-current -translate-x-1/2 rounded-full transition-transform duration-300 ease-out group-open:scale-y-0"></span>
+                    </span>
+                  </span>
+                </summary>
+                <div className="faq-grid">
+                  <div>
+                    <div className="pl-10 pr-4 sm:pr-12 pt-4 text-white/80 text-sm md:text-base leading-relaxed">{a}</div>
+                  </div>
+                </div>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
     </>

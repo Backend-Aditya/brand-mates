@@ -81,7 +81,7 @@ export default function ServicesClient() {
   return (
     <>
       {/* PAGE HERO */}
-      <section className="relative w-full pt-36 md:pt-44 pb-20 md:pb-28 px-6 sm:px-10 md:px-16 bg-brand-ink overflow-hidden">
+      <section className="relative w-full pt-(--hero-top) pb-(--space-section) px-6 sm:px-10 md:px-16 bg-brand-ink overflow-hidden">
         <div className="relative max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
             <h1 className="sv-heading opacity-0 translate-y-6 text-[1.875rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-7xl xl:text-[5.5rem] font-extrabold tracking-[-0.03em] leading-[1.02] text-white max-w-2xl">
@@ -102,7 +102,7 @@ export default function ServicesClient() {
       </section>
 
       {/* SERVICE 1, WEB */}
-      <section id="web" className="relative px-6 sm:px-10 md:px-16 py-20 md:py-28 border-t border-white/5">
+      <section id="web" className="relative px-6 sm:px-10 md:px-16 py-(--space-section) border-t border-white/5">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 md:gap-20 items-start">
           <div className="sv-block opacity-0 translate-y-8">
             <div className="mb-8">
@@ -140,7 +140,7 @@ export default function ServicesClient() {
       </section>
 
       {/* SERVICE 2, SOCIAL */}
-      <section id="social" className="relative px-6 sm:px-10 md:px-16 py-20 md:py-28 border-t border-white/5 bg-white/1">
+      <section id="social" className="relative px-6 sm:px-10 md:px-16 py-(--space-section) border-t border-white/5 bg-white/1">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 md:gap-20 items-start">
           <div className="sv-block opacity-0 translate-y-8 order-2 md:order-1 flex flex-col gap-4">
             <div className="rounded-2xl border border-white/5 bg-brand-ink p-6">
@@ -178,7 +178,7 @@ export default function ServicesClient() {
       </section>
 
       {/* SERVICE 3, ADS */}
-      <section id="ads" className="relative px-6 sm:px-10 md:px-16 py-20 md:py-28 border-t border-white/5">
+      <section id="ads" className="relative px-6 sm:px-10 md:px-16 py-(--space-section) border-t border-white/5">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 md:gap-20 items-start">
           <div className="sv-block opacity-0 translate-y-8">
             <div className="mb-8">
@@ -216,7 +216,7 @@ export default function ServicesClient() {
       </section>
 
       {/* SERVICE 4, CONTENT */}
-      <section id="content" className="relative px-6 sm:px-10 md:px-16 py-20 md:py-28 border-t border-white/5 bg-white/1">
+      <section id="content" className="relative px-6 sm:px-10 md:px-16 py-(--space-section) border-t border-white/5 bg-white/1">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 md:gap-20 items-start">
           <div className="sv-block opacity-0 translate-y-8 order-2 md:order-1 flex flex-col gap-4">
             <div className="rounded-2xl border border-white/5 bg-brand-ink p-6">
@@ -254,7 +254,7 @@ export default function ServicesClient() {
       </section>
 
       {/* CTA */}
-      <section className="px-6 sm:px-10 md:px-16 py-20 md:py-28 border-t border-white/5">
+      <section className="px-6 sm:px-10 md:px-16 py-(--space-section) border-t border-white/5">
         <div className="max-w-7xl mx-auto">
           <div className="sv-cta opacity-0 translate-y-6 relative rounded-3xl overflow-hidden bg-brand-700 border border-white/10 p-10 md:p-16 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
             <div className="relative">

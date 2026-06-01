@@ -72,7 +72,7 @@ export default function WorkClient() {
   return (
     <>
       {/* PAGE HERO */}
-      <section className="relative w-full pt-36 md:pt-44 pb-20 md:pb-28 px-6 sm:px-10 md:px-16 bg-brand-ink overflow-hidden">
+      <section className="relative w-full pt-(--hero-top) pb-(--space-section) px-6 sm:px-10 md:px-16 bg-brand-ink overflow-hidden">
         <div className="relative max-w-7xl mx-auto">
           <div className="wk-eyebrow opacity-0 translate-y-4 flex items-center gap-2.5 mb-6">
             <span className="text-xs font-medium tracking-[0.08em] uppercase text-brand-400">Selected Work · 2019–2025</span>
@@ -105,7 +105,7 @@ export default function WorkClient() {
       </section>
 
       {/* PROJECTS GRID */}
-      <section className="px-6 sm:px-10 md:px-16 pb-24 md:pb-36">
+      <section className="px-6 sm:px-10 md:px-16 pb-(--space-section)">
         <div className="max-w-7xl mx-auto flex flex-col gap-6">
 
           {/* Project 1, Saltbush (full width) */}
@@ -222,7 +222,7 @@ export default function WorkClient() {
       </section>
 
       {/* CTA BANNER */}
-      <section className="px-6 sm:px-10 md:px-16 pb-24 md:pb-36">
+      <section className="px-6 sm:px-10 md:px-16 pb-(--space-section)">
         <div className="max-w-7xl mx-auto">
           <div className="wk-cta opacity-0 translate-y-6 relative rounded-3xl overflow-hidden bg-linear-to-br from-brand-600 to-brand-700 p-10 md:p-16 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_0%_0%,rgb(var(--accent-rgb)/0.2),transparent_60%)]"></div>

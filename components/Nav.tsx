@@ -111,23 +111,10 @@ export default function Nav() {
 
       const linkEls = document.querySelectorAll<HTMLElement>(".nav-primary-links a");
 
-      const lockScroll = () => {
-        const sb = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--scrollbar-w")) || 0;
-        if (sb <= 0) return;
-        document.body.style.overflow = "hidden";
-        document.body.style.paddingRight = `${sb}px`;
-        const navEl = navRef.current;
-        if (navEl) {
-          const pr = parseFloat(getComputedStyle(navEl).paddingRight) || 0;
-          navEl.style.paddingRight = `${pr + sb}px`;
-        }
-      };
-      const unlockScroll = () => {
-        document.body.style.overflow = "";
-        document.body.style.paddingRight = "";
-        const navEl = navRef.current;
-        if (navEl) navEl.style.paddingRight = "";
-      };
+      // scrollbar-gutter: stable (globals) keeps the gutter reserved, so
+      // toggling overflow never reflows the page — no width compensation needed.
+      const lockScroll = () => { document.documentElement.style.overflow = "hidden"; };
+      const unlockScroll = () => { document.documentElement.style.overflow = ""; };
 
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -199,9 +186,7 @@ export default function Nav() {
     if (isMenuOpen.current && tlRef.current) {
       tlRef.current.reverse();
       isMenuOpen.current = false;
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
-      if (navRef.current) navRef.current.style.paddingRight = "";
+      document.documentElement.style.overflow = "";
       const toggler = document.querySelector<HTMLButtonElement>(".nav-toggler");
       toggler?.classList.remove("open");
       toggler?.setAttribute("aria-expanded", "false");
