@@ -522,22 +522,6 @@ export default function HomeClient() {
               ))}
             </div>
           </div>
-
-          <div className="pr-footer mt-20 md:mt-28 flex flex-col md:flex-row md:items-center md:justify-between gap-8 p-8 md:p-10 rounded-2xl border border-white/10 bg-brand-700/40 opacity-0 translate-y-4">
-            <div className="flex items-start gap-4 max-w-xl">
-              <div className="shrink-0 w-10 h-10 rounded-full bg-brand-400/10 border border-brand-400/30 flex items-center justify-center text-brand-400">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" /></svg>
-              </div>
-              <div className="flex flex-col gap-1">
-                <h4 className="text-white font-bold text-base">Not every Aussie brand fits a 12-week box.</h4>
-                <p className="text-white/55 text-sm leading-relaxed">ASX-listed transformations and trans-Tasman rebrands can run 3–6 months. We scope every engagement in AUD before we quote it, no surprises, no offshore sticker shock.</p>
-              </div>
-            </div>
-            <a href="#contact" className="group shrink-0 inline-flex items-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-7 py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-(--shadow-brand-md) w-fit">
-              <span>Book a discovery call</span>
-              <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
-          </div>
         </div>
       </section>
 
