@@ -3,12 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
-const ArrowRight = ({ size = 16, className = "" }: { size?: number; className?: string }) => (
-  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className={className}>
-    <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
+import { ArrowRight, ChevronDown, Calendar, Mail } from "lucide-react";
 
 export default function HomeClient() {
   useEffect(() => {
@@ -141,7 +136,7 @@ export default function HomeClient() {
 
             {/* Subtext */}
             <p className="hero-subtext max-w-140 text-sm sm:text-base md:text-lg font-normal leading-relaxed text-white/80 opacity-0 translate-y-4">
-              From Surry Hills seed rounds to ASX-listed rebrands, the studio Australian founders and CMOs call when the brand needs to work harder than it does.
+              From Merrylands seed rounds to ASX-listed rebrands, the studio Australian founders and CMOs call when the brand needs to work harder than it does.
             </p>
 
             {/* CTA */}
@@ -158,10 +153,10 @@ export default function HomeClient() {
             {/* Trust bar */}
             <div className="hero-trust flex flex-col gap-2.5 opacity-0 translate-y-4">
               <span className="text-[0.6rem] font-medium tracking-[0.2em] uppercase text-white/65">Trusted by Australian brands</span>
-              <div className="flex flex-wrap items-center gap-y-2">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-2 sm:flex sm:flex-wrap sm:items-center sm:gap-x-4 sm:gap-y-2">
                 {["Saltbush", "Koorang", "Harbour Co", "Tallow & Co", "Bushline"].map((name, i) => (
-                  <span key={name} className="flex items-center">
-                    {i > 0 && <span className="mx-3 text-white/15 text-[0.55rem] select-none">&#9679;</span>}
+                  <span key={name} className="flex items-center gap-x-3 sm:gap-x-4">
+                    <span className="hidden sm:inline text-white/15 text-[0.55rem] select-none">{i > 0 && "●"}</span>
                     <span className="text-[0.73rem] font-semibold tracking-widest uppercase text-white/65 hover:text-white/85 transition-colors cursor-default">{name}</span>
                   </span>
                 ))}
@@ -170,7 +165,7 @@ export default function HomeClient() {
           </div>
 
           {/* Floating contact form */}
-          <div className="hero-form mt-10 lg:mt-0 flex flex-col w-full lg:w-[320px] xl:w-90 lg:shrink-0 rounded-2xl border border-white/10 bg-brand-ink p-5 sm:p-6 gap-4 sm:gap-5 opacity-0 translate-y-8">
+          <div className="hero-form mt-10 lg:mt-0 flex flex-col w-full lg:w-[380px] xl:w-110 lg:shrink-0 rounded-2xl border border-white/10 bg-brand-ink p-5 sm:p-6 gap-4 sm:gap-5 opacity-0 translate-y-8">
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <span className="w-2 h-2 rounded-full bg-brand-400 shrink-0"></span>
@@ -202,7 +197,7 @@ export default function HomeClient() {
                     <option value="multiple">Multiple services</option>
                   </select>
                   <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white/35">
-                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                    <ChevronDown size={10} strokeWidth={2} />
                   </div>
                 </div>
               </div>
@@ -217,7 +212,10 @@ export default function HomeClient() {
             </form>
             <div className="flex items-center gap-3 pt-1">
               <div className="flex-1 h-px bg-white/8"></div>
-              <Link href="/contact" className="inline-flex items-center min-h-11 sm:min-h-0 text-white/55 hover:text-white/80 text-[0.7rem] transition-colors shrink-0">or book a call instead →</Link>
+              <Link href="/contact" className="group inline-flex items-center gap-1 min-h-11 sm:min-h-0 text-white/55 hover:text-white/80 text-[0.7rem] transition-colors shrink-0">
+                or book a call instead
+                <ArrowRight size={11} className="transition-transform group-hover:translate-x-1" />
+              </Link>
               <div className="flex-1 h-px bg-white/8"></div>
             </div>
           </div>
@@ -310,8 +308,8 @@ export default function HomeClient() {
                   </h3>
                   <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2.5 mt-5">
                     {["No pitch deck", "AEST hours", "Honest advice", "Free of charge"].map((pill) => (
-                      <span key={pill} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70 text-xs font-medium">
-                        <span className="w-1.5 h-1.5 rounded-full bg-brand-400 shrink-0"></span>
+                      <span key={pill} className="flex sm:inline-flex items-center justify-start gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70 text-xs font-medium whitespace-nowrap">
+                        <span className="w-2 h-2 shrink-0 self-center bg-brand-400 aspect-square" style={{ borderRadius: "9999px" }}></span>
                         {pill}
                       </span>
                     ))}
@@ -492,35 +490,46 @@ export default function HomeClient() {
             </p>
           </div>
 
-          <div className="relative">
-            <div className="hidden md:block absolute top-8 left-0 right-0 h-px bg-linear-to-r from-transparent via-white/15 to-transparent"></div>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-8">
-              {[
-                { num: "01", week: "Week 1–2", title: "Discover", desc: "We immerse ourselves in your business, audience, and market. Strategy starts with hard listening.", items: ["Stakeholder interviews", "Competitive audit", "Customer research"], icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="text-brand-400"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>, highlight: false },
-                { num: "02", week: "Week 3–4", title: "Define", desc: "We distill everything into a clear strategic foundation: the why before the what, the story before the style.", items: ["Positioning & story", "Voice & tone", "Brand architecture"], icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="text-brand-400"><path d="M12 2l3 7h7l-5.5 4.5L18 22l-6-4-6 4 1.5-8.5L2 9h7z" /></svg>, highlight: false },
-                { num: "03", week: "Week 5–9", title: "Design", desc: "Every visual decision reinforces the strategy. Nothing is decorative. No stray pixels.", items: ["Identity system", "Typography & color", "Touchpoint design"], icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="text-brand-400"><path d="M15.5 3.5l5 5M3 21v-4.5L17 2.5l4.5 4.5L7.5 21z" /></svg>, highlight: false },
-                { num: "04", week: "Week 10–12", title: "Deploy", desc: "We hand over a brand your team can run without us: files, templates, and a training session so nothing goes dark after we leave.", items: ["Rollout & launch", "Team training", "Governance & ongoing care"], icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="text-brand-400"><path d="M5 12l5 5L20 7" /></svg>, highlight: true },
-              ].map(({ num, week, title, desc, items, icon, highlight }) => (
-                <div key={num} className="pr-step relative md:pl-0 opacity-0 translate-y-6">
-                  <div className={`mb-5 md:mb-0 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center ${highlight ? "bg-brand-400 border border-brand-400 shadow-(--shadow-brand-glow)" : "bg-brand-ink border border-brand-400/30"}`}>
-                    <span className={`font-mono font-bold text-sm tracking-wider ${highlight ? "text-brand-700" : "text-brand-400"}`}>{num}</span>
-                  </div>
-                  <div className="md:mt-10 flex flex-col gap-3">
-                    <div className="flex items-center gap-2 mb-1">
-                      {icon}
-                      <span className="text-[0.7rem] font-medium tracking-[0.08em] uppercase text-white/40">{week}</span>
+          <div className="pr-list border-t border-white/10">
+            {[
+              { num: "01", week: "Week 1–2", from: 1, weeks: 2, title: "Discover", desc: "We immerse ourselves in your business, audience, and market. Strategy starts with hard listening.", items: ["Stakeholder interviews", "Competitive audit", "Customer research"], highlight: false },
+              { num: "02", week: "Week 3–4", from: 3, weeks: 2, title: "Define", desc: "We distill everything into a clear strategic foundation: the why before the what, the story before the style.", items: ["Positioning & story", "Voice & tone", "Brand architecture"], highlight: false },
+              { num: "03", week: "Week 5–9", from: 5, weeks: 5, title: "Design", desc: "Every visual decision reinforces the strategy. Nothing is decorative. No stray pixels.", items: ["Identity system", "Typography & color", "Touchpoint design"], highlight: false },
+              { num: "04", week: "Week 10–12", from: 10, weeks: 3, title: "Deploy", desc: "We hand over a brand your team can run without us: files, templates, and a training session so nothing goes dark after we leave.", items: ["Rollout & launch", "Team training", "Governance & ongoing care"], highlight: true },
+            ].map(({ num, week, from, weeks, title, desc, items, highlight }) => (
+              <div key={num} className="pr-step opacity-0 translate-y-6 border-b border-white/10">
+                <div className="grid md:grid-cols-12 gap-4 md:gap-8 py-8 md:py-10">
+                  <div className="md:col-span-4 flex items-start gap-4 md:gap-5">
+                    <span className={`font-mono text-sm md:text-base pt-2 shrink-0 tabular-nums ${highlight ? "text-brand-400" : "text-white/35"}`}>{num}</span>
+                    <div className="min-w-0">
+                      <h3 className={`text-2xl sm:text-3xl md:text-[2.25rem] font-extrabold tracking-tight leading-none ${highlight ? "text-brand-400" : "text-white"}`}>{title}</h3>
+                      <div className="mt-4 flex items-center gap-2.5">
+                        <span className="text-xs font-medium text-white/45 tracking-wide whitespace-nowrap">{week}</span>
+                        <div className="flex items-center gap-[3px]" role="img" aria-label={`${week} of a 12-week timeline`}>
+                          {Array.from({ length: 12 }, (_, i) => {
+                            const active = i + 1 >= from && i + 1 < from + weeks;
+                            return (
+                              <span
+                                key={i}
+                                className={`w-[3px] h-3 rounded-full ${active ? (highlight ? "bg-brand-400" : "bg-white/70") : "bg-white/12"}`}
+                              ></span>
+                            );
+                          })}
+                        </div>
+                      </div>
                     </div>
-                    <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight">{title}</h3>
-                    <p className="text-white/70 leading-relaxed text-[0.95rem]">{desc}</p>
-                    <ul className="flex flex-col gap-1.5 mt-2 text-xs text-white/40">
+                  </div>
+                  <div className="md:col-span-8">
+                    <p className="text-white/70 leading-relaxed text-[0.95rem] md:text-base max-w-xl">{desc}</p>
+                    <ul className="mt-4 flex flex-wrap gap-2">
                       {items.map((item) => (
-                        <li key={item} className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-brand-400"></span>{item}</li>
+                        <li key={item} className="px-3 py-1.5 rounded-full border border-white/10 bg-white/3 text-xs text-white/55">{item}</li>
                       ))}
                     </ul>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -554,7 +563,7 @@ export default function HomeClient() {
               <div className="relative flex flex-col gap-8 h-full">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-2.5 px-3 py-1 rounded-full bg-brand-700/15 text-brand-700 text-[0.65rem] font-bold uppercase tracking-[0.15em]">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>
+                    <Calendar size={12} strokeWidth={2.5} />
                     <span>Recommended</span>
                   </div>
                   <div className="w-12 h-12 rounded-full bg-brand-700 text-brand-400 flex items-center justify-center transition-transform duration-500 group-hover:-rotate-45">
@@ -563,7 +572,7 @@ export default function HomeClient() {
                 </div>
                 <div>
                   <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight leading-[1.05] mb-3">Book a discovery call</h3>
-                  <p className="text-brand-700/75 text-base leading-relaxed max-w-sm">20 min · with Priya, our client partner. Zoom or at our Surry Hills studio, your call.</p>
+                  <p className="text-brand-700/75 text-base leading-relaxed max-w-sm">20 min · with Priya, our client partner. Zoom or at our Merrylands studio, your call.</p>
                 </div>
                 <div className="mt-auto pt-6 border-t border-brand-700/15 grid grid-cols-2 gap-4">
                   <div>
@@ -583,7 +592,7 @@ export default function HomeClient() {
               <div className="relative flex flex-col gap-8 h-full">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-2.5 px-3 py-1 rounded-full bg-white/5 text-white/55 text-[0.65rem] font-bold uppercase tracking-[0.15em] border border-white/10">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16v16H4z" /><path d="m4 4 8 8 8-8" /></svg>
+                    <Mail size={12} strokeWidth={2.5} />
                     <span>Old-school email</span>
                   </div>
                   <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white/70 flex items-center justify-center transition-all duration-500 group-hover:bg-brand-400 group-hover:border-brand-400 group-hover:text-brand-700 group-hover:-rotate-45">
@@ -605,29 +614,20 @@ export default function HomeClient() {
             </a>
           </div>
 
-          <div className="contact-offices opacity-0 translate-y-6 grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/5">
-            {[
-              { label: "Sydney HQ", addr: "Level 3, 56 Foveaux St\nSurry Hills NSW 2010", phone: "+61 2 8234 5678", tel: "+61282345678" },
-              { label: "Melbourne Studio", addr: "Suite 12, 112 Brunswick St\nFitzroy VIC 3065", phone: "+61 3 9432 1234", tel: "+61394321234" },
-            ].map(({ label, addr, phone, tel }) => (
-              <div key={label} className="bg-brand-700/70 p-6 md:p-8">
-                <div className="flex flex-col xs:flex-row items-start justify-between gap-4 mb-6">
-                  <div>
-                    <div className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-300 mb-2">{label}</div>
-                    <div className="text-white font-bold text-lg leading-snug whitespace-pre-line">{addr}</div>
-                  </div>
-                  <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-400/15 text-brand-300 text-[0.6rem] font-bold uppercase tracking-wider self-start">
-                    <span className="w-1.5 h-1.5 rounded-full bg-brand-400"></span>
-                    <span>Open now</span>
-                  </div>
-                </div>
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm">
-                  <a href={`tel:${tel}`} className="text-white/70 hover:text-brand-300 transition-colors">{phone}</a>
-                  <span className="hidden sm:block w-px h-4 bg-white/10"></span>
-                  <span className="text-white/65">Mon–Fri · 9–6 AEST</span>
-                </div>
-              </div>
-            ))}
+          <div className="contact-offices opacity-0 translate-y-6 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 rounded-2xl border border-white/5 bg-brand-700/70 px-6 py-5 md:px-8">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+              <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-300">Sydney HQ</span>
+              <span className="text-white font-bold text-base">Merrylands NSW 2160</span>
+              <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-400/15 text-brand-300 text-[0.6rem] font-bold uppercase tracking-wider">
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-400"></span>
+                Open now
+              </span>
+            </div>
+            <div className="flex items-center gap-4 text-sm">
+              <a href="tel:+61282345678" className="text-white/70 hover:text-brand-300 transition-colors">+61 2 8234 5678</a>
+              <span className="hidden sm:block w-px h-4 bg-white/10"></span>
+              <span className="text-white/65">Mon–Fri · 9–6 AEST</span>
+            </div>
           </div>
         </div>
       </section>

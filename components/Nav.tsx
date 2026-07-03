@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 export default function Nav() {
   const pathname = usePathname();
+  const [activeHref, setActiveHref] = useState<string | null>(null);
   const isMenuOpen = useRef(false);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
   const navRef = useRef<HTMLElement>(null);
@@ -16,7 +17,7 @@ export default function Nav() {
     const nav = navRef.current;
     if (!nav) return;
 
-    const SHOW_THRESHOLD = 80;  // px from top — always visible above this
+    const SHOW_THRESHOLD = 80;  // px from top - always visible above this
     const DELTA = 6;            // px accumulated before direction triggers hide/show
 
     let lastY = window.scrollY;
@@ -112,7 +113,7 @@ export default function Nav() {
       const linkEls = document.querySelectorAll<HTMLElement>(".nav-primary-links a");
 
       // scrollbar-gutter: stable (globals) keeps the gutter reserved, so
-      // toggling overflow never reflows the page — no width compensation needed.
+      // toggling overflow never reflows the page - no width compensation needed.
       const lockScroll = () => { document.documentElement.style.overflow = "hidden"; };
       const unlockScroll = () => { document.documentElement.style.overflow = ""; };
 
@@ -181,6 +182,11 @@ export default function Nav() {
     return () => cleanup?.();
   }, []);
 
+  // Route landed: drop the optimistic click state, pathname is now the source of truth
+  useEffect(() => {
+    setActiveHref(null);
+  }, [pathname]);
+
   // Close menu on route change
   useEffect(() => {
     if (isMenuOpen.current && tlRef.current) {
@@ -229,7 +235,8 @@ export default function Nav() {
               <div key={href} className="overflow-hidden">
                 <Link
                   href={href}
-                  className={`link-underline relative block text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-2 ${pathname === href ? "text-brand-400" : "text-white"}`}
+                  onClick={() => setActiveHref(href)}
+                  className={`link-underline relative block text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-2 transition-colors duration-200 ease-out ${(activeHref ?? pathname) === href ? "text-brand-400" : "text-white"}`}
                 >
                   {label}
                 </Link>

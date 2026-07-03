@@ -147,11 +147,19 @@ h1, h2, h3 {
 #faq details > summary > span:last-child {
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
-#faq details:not([open]) > summary:hover > span:last-child {
+#faq details:not(.is-open) > summary:hover > span:last-child {
   transform: scale(1.06);
 }
-#faq details[open] > summary:hover > span:last-child {
+#faq details.is-open > summary:hover > span:last-child {
   transform: scale(1.06);
+}
+#faq details.is-open > summary .faq-chip {
+  background-color: var(--color-brand-400);
+  border-color: var(--color-brand-400);
+  color: var(--color-brand-700);
+}
+#faq details.is-open > summary .faq-chip-bar {
+  transform: translateX(-50%) scaleY(0);
 }
 
 /* Brand shadow tokens */

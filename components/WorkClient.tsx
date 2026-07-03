@@ -3,18 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { workProjects } from "@/lib/work";
-
-const ExternalArrow = ({ size = 16 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
-    <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-
-const ArrowRight = ({ size = 16 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
-    <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
+import { ArrowRight, ArrowUpRight as ExternalArrow } from "lucide-react";
 
 export default function WorkClient() {
   useEffect(() => {

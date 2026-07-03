@@ -2,12 +2,11 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import { ArrowRight, ArrowUpRight, ArrowDown } from "lucide-react";
 import { journalArticles } from "@/lib/journal";
 
 const ReadMoreArrow = () => (
-  <svg width="12" height="12" viewBox="0 0 16 16" fill="none" className="transition-transform group-hover:translate-x-1">
-    <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
+  <ArrowRight size={12} className="transition-transform group-hover:translate-x-1" />
 );
 
 const featuredArticle = journalArticles[0];
@@ -100,7 +99,7 @@ export default function JournalClient() {
               <div className="absolute inset-0 flex items-center justify-center">
                 <span className="text-white/10 font-black text-8xl tracking-tighter select-none">{featuredArticle.initials}</span>
               </div>
-              {/* Overlay text — tablet+ only */}
+              {/* Overlay text - tablet+ only */}
               <div className="absolute inset-0 hidden sm:flex items-end p-8 md:p-14">
                 <div className="max-w-2xl">
                   <div className="flex flex-wrap items-center gap-3 mb-5">
@@ -116,12 +115,10 @@ export default function JournalClient() {
                 </div>
               </div>
               <span className="absolute top-6 right-6 w-11 h-11 rounded-full bg-white/10 group-hover:bg-brand-400 group-hover:text-brand-700 text-white flex items-center justify-center transition-all duration-300">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <ArrowUpRight size={16} aria-hidden="true" />
               </span>
             </div>
-            {/* Card body — mobile only, matches grid article style */}
+            {/* Card body - mobile only, matches grid article style */}
             <div className="sm:hidden flex flex-col gap-3 p-5 bg-brand-700/70">
               <div className="flex items-center gap-2">
                 <span className="px-2.5 py-0.5 rounded-full bg-brand-400/20 text-brand-300 text-[0.65rem] font-bold uppercase tracking-wider">{featuredArticle.tag}</span>
@@ -165,9 +162,7 @@ export default function JournalClient() {
         <div className="max-w-7xl mx-auto mt-12 flex justify-center">
           <button className="jn-more opacity-0 translate-y-4 group inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/3 hover:border-brand-400/40 hover:bg-brand-400/8 text-white/70 hover:text-white font-medium text-sm px-8 py-3.5 transition-all duration-300">
             Load more articles
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="transition-transform group-hover:translate-y-0.5">
-              <path d="M8 3v10M3 8l5 5 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <ArrowDown size={14} className="transition-transform group-hover:translate-y-0.5" />
           </button>
         </div>
       </section>

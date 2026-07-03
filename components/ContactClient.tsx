@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Mail, Phone, Calendar, Clock, ArrowRight } from "lucide-react";
 
 const selectStyle = {
   backgroundImage: `url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23ffffff60' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`,
@@ -8,32 +9,13 @@ const selectStyle = {
   backgroundPosition: "right 1.25rem center",
 };
 
-const EmailIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-    <polyline points="22,6 12,13 2,6" />
-  </svg>
-);
+const EmailIcon = () => <Mail size={14} strokeWidth={1.8} />;
 
-const PhoneIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.59 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-  </svg>
-);
+const PhoneIcon = () => <Phone size={14} strokeWidth={1.8} />;
 
-const CalendarIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 opacity-60">
-    <rect x="3" y="4" width="18" height="18" rx="2" />
-    <path d="M16 2v4M8 2v4M3 10h18" />
-  </svg>
-);
+const CalendarIcon = () => <Calendar size={14} strokeWidth={2} className="shrink-0 opacity-60" />;
 
-const ClockIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 opacity-60">
-    <circle cx="12" cy="12" r="10" />
-    <path d="M12 6v6l4 2" />
-  </svg>
-);
+const ClockIcon = () => <Clock size={14} strokeWidth={2} className="shrink-0 opacity-60" />;
 
 export default function ContactClient() {
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "sent">("idle");
@@ -210,9 +192,7 @@ export default function ContactClient() {
                   {formStatus === "idle" && (
                     <>
                       Send enquiry
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="transition-transform group-hover:translate-x-1">
-                        <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
+                      <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
                     </>
                   )}
                 </button>
@@ -242,7 +222,10 @@ export default function ContactClient() {
                   <div className="flex items-center gap-2"><CalendarIcon /><span>Next available: Wed 23 Apr 10:00 AEST</span></div>
                   <div className="flex items-center gap-2"><ClockIcon /><span>30 minutes via Google Meet</span></div>
                 </div>
-                <a href="#" className="block text-center rounded-full bg-brand-700 text-brand-300 hover:bg-brand-ink font-bold text-sm py-3 transition-colors">Book this slot →</a>
+                <a href="#" className="group inline-flex items-center justify-center gap-1.5 rounded-full bg-brand-700 text-brand-300 hover:bg-brand-ink font-bold text-sm py-3 w-full transition-colors">
+                  Book this slot
+                  <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                </a>
               </div>
             </div>
 
@@ -255,25 +238,15 @@ export default function ContactClient() {
               </a>
               <a href="tel:+61282345678" className="group flex items-center gap-3 text-white/70 hover:text-brand-400 transition-colors text-sm">
                 <span className="w-8 h-8 rounded-lg bg-white/5 group-hover:bg-brand-400/10 flex items-center justify-center transition-colors shrink-0"><PhoneIcon /></span>
-                +61 2 8234 5678 (Sydney)
-              </a>
-              <a href="tel:+61394321234" className="group flex items-center gap-3 text-white/70 hover:text-brand-400 transition-colors text-sm">
-                <span className="w-8 h-8 rounded-lg bg-white/5 group-hover:bg-brand-400/10 flex items-center justify-center transition-colors shrink-0"><PhoneIcon /></span>
-                +61 3 9432 1234 (Melbourne)
+                +61 2 8234 5678
               </a>
               <div className="pt-3 mt-1 border-t border-white/5 text-white/60 text-xs">Mon – Fri · 9am – 6pm AEST/AEDT</div>
             </div>
 
-            {/* Offices */}
-            <div className="rounded-2xl border border-white/5 bg-white/2 p-6 grid grid-cols-2 gap-4">
-              <div>
-                <p className="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-brand-300 mb-2">Sydney HQ</p>
-                <address className="not-italic text-white/70 text-xs leading-relaxed">Level 3, 56 Foveaux St<br />Surry Hills NSW 2010</address>
-              </div>
-              <div>
-                <p className="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-brand-300 mb-2">Melbourne Studio</p>
-                <address className="not-italic text-white/70 text-xs leading-relaxed">Suite 12, 112 Brunswick St<br />Fitzroy VIC 3065</address>
-              </div>
+            {/* Office */}
+            <div className="rounded-2xl border border-white/5 bg-white/2 p-6">
+              <p className="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-brand-300 mb-2">Sydney HQ</p>
+              <address className="not-italic text-white/70 text-xs leading-relaxed">Merrylands NSW 2160</address>
             </div>
           </div>
 
@@ -306,10 +279,10 @@ export default function ContactClient() {
                     <span className="text-brand-400 font-bold text-sm mt-0.5 shrink-0 tabular-nums">{num}</span>
                     <h3 className="text-white font-semibold text-lg md:text-xl leading-snug group-hover:text-brand-300 transition-colors">{q}</h3>
                   </div>
-                  <span className="shrink-0 w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/70 transition-all duration-300 group-open:bg-brand-400 group-open:border-brand-400 group-open:text-brand-700">
+                  <span className="faq-chip shrink-0 w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/70 transition-all duration-300">
                     <span className="relative block w-3.5 h-3.5">
                       <span className="absolute top-1/2 left-0 right-0 h-[1.75px] bg-current -translate-y-1/2 rounded-full"></span>
-                      <span className="absolute left-1/2 top-0 bottom-0 w-[1.75px] bg-current -translate-x-1/2 rounded-full transition-transform duration-300 ease-out group-open:scale-y-0"></span>
+                      <span className="faq-chip-bar absolute left-1/2 top-0 bottom-0 w-[1.75px] bg-current -translate-x-1/2 rounded-full transition-transform duration-300 ease-out"></span>
                     </span>
                   </span>
                 </summary>

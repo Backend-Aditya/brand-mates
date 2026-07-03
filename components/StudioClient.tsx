@@ -2,17 +2,12 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
-
-const LinkedInIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
-  </svg>
-);
+import { ArrowRight as ArrowRightIcon } from "lucide-react";
+import { FaLinkedin as LinkedInIcon } from "react-icons/fa6";
+import { Shield, RefreshCw, Users } from "lucide-react";
 
 const ArrowRight = ({ size = 14 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className="transition-transform group-hover/btn:translate-x-1">
-    <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
+  <ArrowRightIcon size={size} className="transition-transform group-hover/btn:translate-x-1" />
 );
 
 interface TeamMember {
@@ -111,7 +106,7 @@ export default function StudioClient() {
             <span className="bg-linear-to-r from-brand-400 to-brand-300 bg-clip-text text-transparent">We give a damn.</span>
           </h1>
           <p className="st-intro opacity-0 translate-y-6 text-white/55 text-base md:text-xl leading-relaxed max-w-2xl">
-            Founded in Surry Hills in 2017, BrandMates is the studio Australian founders and CMOs call when the brief is too important for a junior account manager. We&apos;re six senior creatives who left big-agency land because we believed smaller teams do better work, and after 150+ projects, we still believe it.
+            Founded in Merrylands in 2017, BrandMates is the studio Australian founders and CMOs call when the brief is too important for a junior account manager. We&apos;re six senior creatives who left big-agency land because we believed smaller teams do better work, and after 150+ projects, we still believe it.
           </p>
         </div>
       </section>
@@ -125,31 +120,21 @@ export default function StudioClient() {
           <div className="grid sm:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/5">
             <div className="st-value opacity-0 translate-y-6 bg-brand-ink p-8 md:p-10">
               <div className="w-10 h-10 rounded-lg bg-brand-400/10 border border-brand-400/20 flex items-center justify-center text-brand-400 mb-6">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                </svg>
+                <Shield size={18} strokeWidth={1.8} />
               </div>
               <h3 className="text-white font-bold text-xl mb-3">Honest first</h3>
               <p className="text-white/55 text-sm leading-relaxed">We&apos;ll tell you when an idea won&apos;t work, even if it costs us the job. Our reputation outlasts any single project.</p>
             </div>
             <div className="st-value opacity-0 translate-y-6 bg-brand-ink p-8 md:p-10">
               <div className="w-10 h-10 rounded-lg bg-brand-400/10 border border-brand-400/20 flex items-center justify-center text-brand-400 mb-6">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="23 4 23 10 17 10" />
-                  <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
-                </svg>
+                <RefreshCw size={18} strokeWidth={1.8} />
               </div>
               <h3 className="text-white font-bold text-xl mb-3">Restlessly curious</h3>
               <p className="text-white/55 text-sm leading-relaxed">The Australian market moves fast. We stay ahead of platform changes, cultural shifts, and what&apos;s working in market, not in a New York case study.</p>
             </div>
             <div className="st-value opacity-0 translate-y-6 bg-brand-ink p-8 md:p-10">
               <div className="w-10 h-10 rounded-lg bg-brand-400/10 border border-brand-400/20 flex items-center justify-center text-brand-400 mb-6">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                </svg>
+                <Users size={18} strokeWidth={1.8} />
               </div>
               <h3 className="text-white font-bold text-xl mb-3">Genuinely local</h3>
               <p className="text-white/55 text-sm leading-relaxed">We live, eat, and commute in the same cities as your customers. That local understanding isn&apos;t a differentiator, it&apos;s a prerequisite.</p>
@@ -188,7 +173,7 @@ export default function StudioClient() {
                 <div className="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
                   <span className="text-xs text-white/50 uppercase tracking-wider">{member.location}</span>
                   <a href="#" className="w-8 h-8 rounded-full bg-white/5 hover:bg-brand-400 hover:text-brand-700 text-white/60 flex items-center justify-center transition-all duration-300">
-                    <LinkedInIcon />
+                    <LinkedInIcon size={14} />
                   </a>
                 </div>
               </div>
@@ -227,7 +212,7 @@ export default function StudioClient() {
                 <h3 className="text-white font-bold text-lg">Social Media Manager</h3>
                 <div className="flex flex-wrap gap-2 mt-2">
                   <span className="px-2.5 py-1 rounded-full bg-brand-400/10 text-brand-400 text-xs font-medium">Full-time</span>
-                  <span className="px-2.5 py-1 rounded-full bg-white/5 text-white/60 text-xs font-medium">Melbourne or Sydney</span>
+                  <span className="px-2.5 py-1 rounded-full bg-white/5 text-white/60 text-xs font-medium">Sydney</span>
                   <span className="px-2.5 py-1 rounded-full bg-white/5 text-white/60 text-xs font-medium">2+ years exp.</span>
                 </div>
               </div>

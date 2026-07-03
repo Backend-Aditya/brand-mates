@@ -28,7 +28,7 @@ export const workProjects: WorkProject[] = [
     challenge:
       "Saltbush Co had a compelling sustainable story but a fragmented digital presence. Their DTC site was converting below 1%, social felt inconsistent across channels, and Meta ads were burning $40K/month at a ROAS of 1.2×. Stockists were asking why the online brand didn't match the in-store experience.",
     approach:
-      "We started with a full brand audit and qualitative research across their Sydney and Melbourne customer base. A unified visual identity — earthy, confident, premium — rolled out across a rebuilt Shopify storefront, a new editorial social content calendar, and a Meta creative framework built around three proven formats. Every channel shared the same voice for the first time.",
+      "We started with a full brand audit and qualitative research across their Sydney and Melbourne customer base. A unified visual identity - earthy, confident, premium - rolled out across a rebuilt Shopify storefront, a new editorial social content calendar, and a Meta creative framework built around three proven formats. Every channel shared the same voice for the first time.",
     outcome:
       "Six months after launch: site conversion improved from 0.8% to 3.4%, Meta ROAS rose from 1.2× to 4.1×, and Instagram following grew from 8K to 34K organically. The rebrand became the foundation for a $2.3M Meta spend managed in year two.",
     metrics: [
@@ -51,7 +51,7 @@ export const workProjects: WorkProject[] = [
     challenge:
       "Koorang had award-winning technical outdoor apparel and no paid media infrastructure to match. Their internal team was spending time producing creative rather than strategising, every campaign started from scratch, and there was no data architecture to build on.",
     approach:
-      "We built a full Meta and Google campaign framework — structured creative library, audience segmentation by terrain and activity type, and a 12-month testing calendar aligned with the Australian outdoor season. The handover included a documented playbook their team could run independently.",
+      "We built a full Meta and Google campaign framework - structured creative library, audience segmentation by terrain and activity type, and a 12-month testing calendar aligned with the Australian outdoor season. The handover included a documented playbook their team could run independently.",
     outcome:
       "$820K in attributed revenue in a single quarter. ROAS of 4.2× across combined channels. Creative testing surfaced three hero ad formats that are still running year-round. The client's internal team took full ownership within 90 days of handover.",
     metrics: [
@@ -74,7 +74,7 @@ export const workProjects: WorkProject[] = [
     challenge:
       "A five-venue Sydney restaurant group with no unified social strategy. Each venue had its own account managed ad hoc by floor staff, posting inconsistently, getting low engagement, and running zero paid amplification. Competitor venues with inferior food were outperforming them online.",
     approach:
-      "We consolidated strategy under one framework while preserving each venue's distinct character — Harbour Co as the group umbrella, each restaurant with its own content pillars. Monthly on-location content shoots, a UGC programme with staff and regulars, and geo-targeted Meta ads turned the social accounts into a live reservations engine.",
+      "We consolidated strategy under one framework while preserving each venue's distinct character - Harbour Co as the group umbrella, each restaurant with its own content pillars. Monthly on-location content shoots, a UGC programme with staff and regulars, and geo-targeted Meta ads turned the social accounts into a live reservations engine.",
     outcome:
       "Average 12% week-on-week follower growth across all five venues over six months. Reservation enquiries from social up 240%. Two venues reached waiting-list status within four months. The campaign was shortlisted in the 2024 Mumbrella Marketing Awards.",
     metrics: [
@@ -97,7 +97,7 @@ export const workProjects: WorkProject[] = [
     challenge:
       "Tallow & Co were selling primarily through Sydney weekend markets and a basic Shopify template that had never been designed. Great product and a loyal repeat customer base, but no brand photography, no digital story, and no infrastructure to scale DTC.",
     approach:
-      "A full Shopify redesign anchored in warmth, craft, and the texture of the candle-making process. We paired the build with a two-day Sydney content shoot — product flat lays, lifestyle scenes, and behind-the-scenes studio footage — that gave every channel six months of ready-to-publish assets without another reshoot.",
+      "A full Shopify redesign anchored in warmth, craft, and the texture of the candle-making process. We paired the build with a two-day Sydney content shoot - product flat lays, lifestyle scenes, and behind-the-scenes studio footage - that gave every channel six months of ready-to-publish assets without another reshoot.",
     outcome:
       "Online revenue grew 380% in the first quarter post-launch. Average order value increased from $42 to $89 with better bundling and product story. The content library lasted eight months. Tallow & Co moved from markets-first to DTC-first within a year.",
     metrics: [
@@ -118,9 +118,9 @@ export const workProjects: WorkProject[] = [
     tagline: "National paid media scale-up",
     tags: ["Paid Ads", "Social Media"],
     challenge:
-      "Bushline had 12 stores across Australia but negligible digital revenue — less than $380K annually online. They'd never invested in performance media and were losing market share to two well-capitalised e-commerce competitors with national digital budgets.",
+      "Bushline had 12 stores across Australia but negligible digital revenue - less than $380K annually online. They'd never invested in performance media and were losing market share to two well-capitalised e-commerce competitors with national digital budgets.",
     approach:
-      "A 90-day launch sprint: Google Shopping campaigns structured by category and margin, Meta prospecting and retargeting funnels, and a social content calendar timed around the Australian outdoor calendar — summer camping season, winter ski runs, and the shoulder-season adventure travel surge.",
+      "A 90-day launch sprint: Google Shopping campaigns structured by category and margin, Meta prospecting and retargeting funnels, and a social content calendar timed around the Australian outdoor calendar - summer camping season, winter ski runs, and the shoulder-season adventure travel surge.",
     outcome:
       "Digital revenue grew from $380K to $2.1M in 12 months. Google Shopping alone accounted for $900K. Social following grew from 4.2K to 28K. Bushline's digital channel is now their second highest-revenue store nationally.",
     metrics: [
@@ -141,7 +141,7 @@ export const workProjects: WorkProject[] = [
     tagline: "Full identity system for an Aussie digital bank",
     tags: ["Strategy", "Identity", "Product"],
     challenge:
-      "A digital bank preparing for ASX listing needed an identity that could reassure nervous first-time investors and pass APRA compliance review — while feeling modern enough to attract under-35s in a market dominated by the Big Four. The rebrand had to work across five capital cities from day one.",
+      "A digital bank preparing for ASX listing needed an identity that could reassure nervous first-time investors and pass APRA compliance review - while feeling modern enough to attract under-35s in a market dominated by the Big Four. The rebrand had to work across five capital cities from day one.",
     approach:
       "Eighteen months of deep brand strategy, including competitive positioning across five Australian banks and a full customer research programme with 400 participants. A 60-page brand guidelines document, a complete product design system covering every screen and APRA-required touchpoint, and a launch film handled by our motion team.",
     outcome:
@@ -164,7 +164,7 @@ export const workProjects: WorkProject[] = [
     tagline: "Launch identity for a boutique hotel group",
     tags: ["Branding", "Print", "Web"],
     challenge:
-      "Meridian was launching two boutique hotels simultaneously — one in Byron Bay, one in Hobart — markets with fundamentally different aesthetics and guest profiles. A single brand identity needed to feel native to both locations without feeling generic to either.",
+      "Meridian was launching two boutique hotels simultaneously - one in Byron Bay, one in Hobart - markets with fundamentally different aesthetics and guest profiles. A single brand identity needed to feel native to both locations without feeling generic to either.",
     approach:
       "A flexible identity system built on timeless serif typography and a shared structural language, with two venue-specific colour palettes that reflect each location's character. Print collateral designed to Australian luxury standards. A single website that lets each property breathe independently.",
     outcome:

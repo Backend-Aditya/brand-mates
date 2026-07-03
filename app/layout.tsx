@@ -12,9 +12,9 @@ const onest = Onest({
 });
 
 export const metadata: Metadata = {
-  title: "BrandMates — Australia's Brand Studio. We Build Belief.",
+  title: "BrandMates - Australia's Brand Studio. We Build Belief.",
   description:
-    "BrandMates is an Australian brand studio for founders and CMOs who need identity, digital, and content work that holds up in the real world — based in Sydney and Melbourne.",
+    "BrandMates is an Australian brand studio for founders and CMOs who need identity, digital, and content work that holds up in the real world - based in Sydney.",
 };
 
 export default function RootLayout({

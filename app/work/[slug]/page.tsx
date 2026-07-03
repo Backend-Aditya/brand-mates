@@ -18,17 +18,17 @@ export async function generateMetadata({
   const project = getWorkProject(slug);
   if (!project) return {};
   return {
-    title: `${project.client} — BrandMates`,
+    title: `${project.client} - BrandMates`,
     description: project.tagline,
     openGraph: {
-      title: `${project.client} Case Study — BrandMates`,
+      title: `${project.client} Case Study - BrandMates`,
       description: project.tagline,
       url: `https://brandmates.com.au/work/${slug}`,
       siteName: "BrandMates",
       locale: "en_AU",
       type: "article",
     },
-    twitter: { card: "summary_large_image", title: `${project.client} — BrandMates` },
+    twitter: { card: "summary_large_image", title: `${project.client} - BrandMates` },
     alternates: { canonical: `https://brandmates.com.au/work/${slug}` },
   };
 }

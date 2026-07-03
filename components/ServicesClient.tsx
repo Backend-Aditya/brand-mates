@@ -2,28 +2,23 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import { Check, Zap, ArrowRight as ArrowRightIcon } from "lucide-react";
 
 const CheckItem = ({ children }: { children: React.ReactNode }) => (
   <li className="flex items-start gap-3">
     <span className="mt-1 w-4 h-4 shrink-0 rounded-full bg-brand-400/15 border border-brand-400/30 flex items-center justify-center text-brand-400">
-      <svg width="8" height="8" viewBox="0 0 10 10" fill="none">
-        <path d="M2 5l2.5 2.5L8 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      <Check size={8} strokeWidth={2.5} />
     </span>
     <span>{children}</span>
   </li>
 );
 
 const BoltIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 mt-0.5 text-brand-400">
-    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-  </svg>
+  <Zap size={20} strokeWidth={1.8} className="shrink-0 mt-0.5 text-brand-400" />
 );
 
 const ArrowRight = ({ size = 14 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className="transition-transform duration-300 group-hover:translate-x-1">
-    <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
+  <ArrowRightIcon size={size} className="transition-transform duration-300 group-hover:translate-x-1" />
 );
 
 export default function ServicesClient() {
@@ -267,9 +262,7 @@ export default function ServicesClient() {
               className="relative group inline-flex items-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-8 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-(--shadow-brand-lg) shrink-0"
             >
               Book a discovery call
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="transition-transform duration-300 group-hover:translate-x-1">
-                <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <ArrowRight size={16} />
             </Link>
           </div>
         </div>
