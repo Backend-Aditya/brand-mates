@@ -140,7 +140,7 @@ export default function HomeClient() {
 
             {/* CTA */}
             <div className="hero-cta flex items-center flex-wrap gap-4 md:gap-5 opacity-0 translate-y-4">
-              <a href="#services" className="group inline-flex items-center gap-2.5 rounded-full bg-brand-400 text-brand-700 font-bold text-sm tracking-tight px-6 md:px-7 py-3 md:py-3.5 transition-all duration-300 hover:bg-brand-300 hover:-translate-y-0.5 hover:shadow-(--shadow-brand-md)">
+              <a href="#contact" className="group inline-flex items-center gap-2.5 rounded-full bg-brand-400 text-brand-700 font-bold text-sm tracking-tight px-6 md:px-7 py-3 md:py-3.5 transition-all duration-300 hover:bg-brand-300 hover:-translate-y-0.5 hover:shadow-(--shadow-brand-md)">
                 <span>Book an Aussie Discovery Call</span>
                 <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
               </a>
