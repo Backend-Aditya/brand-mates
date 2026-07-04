@@ -107,6 +107,7 @@ export default function HomeClient() {
           alt=""
           fill
           priority
+          quality={60}
           className="object-cover object-center"
           sizes="100vw"
           aria-hidden="true"
@@ -171,7 +172,7 @@ export default function HomeClient() {
                 <span className="w-2 h-2 rounded-full bg-brand-400 shrink-0"></span>
                 <span className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-brand-400">2 slots left this quarter</span>
               </div>
-              <h3 className="text-white font-bold text-xl tracking-tight mt-2">Start a project</h3>
+              <h2 className="text-white font-bold text-xl tracking-tight mt-2">Start a project</h2>
               <p className="text-white/65 text-xs leading-relaxed mt-1">We&apos;ll reply within 1 business day, AEST.</p>
             </div>
             <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>

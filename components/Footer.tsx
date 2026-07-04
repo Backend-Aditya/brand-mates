@@ -64,7 +64,7 @@ export default function Footer() {
               <label className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-300">Studio dispatch</label>
               <div className="flex items-center gap-0 rounded-full border border-white/10 bg-white/2 focus-within:border-brand-400/60 transition-colors overflow-hidden pl-5 pr-1 py-1">
                 <input type="email" placeholder="you@company.com.au" className="flex-1 bg-transparent border-0 outline-none text-white placeholder:text-white/55 text-sm py-2" />
-                <button type="submit" className="shrink-0 w-9 h-9 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 flex items-center justify-center transition-colors">
+                <button type="submit" aria-label="Subscribe to the studio dispatch" className="shrink-0 w-9 h-9 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 flex items-center justify-center transition-colors">
                   <ArrowIcon size={14} strokeWidth={2.5} />
                 </button>
               </div>
@@ -173,11 +173,11 @@ export default function Footer() {
             </span>
           </div>
           <div className="flex items-center gap-5 text-white/50">
-            <span className="cursor-default">Privacy</span>
+            <Link href="/privacy" className="hover:text-white/80 transition-colors">Privacy</Link>
             <span className="w-1 h-1 rounded-full bg-white/20"></span>
-            <span className="cursor-default">Terms</span>
+            <Link href="/terms" className="hover:text-white/80 transition-colors">Terms</Link>
             <span className="w-1 h-1 rounded-full bg-white/20"></span>
-            <span className="cursor-default">Accessibility</span>
+            <Link href="/accessibility" className="hover:text-white/80 transition-colors">Accessibility</Link>
           </div>
         </div>
       </div>
