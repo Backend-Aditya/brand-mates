@@ -64,31 +64,24 @@ export default function WorkClient() {
       <section className="relative w-full pt-(--hero-top) pb-(--space-section) px-6 sm:px-10 md:px-16 bg-brand-ink overflow-hidden">
         <div className="relative max-w-7xl mx-auto">
           <div className="wk-eyebrow opacity-0 translate-y-4 flex items-center gap-2.5 mb-6">
-            <span className="text-xs font-medium tracking-[0.08em] uppercase text-brand-400">Selected Work · 2019–2025</span>
+            <span className="text-xs font-medium tracking-[0.08em] uppercase text-brand-400">Selected Work · 2019–2026</span>
           </div>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
             <h1 className="wk-heading opacity-0 translate-y-6 text-[1.875rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-7xl xl:text-[5.5rem] font-extrabold tracking-[-0.03em] leading-[1.02] text-white max-w-2xl">
               Work that<br />
-              <span className="bg-linear-to-r from-brand-400 to-brand-300 bg-clip-text text-transparent">earns trust.</span>
+              <span className="text-brand-400">earns trust.</span>
             </h1>
-            <p className="wk-intro opacity-0 translate-y-6 text-white/55 text-base md:text-lg leading-relaxed max-w-sm md:text-right">
+            <p className="wk-intro opacity-0 translate-y-6 text-white/75 text-base md:text-lg leading-relaxed max-w-sm md:text-right">
               A selection of projects across web, social, ads, and content, built for Australian brands with something real to say.
             </p>
           </div>
 
-          <div className="wk-stats opacity-0 translate-y-6 mt-14 md:mt-20 grid grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/5 max-w-lg">
-            <div className="px-6 py-5 bg-brand-ink flex flex-col gap-1">
-              <span className="text-3xl font-extrabold text-white tracking-tight">47+</span>
-              <span className="text-xs text-white/45 uppercase tracking-wide">Projects</span>
-            </div>
-            <div className="px-6 py-5 bg-brand-ink flex flex-col gap-1">
-              <span className="text-3xl font-extrabold text-white tracking-tight">12</span>
-              <span className="text-xs text-white/45 uppercase tracking-wide">Industries</span>
-            </div>
-            <div className="px-6 py-5 bg-brand-ink flex flex-col gap-1">
-              <span className="text-3xl font-extrabold text-white tracking-tight">3</span>
-              <span className="text-xs text-white/45 uppercase tracking-wide">AGDA Awards</span>
-            </div>
+          <div className="wk-stats opacity-0 translate-y-6 mt-14 md:mt-20 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-white/60 border-t border-white/10 pt-5">
+            <span><span className="text-white font-semibold">150+</span> projects</span>
+            <span className="w-1 h-1 rounded-full bg-white/15" aria-hidden="true"></span>
+            <span><span className="text-white font-semibold">12</span> industries</span>
+            <span className="w-1 h-1 rounded-full bg-white/15" aria-hidden="true"></span>
+            <span><span className="text-white font-semibold">3</span> AGDA awards</span>
           </div>
         </div>
       </section>

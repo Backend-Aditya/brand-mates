@@ -1,11 +1,20 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ChevronDown, Calendar, Mail } from "lucide-react";
+import { ArrowRight, ChevronDown, Calendar, Mail, Check } from "lucide-react";
 
 export default function HomeClient() {
+  const [heroFormStatus, setHeroFormStatus] = useState<"idle" | "sending" | "sent">("idle");
+
+  async function handleHeroSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setHeroFormStatus("sending");
+    await new Promise((r) => setTimeout(r, 900));
+    setHeroFormStatus("sent");
+  }
+
   useEffect(() => {
     let ctx: ReturnType<typeof import("gsap").gsap.context> | null = null;
 
@@ -49,17 +58,6 @@ export default function HomeClient() {
         heroTl.fromTo(".hero-form",    from, to, 0.5);
         heroTl.fromTo(".hero-stats",   from, to, 0.6);
 
-        heroTl.add(() => {
-          document.querySelectorAll<HTMLElement>(".stat-number").forEach((el) => {
-            const target = parseInt(el.dataset.target ?? "0", 10);
-            const counter = { val: 0 };
-            gsap.to(counter, {
-              val: target, duration: 2, ease: "power2.out",
-              onUpdate() { el.textContent = String(Math.round(counter.val)); },
-            });
-          });
-        }, 1.2);
-
         // Section headers
         ([
           [".services-heading", ".services-intro"],
@@ -82,7 +80,7 @@ export default function HomeClient() {
         });
 
         // Individual blocks
-        [".services-cta", ".work-footer", ".pr-footer", ".contact-offices", ".contact-badge"].forEach((sel) => {
+        [".services-cta", ".work-footer", ".contact-offices", ".contact-badge"].forEach((sel) => {
           gsap.fromTo(sel, from, { ...to, scrollTrigger: { trigger: sel, ...ST } });
         });
 
@@ -175,15 +173,19 @@ export default function HomeClient() {
               <h2 className="text-white font-bold text-xl tracking-tight mt-2">Start a project</h2>
               <p className="text-white/65 text-xs leading-relaxed mt-1">We&apos;ll reply within 1 business day, AEST.</p>
             </div>
-            <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
+            <form className="flex flex-col gap-3" onSubmit={handleHeroSubmit}>
+              <div role="status" aria-live="polite" className="sr-only">
+                {heroFormStatus === "sending" && "Sending your enquiry..."}
+                {heroFormStatus === "sent" && "Enquiry sent. We will reply within 1 business day, AEST."}
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="flex flex-col gap-1.5">
                   <label htmlFor="hero-name" className="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-white/65">Name</label>
-                  <input id="hero-name" type="text" placeholder="Alex Chen" className="rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-white/55 text-sm px-3.5 py-2.5 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all" />
+                  <input id="hero-name" type="text" required placeholder="Alex Chen" className="rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-white/55 text-sm px-3.5 py-2.5 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all" />
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <label htmlFor="hero-email" className="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-white/65">Email</label>
-                  <input id="hero-email" type="email" placeholder="you@co.com.au" className="rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-white/55 text-sm px-3.5 py-2.5 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all" />
+                  <input id="hero-email" type="email" required placeholder="you@co.com.au" className="rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-white/55 text-sm px-3.5 py-2.5 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all" />
                 </div>
               </div>
               <div className="flex flex-col gap-1.5">
@@ -206,9 +208,24 @@ export default function HomeClient() {
                 <label htmlFor="hero-message" className="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-white/65">Message</label>
                 <textarea id="hero-message" rows={3} placeholder="Tell us about your project…" className="rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-white/55 text-sm px-3.5 py-2.5 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all resize-none leading-relaxed"></textarea>
               </div>
-              <button type="submit" className="group w-full flex items-center justify-center gap-2 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-(--shadow-brand-md) mt-1">
-                Send enquiry
-                <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+              <button
+                type="submit"
+                disabled={heroFormStatus !== "idle"}
+                className="group w-full flex items-center justify-center gap-2 rounded-full bg-brand-400 hover:bg-brand-300 disabled:opacity-70 disabled:cursor-default disabled:hover:bg-brand-400 disabled:hover:translate-y-0 text-brand-700 font-bold text-sm py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-(--shadow-brand-md) mt-1"
+              >
+                {heroFormStatus === "idle" && (
+                  <>
+                    Send enquiry
+                    <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                  </>
+                )}
+                {heroFormStatus === "sending" && "Sending..."}
+                {heroFormStatus === "sent" && (
+                  <>
+                    <Check size={14} />
+                    Enquiry sent, talk soon
+                  </>
+                )}
               </button>
             </form>
             <div className="flex items-center gap-3 pt-1">
@@ -224,23 +241,16 @@ export default function HomeClient() {
 
       </section>
 
-      {/* ── STATS ── */}
+      {/* ── STUDIO FACTS ── */}
       <section className="hero-stats opacity-0 translate-y-5 border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-16 grid grid-cols-2 md:grid-cols-4">
-          {[
-            { target: "150", suffix: "+", label: "Aussie Brands Built" },
-            { target: "8",   suffix: "+", label: "Years Across ANZ"   },
-            { target: "98",  suffix: "%", label: "Client Retention"   },
-            { target: "40",  suffix: "+", label: "AGDA & Award Wins"  },
-          ].map(({ target, suffix, label }, i) => (
-            <div key={label} className={`stat flex flex-col items-center text-center gap-2 py-8 md:py-10 px-6 md:px-10${i % 2 !== 0 ? " border-l border-white/5" : i >= 2 ? " md:border-l" : ""}${i >= 2 ? " border-t border-white/5 md:border-t-0" : ""}`}>
-              <div className="flex items-end justify-center gap-0.5 leading-none">
-                <span className="stat-number text-[2.5rem] md:text-5xl font-black text-white tracking-tight leading-none" data-target={target}>0</span>
-                <span className="text-2xl md:text-3xl font-black text-brand-400 tracking-tight leading-none pb-1">{suffix}</span>
-              </div>
-              <span className="text-[0.65rem] font-bold tracking-[0.15em] uppercase text-white/65">{label}</span>
-            </div>
-          ))}
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-16 py-5 flex flex-wrap items-center justify-center md:justify-between gap-x-8 gap-y-2 text-sm text-white/60">
+          <span><span className="text-white font-semibold">150+</span> Aussie brands built</span>
+          <span className="hidden md:inline w-1 h-1 rounded-full bg-white/15" aria-hidden="true"></span>
+          <span>Est. 2017, Sydney</span>
+          <span className="hidden md:inline w-1 h-1 rounded-full bg-white/15" aria-hidden="true"></span>
+          <span><span className="text-white font-semibold">98%</span> client retention</span>
+          <span className="hidden md:inline w-1 h-1 rounded-full bg-white/15" aria-hidden="true"></span>
+          <span><span className="text-white font-semibold">3×</span> AGDA award winners</span>
         </div>
       </section>
 
@@ -546,7 +556,7 @@ export default function HomeClient() {
             <div className="contact-badge opacity-0 translate-y-4 flex justify-center mb-8">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-400/15 border border-brand-400/25 text-brand-400 text-xs font-semibold">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-400 animate-pulse shrink-0"></span>
-                Booking Q2 2025 · 2 spots remain
+                Booking Q3 2026 · 2 spots remain
               </span>
             </div>
             <h2 className="contact-heading opacity-0 translate-y-6 text-white font-bold leading-[1.1] tracking-[-0.03em]" style={{ fontSize: "clamp(2.75rem, 7vw, 6rem)" }}>
@@ -578,7 +588,7 @@ export default function HomeClient() {
                 <div className="mt-auto pt-6 border-t border-brand-700/15 grid grid-cols-2 gap-4">
                   <div>
                     <div className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-brand-700/55 mb-1">Next Slot</div>
-                    <div className="text-brand-700 font-bold text-sm">Wed 23 Apr · 10:00 AEST</div>
+                    <div className="text-brand-700 font-bold text-sm">Wed 8 Jul · 10:00 AEST</div>
                   </div>
                   <div>
                     <div className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-brand-700/55 mb-1">Response Time</div>

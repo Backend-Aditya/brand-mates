@@ -14,7 +14,7 @@ export const journalArticles: JournalArticle[] = [
   {
     slug: "2-3m-meta-ads-saltbush",
     tag: "Paid Ads",
-    date: "14 Apr 2025",
+    date: "22 Jun 2026",
     readTime: "8 min read",
     title: "How we ran $2.3M in Meta ads for Saltbush, and what actually worked",
     excerpt:
@@ -45,11 +45,11 @@ export const journalArticles: JournalArticle[] = [
     ],
   },
   {
-    slug: "website-leaking-leads-2025",
+    slug: "website-leaking-leads-2026",
     tag: "Web Design",
-    date: "7 Apr 2025",
+    date: "8 Jun 2026",
     readTime: "5 min read",
-    title: "Why your website is leaking leads in 2025, and the 5-minute fix",
+    title: "Why your website is leaking leads in 2026, and the 5-minute fix",
     excerpt:
       "Most conversion problems come from one of three places. Here's how to find yours in under an afternoon.",
     gradient: "from-zinc-800 via-brand-700 to-zinc-900",
@@ -74,11 +74,11 @@ export const journalArticles: JournalArticle[] = [
     ],
   },
   {
-    slug: "instagram-reels-vs-tiktok-australia-2025",
+    slug: "instagram-reels-vs-tiktok-australia-2026",
     tag: "Social Media",
-    date: "1 Apr 2025",
+    date: "25 May 2026",
     readTime: "6 min read",
-    title: "Instagram Reels vs TikTok in Australia: 2025 data breakdown",
+    title: "Instagram Reels vs TikTok in Australia: 2026 data breakdown",
     excerpt:
       "We analysed 18 months of data across 12 Australian brand accounts. Here's what the numbers actually say.",
     gradient: "from-violet-900 via-brand-700 to-slate-900",
@@ -101,7 +101,7 @@ export const journalArticles: JournalArticle[] = [
         body: "One pattern we didn't expect: Australian audiences over 35 are on TikTok in larger numbers than most brand marketers assume - but they're passive viewers, not commenters or sharers. If your Australian customer is 35+, TikTok can still work for awareness, but you'll need to track it differently. Lean on view-through rate and site traffic from TikTok as your success metrics, not engagement rate.",
       },
       {
-        heading: "Our recommendation for 2025",
+        heading: "Our recommendation for 2026",
         body: "Run both, but don't treat them the same. Use TikTok for native, low-production content that builds cultural familiarity - genuine product moments, behind the scenes, responses to comments. Use Instagram for higher-production brand content and for converting warm audiences. Repost strategically but don't just cross-post - content optimised for one platform performs poorly on the other because the aspect ratios, caption conventions, and pacing are different.",
       },
     ],
@@ -109,7 +109,7 @@ export const journalArticles: JournalArticle[] = [
   {
     slug: "50-on-location-content-shoots",
     tag: "Content",
-    date: "25 Mar 2025",
+    date: "11 May 2026",
     readTime: "7 min read",
     title: "What we learned from 50 on-location content shoots across Australia",
     excerpt:
@@ -138,7 +138,7 @@ export const journalArticles: JournalArticle[] = [
   {
     slug: "eofy-marketing-leftover-budget",
     tag: "Strategy",
-    date: "18 Mar 2025",
+    date: "27 Apr 2026",
     readTime: "5 min read",
     title: "EOFY marketing: how Australian brands should spend their leftover budget",
     excerpt:
@@ -167,7 +167,7 @@ export const journalArticles: JournalArticle[] = [
   {
     slug: "meta-creative-framework-australian-dtc",
     tag: "Paid Ads",
-    date: "10 Mar 2025",
+    date: "13 Apr 2026",
     readTime: "6 min read",
     title: "The Meta creative framework we use for every Australian DTC brand",
     excerpt:
@@ -196,7 +196,7 @@ export const journalArticles: JournalArticle[] = [
   {
     slug: "brandmates-onboarding-process",
     tag: "Studio",
-    date: "3 Mar 2025",
+    date: "30 Mar 2026",
     readTime: "4 min read",
     title: "The BrandMates onboarding process: what happens after you say yes",
     excerpt:

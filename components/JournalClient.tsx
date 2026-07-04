@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, ArrowDown } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import { journalArticles } from "@/lib/journal";
 
 const ReadMoreArrow = () => (
@@ -10,9 +10,16 @@ const ReadMoreArrow = () => (
 );
 
 const featuredArticle = journalArticles[0];
-const gridArticles = journalArticles.slice(1);
+const listArticles = journalArticles.slice(1);
 
 export default function JournalClient() {
+  const [subscribeStatus, setSubscribeStatus] = useState<"idle" | "sent">("idle");
+
+  function handleSubscribe(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSubscribeStatus("sent");
+  }
+
   useEffect(() => {
     let ctx: ReturnType<typeof import("gsap").gsap.context> | null = null;
 
@@ -57,7 +64,6 @@ export default function JournalClient() {
           ...ST,
         });
 
-        gsap.fromTo(".jn-more", from, { ...to, scrollTrigger: { trigger: ".jn-more", ...ST } });
         gsap.fromTo(".jn-newsletter", from, { ...to, scrollTrigger: { trigger: ".jn-newsletter", ...ST } });
 
         ScrollTrigger.refresh();
@@ -79,9 +85,9 @@ export default function JournalClient() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
             <h1 className="jn-heading opacity-0 translate-y-6 text-[1.875rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-7xl xl:text-[5.5rem] font-extrabold tracking-[-0.03em] leading-[1.02] text-white">
               From the<br />
-              <span className="bg-linear-to-r from-brand-400 to-brand-300 bg-clip-text text-transparent">studio desk.</span>
+              <span className="text-brand-400">studio desk.</span>
             </h1>
-            <p className="jn-intro opacity-0 translate-y-6 text-white/55 text-base md:text-lg leading-relaxed max-w-sm md:text-right">
+            <p className="jn-intro opacity-0 translate-y-6 text-white/75 text-base md:text-lg leading-relaxed max-w-sm md:text-right">
               What we&apos;re reading, building, and learning, practical insights from a studio that actually runs campaigns in the Australian market.
             </p>
           </div>
@@ -134,36 +140,28 @@ export default function JournalClient() {
         </div>
       </section>
 
-      {/* ARTICLE GRID */}
+      {/* ARTICLE INDEX */}
       <section className="px-6 sm:px-10 md:px-16 pb-(--space-section)">
-        <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {gridArticles.map((article) => (
-            <Link key={article.slug} href={`/journal/${article.slug}`} className="jn-article opacity-0 translate-y-8 group flex flex-col rounded-2xl overflow-hidden border border-white/5 bg-white/2 hover:border-brand-400/25 hover:bg-brand-400/5 transition-all duration-300">
-              <div className={`aspect-video bg-linear-to-br ${article.gradient} relative overflow-hidden`}>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-white/10 font-black text-7xl tracking-tighter">{article.initials}</span>
-                </div>
+        <div className="max-w-7xl mx-auto border-t border-white/10">
+          {listArticles.map((article) => (
+            <Link
+              key={article.slug}
+              href={`/journal/${article.slug}`}
+              className="jn-article opacity-0 translate-y-6 group grid md:grid-cols-12 gap-3 md:gap-8 py-8 md:py-10 border-b border-white/10 items-baseline"
+            >
+              <div className="md:col-span-3 flex items-baseline gap-3 text-xs">
+                <span className="text-white/40 tabular-nums whitespace-nowrap">{article.date}</span>
+                <span className="text-brand-400 font-bold uppercase tracking-wider">{article.tag}</span>
               </div>
-              <div className="flex flex-col gap-3 p-6 flex-1">
-                <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-full bg-white/5 text-white/55 text-[0.65rem] font-bold uppercase tracking-wider">{article.tag}</span>
-                  <span className="text-white/30 text-xs">{article.date}</span>
-                </div>
-                <h3 className="text-white font-bold text-lg leading-snug group-hover:text-brand-300 transition-colors">{article.title}</h3>
-                <p className="text-white/50 text-sm leading-relaxed flex-1">{article.excerpt}</p>
-                <span className="inline-flex items-center gap-2 text-xs font-semibold text-brand-400 mt-2">
-                  Read more <ReadMoreArrow />
-                </span>
-              </div>
+              <h3 className="md:col-span-5 text-white font-bold text-lg md:text-xl leading-snug group-hover:text-brand-300 transition-colors text-balance">
+                {article.title}
+              </h3>
+              <p className="md:col-span-3 text-white/55 text-sm leading-relaxed">{article.excerpt}</p>
+              <span className="md:col-span-1 hidden md:flex justify-end self-center text-white/40 group-hover:text-brand-400 transition-colors">
+                <ReadMoreArrow />
+              </span>
             </Link>
           ))}
-        </div>
-
-        <div className="max-w-7xl mx-auto mt-12 flex justify-center">
-          <button className="jn-more opacity-0 translate-y-4 group inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/3 hover:border-brand-400/40 hover:bg-brand-400/8 text-white/70 hover:text-white font-medium text-sm px-8 py-3.5 transition-all duration-300">
-            Load more articles
-            <ArrowDown size={14} className="transition-transform group-hover:translate-y-0.5" />
-          </button>
         </div>
       </section>
 
@@ -178,17 +176,31 @@ export default function JournalClient() {
                 <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-snug mb-3">One thoughtful email a month.</h2>
                 <p className="text-white/55 text-base">What&apos;s working in AU digital marketing right now, no filler, no agency self-promotion. Just the stuff worth knowing.</p>
               </div>
-              <form className="flex flex-col sm:flex-row gap-3 shrink-0 w-full md:w-auto" onSubmit={(e) => e.preventDefault()}>
+              <form className="flex flex-col sm:flex-row gap-3 shrink-0 w-full md:w-auto" onSubmit={handleSubscribe}>
                 <label htmlFor="newsletter-email" className="sr-only">Email address</label>
                 <input
                   id="newsletter-email"
                   name="email"
                   type="email"
+                  required
+                  disabled={subscribeStatus === "sent"}
                   placeholder="you@company.com.au"
-                  className="flex-1 md:w-64 rounded-full border border-white/15 bg-white/10 text-white placeholder:text-white/40 text-sm px-6 py-3.5 outline-none focus:border-brand-400/60 transition-colors"
+                  className="flex-1 md:w-64 rounded-full border border-white/15 bg-white/10 text-white placeholder:text-white/40 text-sm px-6 py-3.5 outline-none focus:border-brand-400/60 transition-colors disabled:opacity-60"
                 />
-                <button type="submit" className="shrink-0 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-7 py-3.5 transition-colors">
-                  Subscribe
+                <button
+                  type="submit"
+                  disabled={subscribeStatus === "sent"}
+                  aria-live="polite"
+                  className="shrink-0 inline-flex items-center justify-center gap-2 rounded-full bg-brand-400 hover:bg-brand-300 disabled:hover:bg-brand-400 text-brand-700 font-bold text-sm px-7 py-3.5 transition-colors"
+                >
+                  {subscribeStatus === "sent" ? (
+                    <>
+                      <Check size={14} />
+                      You&apos;re on the list
+                    </>
+                  ) : (
+                    "Subscribe"
+                  )}
                 </button>
               </form>
             </div>

@@ -80,7 +80,7 @@ export default function ContactClient() {
           <div className="ct-badge opacity-0 translate-y-4 flex justify-center mb-8">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-400/15 border border-brand-400/25 text-brand-400 text-xs font-semibold">
               <span className="w-1.5 h-1.5 rounded-full bg-brand-400 animate-pulse shrink-0"></span>
-              Booking Q2 2025 · 2 spots remain
+              Booking Q3 2026 · 2 spots remain
             </span>
           </div>
           <h1 className="ct-heading opacity-0 translate-y-6 text-[1.875rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-7xl xl:text-[5.5rem] font-extrabold tracking-[-0.03em] leading-[1.02] text-white mb-6">
@@ -190,10 +190,10 @@ export default function ContactClient() {
                   </div>
                 </div>
                 <div className="flex flex-col gap-2 mb-5 text-sm">
-                  <div className="flex items-center gap-2"><CalendarIcon /><span>Next available: Wed 23 Apr 10:00 AEST</span></div>
+                  <div className="flex items-center gap-2"><CalendarIcon /><span>Next available: Wed 8 Jul 10:00 AEST</span></div>
                   <div className="flex items-center gap-2"><ClockIcon /><span>30 minutes via Google Meet</span></div>
                 </div>
-                <a href="#" className="group inline-flex items-center justify-center gap-1.5 rounded-full bg-brand-700 text-brand-300 hover:bg-brand-ink font-bold text-sm py-3 w-full transition-colors">
+                <a href="mailto:studio@brandmates.com.au?subject=Discovery%20call%20booking" className="group inline-flex items-center justify-center gap-1.5 rounded-full bg-brand-700 text-brand-300 hover:bg-brand-ink font-bold text-sm py-3 w-full transition-colors">
                   Book this slot
                   <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                 </a>

@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight as ArrowIcon } from "lucide-react";
+import { ArrowRight as ArrowIcon, Check } from "lucide-react";
 import { FaInstagram, FaLinkedin, FaDribbble, FaXTwitter } from "react-icons/fa6";
 
 const AussieFlag = () => (
@@ -15,13 +16,20 @@ const AussieFlag = () => (
   </svg>
 );
 
-const SocialIcon = ({ children, label }: { children: React.ReactNode; label: string }) => (
-  <a href="#" aria-label={label} className="w-10 h-10 rounded-full border border-white/10 bg-white/2 text-white/60 hover:text-brand-700 hover:bg-brand-400 hover:border-brand-400 flex items-center justify-center transition-all duration-300">
+const SocialIcon = ({ children, label, href }: { children: React.ReactNode; label: string; href: string }) => (
+  <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="w-10 h-10 rounded-full border border-white/10 bg-white/2 text-white/60 hover:text-brand-700 hover:bg-brand-400 hover:border-brand-400 flex items-center justify-center transition-all duration-300">
     {children}
   </a>
 );
 
 export default function Footer() {
+  const [dispatchStatus, setDispatchStatus] = useState<"idle" | "sent">("idle");
+
+  function handleDispatchSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setDispatchStatus("sent");
+  }
+
   return (
     <footer id="footer" className="relative w-full overflow-hidden bg-brand-ink border-t border-white/5">
       {/* Giant wordmark */}
@@ -60,15 +68,19 @@ export default function Footer() {
             <p className="text-white/72 text-sm leading-relaxed max-w-xs">
               An Australian brand studio for founders and CMOs who need the work to actually hold up. Strategy, identity, and launch, end to end, in your timezone.
             </p>
-            <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
-              <label className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-300">Studio dispatch</label>
+            <form className="flex flex-col gap-3" onSubmit={handleDispatchSubmit}>
+              <label htmlFor="ft-dispatch-email" className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-300">Studio dispatch</label>
               <div className="flex items-center gap-0 rounded-full border border-white/10 bg-white/2 focus-within:border-brand-400/60 transition-colors overflow-hidden pl-5 pr-1 py-1">
-                <input type="email" placeholder="you@company.com.au" className="flex-1 bg-transparent border-0 outline-none text-white placeholder:text-white/55 text-sm py-2" />
-                <button type="submit" aria-label="Subscribe to the studio dispatch" className="shrink-0 w-9 h-9 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 flex items-center justify-center transition-colors">
-                  <ArrowIcon size={14} strokeWidth={2.5} />
+                <input id="ft-dispatch-email" type="email" required disabled={dispatchStatus === "sent"} placeholder="you@company.com.au" className="flex-1 bg-transparent border-0 outline-none text-white placeholder:text-white/55 text-sm py-2 disabled:opacity-60" />
+                <button type="submit" disabled={dispatchStatus === "sent"} aria-label="Subscribe to the studio dispatch" className="shrink-0 w-9 h-9 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 flex items-center justify-center transition-colors disabled:hover:bg-brand-400">
+                  {dispatchStatus === "sent" ? <Check size={14} strokeWidth={2.5} /> : <ArrowIcon size={14} strokeWidth={2.5} />}
                 </button>
               </div>
-              <span className="text-white/60 text-[0.7rem]">One email a month. What&apos;s working in AU digital marketing right now.</span>
+              <span aria-live="polite" className="text-white/60 text-[0.7rem]">
+                {dispatchStatus === "sent"
+                  ? "You're on the list. First dispatch lands early next month."
+                  : "One email a month. What's working in AU digital marketing right now."}
+              </span>
             </form>
           </div>
 
@@ -129,17 +141,17 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="flex items-center gap-2 mt-2" aria-hidden="true">
-              <SocialIcon label="Instagram">
+            <div className="flex items-center gap-2 mt-2">
+              <SocialIcon label="BrandMates on Instagram" href="https://www.instagram.com/brandmates.au">
                 <FaInstagram size={15} />
               </SocialIcon>
-              <SocialIcon label="LinkedIn">
+              <SocialIcon label="BrandMates on LinkedIn" href="https://www.linkedin.com/company/brandmates">
                 <FaLinkedin size={15} />
               </SocialIcon>
-              <SocialIcon label="Dribbble">
+              <SocialIcon label="BrandMates on Dribbble" href="https://dribbble.com/brandmates">
                 <FaDribbble size={15} />
               </SocialIcon>
-              <SocialIcon label="Twitter">
+              <SocialIcon label="BrandMates on X" href="https://x.com/brandmates_au">
                 <FaXTwitter size={15} />
               </SocialIcon>
             </div>
@@ -163,7 +175,7 @@ export default function Footer() {
       <div className="relative border-t border-white/5 bg-black/20">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-16 py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs">
           <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-5 text-white/60">
-            <span>© 2017–2025 BrandMates Pty Ltd</span>
+            <span>© 2017–2026 BrandMates Pty Ltd</span>
             <span className="hidden md:inline w-1 h-1 rounded-full bg-white/20"></span>
             <span>ABN 88 612 334 901</span>
             <span className="hidden md:inline w-1 h-1 rounded-full bg-white/20"></span>

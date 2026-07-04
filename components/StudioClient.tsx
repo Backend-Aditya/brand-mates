@@ -98,9 +98,9 @@ export default function StudioClient() {
           </div>
           <h1 className="st-heading opacity-0 translate-y-6 text-[1.875rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-7xl xl:text-[5.5rem] font-extrabold tracking-[-0.03em] leading-[1.02] text-white max-w-3xl mb-8">
             We&apos;re BrandMates.<br />
-            <span className="bg-linear-to-r from-brand-400 to-brand-300 bg-clip-text text-transparent">We give a damn.</span>
+            <span className="text-brand-400">We give a damn.</span>
           </h1>
-          <p className="st-intro opacity-0 translate-y-6 text-white/55 text-base md:text-xl leading-relaxed max-w-2xl">
+          <p className="st-intro opacity-0 translate-y-6 text-white/75 text-base md:text-xl leading-relaxed max-w-2xl">
             Founded in Merrylands in 2017, BrandMates is the studio Australian founders and CMOs call when the brief is too important for a junior account manager. We&apos;re six senior creatives who left big-agency land because we believed smaller teams do better work, and after 150+ projects, we still believe it.
           </p>
         </div>
@@ -158,7 +158,13 @@ export default function StudioClient() {
                 <p className="text-white/50 text-sm leading-relaxed mt-4">{member.bio}</p>
                 <div className="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
                   <span className="text-xs text-white/50 uppercase tracking-wider">{member.location}</span>
-                  <a href="#" className="w-8 h-8 rounded-full bg-white/5 hover:bg-brand-400 hover:text-brand-700 text-white/60 flex items-center justify-center transition-all duration-300">
+                  <a
+                    href={`https://www.linkedin.com/in/${member.name.toLowerCase().replace(/[^a-z\s]/g, "").trim().replace(/\s+/g, "-")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${member.name} on LinkedIn`}
+                    className="w-8 h-8 rounded-full bg-white/5 hover:bg-brand-400 hover:text-brand-700 text-white/60 flex items-center justify-center transition-all duration-300"
+                  >
                     <LinkedInIcon size={14} />
                   </a>
                 </div>
