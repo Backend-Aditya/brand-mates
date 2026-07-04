@@ -7,13 +7,8 @@ import { ArrowRight as ArrowIcon, Check } from "lucide-react";
 import { FaInstagram, FaLinkedin, FaDribbble, FaXTwitter } from "react-icons/fa6";
 
 const AussieFlag = () => (
-  <svg width="14" height="10" viewBox="0 0 14 10" fill="none" className="rounded-sm overflow-hidden">
-    <rect width="14" height="10" fill="#012169" />
-    <path d="M0 0l14 10M14 0L0 10" stroke="#fff" strokeWidth="1.2" />
-    <path d="M0 0l14 10M14 0L0 10" stroke="#C8102E" strokeWidth="0.7" />
-    <path d="M7 0v10M0 5h14" stroke="#fff" strokeWidth="2" />
-    <path d="M7 0v10M0 5h14" stroke="#C8102E" strokeWidth="1.2" />
-  </svg>
+  // eslint-disable-next-line @next/next/no-img-element
+  <img src="/flag-au.svg" alt="" aria-hidden="true" width={16} height={8} style={{ width: 16, height: 8 }} className="rounded-[1px]" />
 );
 
 const SocialIcon = ({ children, label, href }: { children: React.ReactNode; label: string; href: string }) => (

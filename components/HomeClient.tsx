@@ -30,6 +30,9 @@ export default function HomeClient() {
           el.style.translate = "none";
           el.style.transform = "none";
         });
+        document.querySelectorAll<HTMLElement>(".stat-number").forEach((el) => {
+          el.textContent = el.dataset.target ?? "0";
+        });
         return;
       }
 
@@ -57,6 +60,17 @@ export default function HomeClient() {
         heroTl.fromTo(".hero-trust",   from, to, 0.7);
         heroTl.fromTo(".hero-form",    from, to, 0.5);
         heroTl.fromTo(".hero-stats",   from, to, 0.6);
+
+        heroTl.add(() => {
+          document.querySelectorAll<HTMLElement>(".stat-number").forEach((el) => {
+            const target = parseInt(el.dataset.target ?? "0", 10);
+            const counter = { val: 0 };
+            gsap.to(counter, {
+              val: target, duration: 2, ease: "power2.out",
+              onUpdate() { el.textContent = String(Math.round(counter.val)); },
+            });
+          });
+        }, 1.2);
 
         // Section headers
         ([
@@ -241,16 +255,23 @@ export default function HomeClient() {
 
       </section>
 
-      {/* ── STUDIO FACTS ── */}
+      {/* ── STATS ── */}
       <section className="hero-stats opacity-0 translate-y-5 border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-16 py-5 flex flex-wrap items-center justify-center md:justify-between gap-x-8 gap-y-2 text-sm text-white/60">
-          <span><span className="text-white font-semibold">150+</span> Aussie brands built</span>
-          <span className="hidden md:inline w-1 h-1 rounded-full bg-white/15" aria-hidden="true"></span>
-          <span>Est. 2017, Sydney</span>
-          <span className="hidden md:inline w-1 h-1 rounded-full bg-white/15" aria-hidden="true"></span>
-          <span><span className="text-white font-semibold">98%</span> client retention</span>
-          <span className="hidden md:inline w-1 h-1 rounded-full bg-white/15" aria-hidden="true"></span>
-          <span><span className="text-white font-semibold">3×</span> AGDA award winners</span>
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-16 grid grid-cols-2 md:grid-cols-4">
+          {[
+            { target: "150", suffix: "+", label: "Aussie Brands Built" },
+            { target: "9",   suffix: "+", label: "Years Across ANZ"   },
+            { target: "98",  suffix: "%", label: "Client Retention"   },
+            { target: "3",   suffix: "×", label: "AGDA Award Wins"    },
+          ].map(({ target, suffix, label }, i) => (
+            <div key={label} className={`stat flex flex-col items-center text-center gap-2 py-8 md:py-10 px-6 md:px-10${i % 2 !== 0 ? " border-l border-white/5" : i >= 2 ? " md:border-l" : ""}${i >= 2 ? " border-t border-white/5 md:border-t-0" : ""}`}>
+              <div className="flex items-end justify-center gap-0.5 leading-none">
+                <span className="stat-number text-[2.5rem] md:text-5xl font-black text-white tracking-tight leading-none" data-target={target}>0</span>
+                <span className="text-2xl md:text-3xl font-black text-brand-400 tracking-tight leading-none pb-1">{suffix}</span>
+              </div>
+              <span className="text-[0.65rem] font-bold tracking-[0.15em] uppercase text-white/65">{label}</span>
+            </div>
+          ))}
         </div>
       </section>
 

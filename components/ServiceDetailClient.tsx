@@ -157,23 +157,32 @@ export default function ServiceDetailClient({
             <span className="text-xs font-medium tracking-[0.08em] uppercase text-white/40 mb-6 block">Related work</span>
             <Link
               href={`/work/${relatedWork.slug}`}
-              className="sd-related opacity-0 translate-y-6 group grid md:grid-cols-2 gap-8 items-center rounded-3xl border border-white/5 bg-white/2 hover:border-brand-400/30 hover:bg-brand-400/5 p-8 md:p-12 transition-all duration-300"
+              className={`sd-related opacity-0 translate-y-6 group relative block rounded-3xl overflow-hidden bg-linear-to-br ${relatedWork.bgClass ?? "from-brand-700 via-brand-500 to-brand-400"}`}
+              style={relatedWork.bgStyle}
             >
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-brand-400">{relatedWork.category}</span>
-                <h3 className="text-white font-extrabold text-2xl md:text-3xl tracking-tight mt-3">{relatedWork.client}</h3>
-                <p className="text-white/65 text-base leading-relaxed mt-3 max-w-md">{relatedWork.tagline}</p>
-                <span className="mt-6 inline-flex items-center gap-2 text-brand-400 font-semibold text-sm">
-                  View case study <ArrowRight />
-                </span>
-              </div>
-              <div className="grid grid-cols-2 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/5">
-                {relatedWork.metrics.slice(0, 4).map(({ value, label }) => (
-                  <div key={label} className="bg-brand-ink p-5 flex flex-col gap-1">
-                    <span className="text-2xl font-extrabold text-brand-400 tracking-tight leading-none">{value}</span>
-                    <span className="text-[0.65rem] text-white/45 uppercase tracking-wide mt-1">{label}</span>
+              <div className="aspect-4/3 sm:aspect-16/7 relative">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_60%,rgba(255,255,255,0.1),transparent_55%)]"></div>
+                <div className="absolute inset-0 flex items-center justify-center select-none">
+                  <span className="text-white/10 font-black leading-none tracking-tighter" style={{ fontSize: "clamp(5rem, 16vw, 14rem)" }}>
+                    {relatedWork.initials}
+                  </span>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 md:p-12 bg-linear-to-t from-black/60 to-transparent">
+                  <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                    <div>
+                      <p className="text-brand-300 text-xs font-bold uppercase tracking-[0.15em] mb-2">{relatedWork.client} · {relatedWork.category}</p>
+                      <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight max-w-xl text-balance">{relatedWork.tagline}</h3>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 shrink-0 text-sm text-white/80">
+                      {relatedWork.metrics.slice(0, 2).map(({ value, label }) => (
+                        <span key={label}><span className="text-white font-extrabold">{value}</span> {label.toLowerCase()}</span>
+                      ))}
+                    </div>
                   </div>
-                ))}
+                </div>
+                <span className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 group-hover:bg-brand-400 group-hover:text-brand-700 text-white flex items-center justify-center transition-all duration-300">
+                  <ArrowRight size={16} />
+                </span>
               </div>
             </Link>
           </div>
