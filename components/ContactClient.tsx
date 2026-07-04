@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Mail, Phone, Calendar, Clock, ArrowRight } from "lucide-react";
+import FaqAccordion from "@/components/FaqAccordion";
 
 const selectStyle = {
   backgroundImage: `url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23ffffff60' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`,
@@ -26,36 +27,6 @@ export default function ContactClient() {
     await new Promise(r => setTimeout(r, 900));
     setFormStatus("sent");
   }
-
-  // FAQ accordion: toggle .is-open (CSS animates grid-rows), keep content
-  // mounted through the close so the collapse animates both ways.
-  useEffect(() => {
-    const items = document.querySelectorAll<HTMLDetailsElement>("#faq details.faq-item");
-    const cleanups: Array<() => void> = [];
-    items.forEach((d) => {
-      const summary = d.querySelector("summary");
-      const grid = d.querySelector<HTMLElement>(".faq-grid");
-      if (!summary || !grid) return;
-      const onClick = (e: Event) => {
-        e.preventDefault();
-        if (d.open) {
-          d.classList.remove("is-open");
-          const done = (ev: TransitionEvent) => {
-            if (ev.propertyName !== "grid-template-rows") return;
-            d.open = false;
-            grid.removeEventListener("transitionend", done);
-          };
-          grid.addEventListener("transitionend", done);
-        } else {
-          d.open = true;
-          requestAnimationFrame(() => d.classList.add("is-open"));
-        }
-      };
-      summary.addEventListener("click", onClick);
-      cleanups.push(() => summary.removeEventListener("click", onClick));
-    });
-    return () => cleanups.forEach((fn) => fn());
-  }, []);
 
   useEffect(() => {
     let ctx: ReturnType<typeof import("gsap").gsap.context> | null = null;
@@ -236,9 +207,9 @@ export default function ContactClient() {
                 <span className="w-8 h-8 rounded-lg bg-white/5 group-hover:bg-brand-400/10 flex items-center justify-center transition-colors shrink-0"><EmailIcon /></span>
                 studio@brandmates.com.au
               </a>
-              <a href="tel:+61282345678" className="group flex items-center gap-3 text-white/70 hover:text-brand-400 transition-colors text-sm">
+              <a href="tel:+61426525614" className="group flex items-center gap-3 text-white/70 hover:text-brand-400 transition-colors text-sm">
                 <span className="w-8 h-8 rounded-lg bg-white/5 group-hover:bg-brand-400/10 flex items-center justify-center transition-colors shrink-0"><PhoneIcon /></span>
-                +61 2 8234 5678
+                +61 426 525 614
               </a>
               <div className="pt-3 mt-1 border-t border-white/5 text-white/60 text-xs">Mon – Fri · 9am – 6pm AEST/AEDT</div>
             </div>
@@ -253,49 +224,23 @@ export default function ContactClient() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section id="faq" className="relative w-full py-(--space-section) px-6 sm:px-10 md:px-16 border-t border-white/5">
-        <div className="relative z-10 max-w-3xl mx-auto">
+      <FaqAccordion
+        heading={
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-[-0.03em] leading-[1.05] text-white mb-3">
             Questions, <span className="text-brand-400">answered.</span>
           </h2>
-          <p className="text-white/70 text-base md:text-lg leading-relaxed mb-(--space-head) max-w-xl">
-            The ones we get most often from Aussie founders and CMOs before the first call.
-          </p>
-
-          <div className="divide-y divide-white/10 border-y border-white/10">
-            {[
-              { num: "01", q: "How much does a project cost?", a: <>Most full brand engagements fall between <span className="text-white font-medium">A$95k and A$320k ex-GST</span>, scoped as a fixed fee in AUD. Visual identity&ndash;only projects start around A$55k; full platform work (brand + site + launch film) can go higher. We quote after a 30-minute discovery call, no obligation.</> },
-              { num: "02", q: "What's a typical timeline from kickoff to launch?", a: <>Our default rhythm is <span className="text-white font-medium">12 weeks</span> across Discover &rarr; Define &rarr; Design &rarr; Deploy, planned around EOFY and Christmas shutdown if relevant. Faster sprints (6&ndash;8 weeks) are possible; ASX-listed rebrands and APAC rollouts stretch to 4&ndash;6 months. We lock the schedule before you sign.</> },
-              { num: "03", q: "Do you work with early-stage startups or only enterprise?", a: <>Both. Our sweet spot is <span className="text-white font-medium">Blackbird / Square Peg / AirTree-backed Series A&ndash;C companies</span> and pre-ASX-IPO rebrands, but we take on a small number of seed-stage Aussie founders each year when the category excites us. We don&apos;t work with pre-product startups or personal brands.</> },
-              { num: "04", q: "We already have an in-house design team. How does that work?", a: <>Most of our clients do. We partner on the <span className="text-white font-medium">heavy-lift moments</span>, repositioning, new-state or trans-Tasman launches, rebrands, and build systems your team can run afterward. Shared Figma and Linear from day one; no black boxes.</> },
-              { num: "05", q: "Do you offer retainers or ongoing work?", a: <>Not in the traditional &ldquo;X hours a month&rdquo; sense. After launch we offer a <span className="text-white font-medium">quarterly partnership</span>, scoped around campaigns, new launches, or system expansion. Flat fee, defined deliverables.</> },
-              { num: "06", q: "Who actually owns the work, us or you?", a: <><span className="text-white font-medium">You own everything.</span> IP transfers on final invoice, files, fonts (where licensing permits), source code, the lot. We keep the right to showcase the work in our portfolio unless you ask us not to.</> },
-              { num: "07", q: "How do you handle NDAs and confidentiality?", a: <>Happy to sign a mutual NDA before the first call. We have a <span className="text-white font-medium">standard Australian-law NDA ready</span> (governed by NSW or VIC) that most legal teams approve without edits, or we can redline yours.</> },
-            ].map(({ num, q, a }) => (
-              <details key={num} className="faq-item group py-6 md:py-7">
-                <summary className="flex items-center justify-between gap-6 cursor-pointer list-none">
-                  <div className="flex items-start gap-5">
-                    <span className="text-brand-400 font-bold text-sm mt-0.5 shrink-0 tabular-nums">{num}</span>
-                    <h3 className="text-white font-semibold text-lg md:text-xl leading-snug group-hover:text-brand-300 transition-colors">{q}</h3>
-                  </div>
-                  <span className="faq-chip shrink-0 w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/70 transition-all duration-300">
-                    <span className="relative block w-3.5 h-3.5">
-                      <span className="absolute top-1/2 left-0 right-0 h-[1.75px] bg-current -translate-y-1/2 rounded-full"></span>
-                      <span className="faq-chip-bar absolute left-1/2 top-0 bottom-0 w-[1.75px] bg-current -translate-x-1/2 rounded-full transition-transform duration-300 ease-out"></span>
-                    </span>
-                  </span>
-                </summary>
-                <div className="faq-grid">
-                  <div>
-                    <div className="pl-10 pr-4 sm:pr-12 pt-4 text-white/80 text-sm md:text-base leading-relaxed">{a}</div>
-                  </div>
-                </div>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
+        }
+        intro="The ones we get most often from Aussie founders and CMOs before the first call."
+        items={[
+          { q: "How much does a project cost?", a: <>Most full brand engagements fall between <span className="text-white font-medium">A$95k and A$320k ex-GST</span>, scoped as a fixed fee in AUD. Visual identity&ndash;only projects start around A$55k; full platform work (brand + site + launch film) can go higher. We quote after a 30-minute discovery call, no obligation.</> },
+          { q: "What's a typical timeline from kickoff to launch?", a: <>Our default rhythm is <span className="text-white font-medium">12 weeks</span> across Discover &rarr; Define &rarr; Design &rarr; Deploy, planned around EOFY and Christmas shutdown if relevant. Faster sprints (6&ndash;8 weeks) are possible; ASX-listed rebrands and APAC rollouts stretch to 4&ndash;6 months. We lock the schedule before you sign.</> },
+          { q: "Do you work with early-stage startups or only enterprise?", a: <>Both. Our sweet spot is <span className="text-white font-medium">Blackbird / Square Peg / AirTree-backed Series A&ndash;C companies</span> and pre-ASX-IPO rebrands, but we take on a small number of seed-stage Aussie founders each year when the category excites us. We don&apos;t work with pre-product startups or personal brands.</> },
+          { q: "We already have an in-house design team. How does that work?", a: <>Most of our clients do. We partner on the <span className="text-white font-medium">heavy-lift moments</span>, repositioning, new-state or trans-Tasman launches, rebrands, and build systems your team can run afterward. Shared Figma and Linear from day one; no black boxes.</> },
+          { q: "Do you offer retainers or ongoing work?", a: <>Not in the traditional &ldquo;X hours a month&rdquo; sense. After launch we offer a <span className="text-white font-medium">quarterly partnership</span>, scoped around campaigns, new launches, or system expansion. Flat fee, defined deliverables.</> },
+          { q: "Who actually owns the work, us or you?", a: <><span className="text-white font-medium">You own everything.</span> IP transfers on final invoice, files, fonts (where licensing permits), source code, the lot. We keep the right to showcase the work in our portfolio unless you ask us not to.</> },
+          { q: "How do you handle NDAs and confidentiality?", a: <>Happy to sign a mutual NDA before the first call. We have a <span className="text-white font-medium">standard Australian-law NDA ready</span> (governed by NSW or VIC) that most legal teams approve without edits, or we can redline yours.</> },
+        ]}
+      />
     </>
   );
 }

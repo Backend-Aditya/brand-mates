@@ -11,6 +11,7 @@ export default function Nav() {
   const isMenuOpen = useRef(false);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
   const navRef = useRef<HTMLElement>(null);
+  const closeMenuRef = useRef<(() => void) | null>(null);
 
   // Hide on scroll down, show on scroll up or when stopped
   useEffect(() => {
@@ -138,7 +139,7 @@ export default function Nav() {
 
       const mainContent = document.getElementById("main-content");
 
-      function closeMenu() {
+      function closeMenu(focusToggler = true) {
         tl.reverse();
         unlockScroll();
         isMenuOpen.current = false;
@@ -146,8 +147,9 @@ export default function Nav() {
         navToggler!.setAttribute("aria-expanded", "false");
         document.getElementById("nav-menu")?.setAttribute("aria-hidden", "true");
         if (mainContent) mainContent.removeAttribute("inert");
-        navToggler!.focus();
+        if (focusToggler) navToggler!.focus();
       }
+      closeMenuRef.current = () => { if (isMenuOpen.current) closeMenu(false); };
 
       function handleClick() {
         if (!isMenuOpen.current) {
@@ -175,6 +177,7 @@ export default function Nav() {
         navToggler.removeEventListener("click", handleClick);
         document.removeEventListener("keydown", handleKeydown);
         tl.kill();
+        closeMenuRef.current = null;
       };
     }
 
@@ -235,7 +238,7 @@ export default function Nav() {
               <div key={href} className="overflow-hidden">
                 <Link
                   href={href}
-                  onClick={() => setActiveHref(href)}
+                  onClick={() => { setActiveHref(href); closeMenuRef.current?.(); }}
                   className={`link-underline relative block text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-2 transition-colors duration-200 ease-out ${(activeHref ?? pathname) === href ? "text-brand-400" : "text-white"}`}
                 >
                   {label}

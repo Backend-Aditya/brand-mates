@@ -262,22 +262,22 @@ export default function HomeClient() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5 border border-white/5 rounded-2xl overflow-hidden">
             {[
               {
-                href: "/services#web", num: "01",
+                href: "/services/web-design-development", num: "01",
                 title: "Web Design & Development",
                 desc: "Fast, considered sites and product experiences built to load, convert, and hold up under real Aussie traffic.",
               },
               {
-                href: "/services#social", num: "02",
+                href: "/services/social-media", num: "02",
                 title: "Social Media",
                 desc: "Feeds, stories, and community that grow genuine audiences, run by Aussies who know the local calendar.",
               },
               {
-                href: "/services#ads", num: "03",
+                href: "/services/paid-ads", num: "03",
                 title: "Paid Ads",
                 desc: "Meta, Google, TikTok, fortnightly reporting, nothing left untracked, no offshore bidding teams.",
               },
               {
-                href: "/services#content", num: "04",
+                href: "/services/content-creation", num: "04",
                 title: "Content Creation",
                 desc: "Photo, video, and copy shot on location across Australia, delivered ready to publish, no stock photos.",
               },
@@ -625,7 +625,7 @@ export default function HomeClient() {
               </span>
             </div>
             <div className="flex items-center gap-4 text-sm">
-              <a href="tel:+61282345678" className="text-white/70 hover:text-brand-300 transition-colors">+61 2 8234 5678</a>
+              <a href="tel:+61426525614" className="text-white/70 hover:text-brand-300 transition-colors">+61 426 525 614</a>
               <span className="hidden sm:block w-px h-4 bg-white/10"></span>
               <span className="text-white/65">Mon–Fri · 9–6 AEST</span>
             </div>

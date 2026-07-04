@@ -59,33 +59,48 @@ export default function SmoothScroll() {
     }
   }, [pathname]);
 
-  // Same-page #hash links need manual handling for two reasons:
-  // 1. Next's <Link> only pushes a new URL when the pathname is unchanged
-  //    - it doesn't scroll and doesn't fire "hashchange".
+  // Same-pathname link clicks need manual handling for two reasons:
+  // 1. Next's <Link> only pushes a new URL when the pathname changes -
+  //    if you're on /services#social and click a plain /services link,
+  //    the pathname is identical so the router does nothing and the
+  //    stale #social hash is left sitting in the address bar forever.
   // 2. Plain <a href="#id"> anchors DO jump natively, but that instant
   //    jump fights Lenis's virtual scroll position and looks broken.
-  // So: intercept every #hash click ourselves and drive it through Lenis.
+  // So: intercept every same-pathname click ourselves. With a hash,
+  // scroll to that section through Lenis. Without one, clear any
+  // leftover hash and scroll to top.
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
       if (!(e.target instanceof Element)) return;
-      const anchor = e.target.closest("a[href*='#']") as HTMLAnchorElement | null;
+      const anchor = e.target.closest("a[href]") as HTMLAnchorElement | null;
       if (!anchor) return;
 
       const url = new URL(anchor.href, window.location.href);
-      if (url.pathname !== window.location.pathname || !url.hash) return;
+      if (url.pathname !== window.location.pathname) return;
 
-      const target = document.querySelector(url.hash);
-      if (!target) return;
+      if (url.hash) {
+        const target = document.querySelector(url.hash);
+        if (!target) return;
 
-      e.preventDefault();
-      if (window.location.hash !== url.hash) {
-        history.pushState(null, "", url.hash);
-      }
+        e.preventDefault();
+        if (window.location.hash !== url.hash) {
+          history.pushState(null, "", url.hash);
+        }
 
-      if (lenisRef.current) {
-        lenisRef.current.scrollTo(target);
-      } else {
-        target.scrollIntoView({ behavior: "smooth" });
+        if (lenisRef.current) {
+          lenisRef.current.scrollTo(target);
+        } else {
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+      } else if (window.location.hash) {
+        e.preventDefault();
+        history.pushState(null, "", url.pathname + url.search);
+
+        if (lenisRef.current) {
+          lenisRef.current.scrollTo(0);
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
       }
     };
 

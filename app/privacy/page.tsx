@@ -23,7 +23,7 @@ export default function PrivacyPage() {
           <p>
             BrandMates Pty Ltd (ABN 88 612 334 901) is a brand studio based at Merrylands NSW 2160, Australia.
             For any privacy question, contact us at <a href="mailto:studio@brandmates.com.au">studio@brandmates.com.au</a> or
-            call <a href="tel:+61282345678">+61 2 8234 5678</a>.
+            call <a href="tel:+61426525614">+61 426 525 614</a>.
           </p>
         </div>
 

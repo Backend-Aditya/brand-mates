@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { ArrowRight as ArrowRightIcon } from "lucide-react";
 import { FaLinkedin as LinkedInIcon } from "react-icons/fa6";
-import { Shield, RefreshCw, Users } from "lucide-react";
 
 const ArrowRight = ({ size = 14 }: { size?: number }) => (
   <ArrowRightIcon size={size} className="transition-transform group-hover/btn:translate-x-1" />
@@ -80,10 +79,6 @@ export default function StudioClient() {
         });
 
         gsap.fromTo(".st-careers-head", from, { ...to, scrollTrigger: { trigger: ".st-careers-head", ...ST } });
-        ScrollTrigger.batch(".st-role", {
-          onEnter: (els) => gsap.fromTo(els, from, { ...to, stagger: 0.07 }),
-          ...ST,
-        });
 
         ScrollTrigger.refresh();
       });
@@ -114,28 +109,19 @@ export default function StudioClient() {
       {/* VALUES */}
       <section className="px-6 sm:px-10 md:px-16 py-(--space-section) border-t border-white/5">
         <div className="max-w-7xl mx-auto">
-          <div className="st-values-head opacity-0 translate-y-4 mb-(--space-head)">
-            <span className="text-xs font-medium tracking-[0.08em] uppercase text-brand-400">How we work</span>
-          </div>
-          <div className="grid sm:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/5">
-            <div className="st-value opacity-0 translate-y-6 bg-brand-ink p-8 md:p-10">
-              <div className="w-10 h-10 rounded-lg bg-brand-400/10 border border-brand-400/20 flex items-center justify-center text-brand-400 mb-6">
-                <Shield size={18} strokeWidth={1.8} />
-              </div>
+          <h2 className="st-values-head opacity-0 translate-y-4 text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-(--space-head) max-w-lg text-balance">
+            Three things that don&apos;t change project to project.
+          </h2>
+          <div className="grid sm:grid-cols-3 divide-y divide-white/10 sm:divide-y-0 sm:divide-x">
+            <div className="st-value opacity-0 translate-y-6 py-8 sm:py-0 sm:px-8 sm:first:pl-0 sm:last:pr-0">
               <h3 className="text-white font-bold text-xl mb-3">Honest first</h3>
               <p className="text-white/55 text-sm leading-relaxed">We&apos;ll tell you when an idea won&apos;t work, even if it costs us the job. Our reputation outlasts any single project.</p>
             </div>
-            <div className="st-value opacity-0 translate-y-6 bg-brand-ink p-8 md:p-10">
-              <div className="w-10 h-10 rounded-lg bg-brand-400/10 border border-brand-400/20 flex items-center justify-center text-brand-400 mb-6">
-                <RefreshCw size={18} strokeWidth={1.8} />
-              </div>
+            <div className="st-value opacity-0 translate-y-6 py-8 sm:py-0 sm:px-8 sm:first:pl-0 sm:last:pr-0">
               <h3 className="text-white font-bold text-xl mb-3">Restlessly curious</h3>
               <p className="text-white/55 text-sm leading-relaxed">The Australian market moves fast. We stay ahead of platform changes, cultural shifts, and what&apos;s working in market, not in a New York case study.</p>
             </div>
-            <div className="st-value opacity-0 translate-y-6 bg-brand-ink p-8 md:p-10">
-              <div className="w-10 h-10 rounded-lg bg-brand-400/10 border border-brand-400/20 flex items-center justify-center text-brand-400 mb-6">
-                <Users size={18} strokeWidth={1.8} />
-              </div>
+            <div className="st-value opacity-0 translate-y-6 py-8 sm:py-0 sm:px-8 sm:first:pl-0 sm:last:pr-0">
               <h3 className="text-white font-bold text-xl mb-3">Genuinely local</h3>
               <p className="text-white/55 text-sm leading-relaxed">We live, eat, and commute in the same cities as your customers. That local understanding isn&apos;t a differentiator, it&apos;s a prerequisite.</p>
             </div>
@@ -182,44 +168,25 @@ export default function StudioClient() {
         </div>
       </section>
 
-      {/* CAREERS */}
-      <section id="careers" className="px-6 sm:px-10 md:px-16 py-(--space-section) border-t border-white/5">
+      {/* CAREERS TEASER */}
+      <section className="px-6 sm:px-10 md:px-16 py-(--space-section) border-t border-white/5">
         <div className="max-w-7xl mx-auto">
-          <div className="st-careers-head opacity-0 translate-y-4 mb-(--space-head)">
-            <div className="flex items-center gap-2.5 mb-4">
-              <span className="w-6 h-px bg-brand-400"></span>
-              <span className="text-xs font-medium tracking-[0.08em] uppercase text-brand-400">Open Roles · 2 positions</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">Come work with us.</h2>
-            <p className="text-white/50 text-base leading-relaxed mt-4 max-w-xl">We hire experienced people who are tired of big-agency politics and want to work on fewer, more considered Australian brands.</p>
-          </div>
-          <div className="flex flex-col gap-4">
-            <div className="st-role opacity-0 translate-y-6 group flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 md:p-8 rounded-2xl border border-white/5 bg-white/2 hover:border-brand-400/30 hover:bg-brand-400/5 transition-all duration-300">
-              <div>
-                <h3 className="text-white font-bold text-lg">Senior Web Developer</h3>
-                <div className="flex flex-wrap gap-2 mt-2">
-                  <span className="px-2.5 py-1 rounded-full bg-brand-400/10 text-brand-400 text-xs font-medium">Full-time</span>
-                  <span className="px-2.5 py-1 rounded-full bg-white/5 text-white/60 text-xs font-medium">Sydney or Remote (AU)</span>
-                  <span className="px-2.5 py-1 rounded-full bg-white/5 text-white/60 text-xs font-medium">Next.js / React</span>
-                </div>
+          <div className="st-careers-head opacity-0 translate-y-4 relative rounded-3xl overflow-hidden bg-brand-700 border border-white/10 p-10 md:p-16 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+            <div className="relative">
+              <div className="flex items-center gap-2.5 mb-4">
+                <span className="w-6 h-px bg-brand-400"></span>
+                <span className="text-xs font-medium tracking-[0.08em] uppercase text-brand-400">Open Roles · 2 positions</span>
               </div>
-              <Link href="/contact" className="group/btn shrink-0 inline-flex items-center gap-2 text-sm font-semibold text-white/70 hover:text-brand-400 transition-colors">
-                Apply now <ArrowRight />
-              </Link>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white">Come work with us.</h2>
+              <p className="text-white/60 text-base leading-relaxed mt-3 max-w-md">We hire experienced people who are tired of big-agency politics and want to work on fewer, more considered Australian brands.</p>
             </div>
-            <div className="st-role opacity-0 translate-y-6 group flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 md:p-8 rounded-2xl border border-white/5 bg-white/2 hover:border-brand-400/30 hover:bg-brand-400/5 transition-all duration-300">
-              <div>
-                <h3 className="text-white font-bold text-lg">Social Media Manager</h3>
-                <div className="flex flex-wrap gap-2 mt-2">
-                  <span className="px-2.5 py-1 rounded-full bg-brand-400/10 text-brand-400 text-xs font-medium">Full-time</span>
-                  <span className="px-2.5 py-1 rounded-full bg-white/5 text-white/60 text-xs font-medium">Sydney</span>
-                  <span className="px-2.5 py-1 rounded-full bg-white/5 text-white/60 text-xs font-medium">2+ years exp.</span>
-                </div>
-              </div>
-              <Link href="/contact" className="group/btn shrink-0 inline-flex items-center gap-2 text-sm font-semibold text-white/70 hover:text-brand-400 transition-colors">
-                Apply now <ArrowRight />
-              </Link>
-            </div>
+            <Link
+              href="/careers"
+              className="relative group inline-flex items-center gap-2.5 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 font-bold text-sm px-8 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-(--shadow-brand-lg) shrink-0"
+            >
+              View open roles
+              <ArrowRight size={16} />
+            </Link>
           </div>
         </div>
       </section>

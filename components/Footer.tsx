@@ -82,7 +82,7 @@ export default function Footer() {
                 { href: "/#process", label: "Process" },
                 { href: "/studio", label: "Meet the Mates" },
                 { href: "/journal", label: "Journal" },
-                { href: "/studio#careers", label: "Careers", badge: "+2" },
+                { href: "/careers", label: "Careers", badge: "+2" },
               ].map(({ href, label, badge }) => (
                 <li key={href}>
                   <Link href={href} className="flex items-center min-h-11 sm:min-h-0 text-white/75 hover:text-brand-300 transition-colors">
@@ -98,10 +98,10 @@ export default function Footer() {
             <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/60">Services</span>
             <ul className="flex flex-col gap-3 text-sm">
               {[
-                { href: "/services#web", label: "Web Design & Development" },
-                { href: "/services#social", label: "Social Media" },
-                { href: "/services#ads", label: "Paid Ads" },
-                { href: "/services#content", label: "Content Creation" },
+                { href: "/services/web-design-development", label: "Web Design & Development" },
+                { href: "/services/social-media", label: "Social Media" },
+                { href: "/services/paid-ads", label: "Paid Ads" },
+                { href: "/services/content-creation", label: "Content Creation" },
               ].map(({ href, label }) => (
                 <li key={href}>
                   <Link href={href} className="flex items-center min-h-11 sm:min-h-0 text-white/75 hover:text-brand-300 transition-colors">{label}</Link>
@@ -124,7 +124,7 @@ export default function Footer() {
                 <div className="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-brand-300 mb-1">Sydney</div>
                 <address className="not-italic text-white/72 text-xs leading-relaxed">
                   Merrylands NSW 2160<br />
-                  <a href="tel:+61282345678" className="text-white/75 hover:text-brand-300 transition-colors">+61 2 8234 5678</a>
+                  <a href="tel:+61426525614" className="text-white/75 hover:text-brand-300 transition-colors">+61 426 525 614</a>
                 </address>
               </div>
             </div>

@@ -49,7 +49,7 @@ export default function AccessibilityPage() {
           <h2>4. Tell us</h2>
           <p>
             Email <a href="mailto:studio@brandmates.com.au">studio@brandmates.com.au</a> or call{" "}
-            <a href="tel:+61282345678">+61 2 8234 5678</a> (Mon-Fri, 9-6 AEST) and describe the issue and the page it&apos;s
+            <a href="tel:+61426525614">+61 426 525 614</a> (Mon-Fri, 9-6 AEST) and describe the issue and the page it&apos;s
             on. We&apos;ll get back to you within one business day.
           </p>
         </div>
