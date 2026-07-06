@@ -23,13 +23,13 @@ export async function generateMetadata({
     openGraph: {
       title: article.title,
       description: article.excerpt,
-      url: `https://brandmates.com.au/journal/${slug}`,
+      url: `https://brandmates.au/journal/${slug}`,
       siteName: "BrandMates",
       locale: "en_AU",
       type: "article",
     },
     twitter: { card: "summary_large_image", title: article.title, description: article.excerpt },
-    alternates: { canonical: `https://brandmates.com.au/journal/${slug}` },
+    alternates: { canonical: `https://brandmates.au/journal/${slug}` },
   };
 }
 

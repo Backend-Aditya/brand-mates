@@ -9,13 +9,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "BrandMates - Australia's Brand Studio. We Build Belief.",
     description: "From Merrylands seed rounds to ASX-listed rebrands, the studio Australian founders and CMOs call when the brand needs to work harder than it does.",
-    url: "https://brandmates.com.au",
+    url: "https://brandmates.au",
     siteName: "BrandMates",
     locale: "en_AU",
     type: "website",
   },
   twitter: { card: "summary_large_image", title: "BrandMates - Australia's Brand Studio", description: "From Merrylands seed rounds to ASX-listed rebrands." },
-  alternates: { canonical: "https://brandmates.com.au" },
+  alternates: { canonical: "https://brandmates.au" },
 };
 
 export default function Home() {

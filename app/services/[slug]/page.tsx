@@ -24,13 +24,13 @@ export async function generateMetadata({
     openGraph: {
       title: service.metaTitle,
       description: service.metaDescription,
-      url: `https://brandmates.com.au/services/${slug}`,
+      url: `https://brandmates.au/services/${slug}`,
       siteName: "BrandMates",
       locale: "en_AU",
       type: "website",
     },
     twitter: { card: "summary_large_image", title: service.metaTitle, description: service.metaDescription },
-    alternates: { canonical: `https://brandmates.com.au/services/${slug}` },
+    alternates: { canonical: `https://brandmates.au/services/${slug}` },
   };
 }
 
@@ -56,10 +56,10 @@ export default async function ServiceDetailPage({
         provider: {
           "@type": "Organization",
           name: "BrandMates",
-          url: "https://brandmates.com.au",
+          url: "https://brandmates.au",
         },
         areaServed: { "@type": "Country", name: "Australia" },
-        url: `https://brandmates.com.au/services/${slug}`,
+        url: `https://brandmates.au/services/${slug}`,
       },
       {
         "@type": "FAQPage",
@@ -72,8 +72,8 @@ export default async function ServiceDetailPage({
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Services", item: "https://brandmates.com.au/services" },
-          { "@type": "ListItem", position: 2, name: service.eyebrow, item: `https://brandmates.com.au/services/${slug}` },
+          { "@type": "ListItem", position: 1, name: "Services", item: "https://brandmates.au/services" },
+          { "@type": "ListItem", position: 2, name: service.eyebrow, item: `https://brandmates.au/services/${slug}` },
         ],
       },
     ],

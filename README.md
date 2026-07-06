@@ -172,7 +172,7 @@ Level 3, 56 Foveaux St, Surry Hills NSW 2010
 Suite 12, 112 Brunswick St, Fitzroy VIC 3065
 +61 3 9432 1234
 
-studio@brandmates.com.au — Mon–Fri · 9am–6pm AEST/AEDT
+studio@brandmates.au — Mon–Fri · 9am–6pm AEST/AEDT
 
 ---
 

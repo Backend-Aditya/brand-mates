@@ -6,7 +6,7 @@ import FooterReveal from "@/components/FooterReveal";
 export const metadata: Metadata = {
   title: "Terms of Use - BrandMates",
   description: "The terms governing use of the BrandMates website.",
-  alternates: { canonical: "https://brandmates.com.au/terms" },
+  alternates: { canonical: "https://brandmates.au/terms" },
 };
 
 export default function TermsPage() {
@@ -80,7 +80,7 @@ export default function TermsPage() {
           <h2>8. Changes</h2>
           <p>
             We may update these terms from time to time. The &ldquo;last updated&rdquo; date above reflects the most recent
-            revision. Questions: <a href="mailto:studio@brandmates.com.au">studio@brandmates.com.au</a>.
+            revision. Questions: <a href="mailto:studio@brandmates.au">studio@brandmates.au</a>.
           </p>
         </div>
       </LegalLayout>

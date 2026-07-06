@@ -6,7 +6,7 @@ import FooterReveal from "@/components/FooterReveal";
 export const metadata: Metadata = {
   title: "Privacy Policy - BrandMates",
   description: "How BrandMates collects, uses, and protects your personal information.",
-  alternates: { canonical: "https://brandmates.com.au/privacy" },
+  alternates: { canonical: "https://brandmates.au/privacy" },
 };
 
 export default function PrivacyPage() {
@@ -22,7 +22,7 @@ export default function PrivacyPage() {
           <h2>1. Who we are</h2>
           <p>
             BrandMates Pty Ltd (ABN 88 612 334 901) is a brand studio based at Merrylands NSW 2160, Australia.
-            For any privacy question, contact us at <a href="mailto:studio@brandmates.com.au">studio@brandmates.com.au</a> or
+            For any privacy question, contact us at <a href="mailto:studio@brandmates.au">studio@brandmates.au</a> or
             call <a href="tel:+61426525614">+61 426 525 614</a>.
           </p>
         </div>
@@ -80,7 +80,7 @@ export default function PrivacyPage() {
           <p>
             Under the Australian Privacy Act 1988 (Cth) and the Australian Privacy Principles, you can ask us what personal
             information we hold about you, request a correction, or ask us to delete it. Email{" "}
-            <a href="mailto:studio@brandmates.com.au">studio@brandmates.com.au</a> and we&apos;ll respond within a
+            <a href="mailto:studio@brandmates.au">studio@brandmates.au</a> and we&apos;ll respond within a
             reasonable time.
           </p>
         </div>

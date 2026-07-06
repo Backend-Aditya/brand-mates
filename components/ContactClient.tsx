@@ -193,7 +193,7 @@ export default function ContactClient() {
                   <div className="flex items-center gap-2"><CalendarIcon /><span>Next available: Wed 8 Jul 10:00 AEST</span></div>
                   <div className="flex items-center gap-2"><ClockIcon /><span>30 minutes via Google Meet</span></div>
                 </div>
-                <a href="mailto:studio@brandmates.com.au?subject=Discovery%20call%20booking" className="group inline-flex items-center justify-center gap-1.5 rounded-full bg-brand-700 text-brand-300 hover:bg-brand-ink font-bold text-sm py-3 w-full transition-colors">
+                <a href="mailto:studio@brandmates.au?subject=Discovery%20call%20booking" className="group inline-flex items-center justify-center gap-1.5 rounded-full bg-brand-700 text-brand-300 hover:bg-brand-ink font-bold text-sm py-3 w-full transition-colors">
                   Book this slot
                   <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                 </a>
@@ -203,9 +203,9 @@ export default function ContactClient() {
             {/* Direct contact */}
             <div className="rounded-2xl border border-white/5 bg-white/2 p-6 flex flex-col gap-4">
               <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/40">Or reach us directly</p>
-              <a href="mailto:studio@brandmates.com.au" className="group flex items-center gap-3 text-white/70 hover:text-brand-400 transition-colors text-sm">
+              <a href="mailto:studio@brandmates.au" className="group flex items-center gap-3 text-white/70 hover:text-brand-400 transition-colors text-sm">
                 <span className="w-8 h-8 rounded-lg bg-white/5 group-hover:bg-brand-400/10 flex items-center justify-center transition-colors shrink-0"><EmailIcon /></span>
-                studio@brandmates.com.au
+                studio@brandmates.au
               </a>
               <a href="tel:+61426525614" className="group flex items-center gap-3 text-white/70 hover:text-brand-400 transition-colors text-sm">
                 <span className="w-8 h-8 rounded-lg bg-white/5 group-hover:bg-brand-400/10 flex items-center justify-center transition-colors shrink-0"><PhoneIcon /></span>
