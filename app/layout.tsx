@@ -3,6 +3,7 @@ import { Onest } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import SmoothScroll from "@/components/SmoothScroll";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const onest = Onest({
   subsets: ["latin"],
@@ -34,6 +35,7 @@ export default function RootLayout({
         <SmoothScroll />
         <Nav />
         <main id="main-content">{children}</main>
+        <SpeedInsights />
       </body>
     </html>
   );
