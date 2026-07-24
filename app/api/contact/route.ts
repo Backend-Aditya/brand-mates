@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { sendMail } from "@/lib/mailer";
 import { isRateLimited } from "@/lib/rateLimit";
 import { looksLikeBot } from "@/lib/botCheck";
+import ContactAdminEmail from "@/emails/ContactAdminEmail";
+import ContactAutoReplyEmail from "@/emails/ContactAutoReplyEmail";
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
@@ -40,32 +42,13 @@ export async function POST(req: NextRequest) {
       to,
       replyTo: email,
       subject: `New enquiry from ${name}`,
-      text: [
-        `Name: ${name}`,
-        `Email: ${email}`,
-        company ? `Company: ${company}` : null,
-        website ? `Website: ${website}` : null,
-        service ? `Service: ${service}` : null,
-        budget ? `Budget: ${budget}` : null,
-        "",
-        "Message:",
-        message,
-      ].filter(Boolean).join("\n"),
+      template: ContactAdminEmail({ name, email, company, website, service, budget, message }),
     });
 
     sendMail({
       to: email,
       subject: "We've got your enquiry — BrandMates",
-      text: [
-        `Hi ${name},`,
-        "",
-        "Thanks for reaching out to BrandMates. We've received your enquiry and will reply within 1 business day (AEST).",
-        "",
-        "If it's urgent, call us on +61 426 525 614.",
-        "",
-        "— The BrandMates team",
-        "https://www.brandmates.au",
-      ].join("\n"),
+      template: ContactAutoReplyEmail({ name }),
     }).catch((err) => console.error("Contact auto-reply failed:", err));
 
     return NextResponse.json({ ok: true });

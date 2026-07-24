@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { sendMail } from "@/lib/mailer";
 import { isRateLimited } from "@/lib/rateLimit";
 import { looksLikeBot } from "@/lib/botCheck";
+import SubscribeAdminEmail from "@/emails/SubscribeAdminEmail";
+import SubscribeAutoReplyEmail from "@/emails/SubscribeAutoReplyEmail";
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
@@ -36,22 +38,13 @@ export async function POST(req: NextRequest) {
       to,
       replyTo: email,
       subject: `New newsletter subscriber${source ? ` (${source})` : ""}`,
-      text: `Email: ${email}\nSource: ${source ?? "unknown"}`,
+      template: SubscribeAdminEmail({ email, source }),
     });
 
     sendMail({
       to: email,
       subject: "You're on the list — BrandMates Studio Dispatch",
-      text: [
-        "Thanks for subscribing to the Studio Dispatch.",
-        "",
-        "One thoughtful email a month, what's working in AU digital marketing right now. No filler, no agency self-promotion.",
-        "",
-        "First dispatch lands early next month.",
-        "",
-        "— The BrandMates team",
-        "https://www.brandmates.au",
-      ].join("\n"),
+      template: SubscribeAutoReplyEmail(),
     }).catch((err) => console.error("Subscribe auto-reply failed:", err));
 
     return NextResponse.json({ ok: true });

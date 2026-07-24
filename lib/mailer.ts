@@ -1,4 +1,6 @@
 import nodemailer from "nodemailer";
+import { render } from "@react-email/render";
+import type { ReactElement } from "react";
 
 let transporter: nodemailer.Transporter | null = null;
 
@@ -20,13 +22,22 @@ function getTransporter() {
   return transporter;
 }
 
-export async function sendMail(opts: { to: string; subject: string; text: string; replyTo?: string }) {
+export async function sendMail(opts: {
+  to: string;
+  subject: string;
+  template: ReactElement;
+  replyTo?: string;
+}) {
   const t = getTransporter();
+  const html = await render(opts.template);
+  const text = await render(opts.template, { plainText: true });
+
   await t.sendMail({
     from: `"BrandMates Website" <${process.env.SMTP_USER}>`,
     to: opts.to,
     replyTo: opts.replyTo,
     subject: opts.subject,
-    text: opts.text,
+    html,
+    text,
   });
 }
