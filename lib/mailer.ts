@@ -17,6 +17,9 @@ function getTransporter() {
     port: Number(SMTP_PORT),
     secure: Number(SMTP_PORT) === 465,
     auth: { user: SMTP_USER, pass: SMTP_PASS },
+    pool: true,
+    maxConnections: 3,
+    maxMessages: 50,
   });
 
   return transporter;

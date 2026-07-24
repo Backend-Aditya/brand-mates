@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { after } from "next/server";
 import { sendMail } from "@/lib/mailer";
 import { isRateLimited } from "@/lib/rateLimit";
 import { looksLikeBot } from "@/lib/botCheck";
@@ -33,23 +34,26 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Newsletter signup is not configured." }, { status: 500 });
   }
 
-  try {
-    await sendMail({
-      to,
-      replyTo: email,
-      subject: `New newsletter subscriber${source ? ` (${source})` : ""}`,
-      template: SubscribeAdminEmail({ email, source }),
+  // Send both emails after the response is flushed — see app/api/contact/route.ts for why.
+  after(async () => {
+    const results = await Promise.allSettled([
+      sendMail({
+        to,
+        replyTo: email,
+        subject: `New newsletter subscriber${source ? ` (${source})` : ""}`,
+        template: SubscribeAdminEmail({ email, source }),
+      }),
+      sendMail({
+        to: email,
+        subject: "You're on the list — BrandMates Studio Dispatch",
+        template: SubscribeAutoReplyEmail(),
+      }),
+    ]);
+
+    results.forEach((r) => {
+      if (r.status === "rejected") console.error("Subscribe mail send failed:", r.reason);
     });
+  });
 
-    sendMail({
-      to: email,
-      subject: "You're on the list — BrandMates Studio Dispatch",
-      template: SubscribeAutoReplyEmail(),
-    }).catch((err) => console.error("Subscribe auto-reply failed:", err));
-
-    return NextResponse.json({ ok: true });
-  } catch (err) {
-    console.error("Subscribe form send failed:", err);
-    return NextResponse.json({ error: "Could not subscribe right now. Please try again later." }, { status: 500 });
-  }
+  return NextResponse.json({ ok: true });
 }

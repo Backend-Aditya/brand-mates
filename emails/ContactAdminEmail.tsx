@@ -42,7 +42,7 @@ export default function ContactAdminEmail({
       <Field label="Service" value={service} />
       <Field label="Budget" value={budget} />
 
-      <Hr style={{ borderColor: "#e5e7eb", margin: "8px 0 16px" }} />
+      <Hr style={{ borderColor: "rgba(255,255,255,0.08)", margin: "8px 0 16px" }} />
 
       <Text style={emailStyles.label}>Message</Text>
       <Text style={emailStyles.value}>{message}</Text>

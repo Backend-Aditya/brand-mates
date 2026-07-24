@@ -14,7 +14,7 @@ export default function ContactAutoReplyEmail({ name }: ContactAutoReplyEmailPro
       </Text>
       <Text style={emailStyles.paragraph}>
         If it&apos;s urgent, call us on{" "}
-        <a href="tel:+61426525614" style={{ color: "#0a1733" }}>
+        <a href="tel:+61426525614" style={{ color: "#d4af37" }}>
           +61 426 525 614
         </a>.
       </Text>

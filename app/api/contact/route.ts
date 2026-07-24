@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { after } from "next/server";
 import { sendMail } from "@/lib/mailer";
 import { isRateLimited } from "@/lib/rateLimit";
 import { looksLikeBot } from "@/lib/botCheck";
@@ -37,23 +38,28 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Contact form is not configured." }, { status: 500 });
   }
 
-  try {
-    await sendMail({
-      to,
-      replyTo: email,
-      subject: `New enquiry from ${name}`,
-      template: ContactAdminEmail({ name, email, company, website, service, budget, message }),
+  // Send both emails after the response is flushed — the platform (Vercel's
+  // waitUntil, via Next's `after`) keeps the function alive until they finish,
+  // so the form returns instantly without dropping the auto-reply mid-send.
+  after(async () => {
+    const results = await Promise.allSettled([
+      sendMail({
+        to,
+        replyTo: email,
+        subject: `New enquiry from ${name}`,
+        template: ContactAdminEmail({ name, email, company, website, service, budget, message }),
+      }),
+      sendMail({
+        to: email,
+        subject: "We've got your enquiry — BrandMates",
+        template: ContactAutoReplyEmail({ name }),
+      }),
+    ]);
+
+    results.forEach((r) => {
+      if (r.status === "rejected") console.error("Contact mail send failed:", r.reason);
     });
+  });
 
-    sendMail({
-      to: email,
-      subject: "We've got your enquiry — BrandMates",
-      template: ContactAutoReplyEmail({ name }),
-    }).catch((err) => console.error("Contact auto-reply failed:", err));
-
-    return NextResponse.json({ ok: true });
-  } catch (err) {
-    console.error("Contact form send failed:", err);
-    return NextResponse.json({ error: "Could not send your enquiry. Please email us directly." }, { status: 500 });
-  }
+  return NextResponse.json({ ok: true });
 }
