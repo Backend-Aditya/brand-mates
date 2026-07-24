@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/* Clip at the root, not just body — browser extensions (e.g. Grammarly) inject
+   elements as direct children of <html>, outside body's own overflow-x rule,
+   so body alone can't contain them. */
+html {
+  overflow-x: hidden;
+}
+
 @theme {
   /* Trust + professionalism: navy-black body, slate-navy surfaces,
      deep sapphire gradients, bright azure accent, white text. */
