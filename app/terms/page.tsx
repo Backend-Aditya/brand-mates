@@ -80,7 +80,7 @@ export default function TermsPage() {
           <h2>8. Changes</h2>
           <p>
             We may update these terms from time to time. The &ldquo;last updated&rdquo; date above reflects the most recent
-            revision. Questions: <a href="mailto:studio@brandmates.au">studio@brandmates.au</a>.
+            revision. Questions: <a href="mailto:info@brandmates.au">info@brandmates.au</a>.
           </p>
         </div>
       </LegalLayout>

@@ -652,7 +652,7 @@ export default function HomeClient() {
               </div>
             </Link>
 
-            <a href="mailto:studio@brandmates.au" className="contact-card opacity-0 translate-y-6 group relative overflow-hidden rounded-3xl p-8 md:p-10 bg-brand-ink/70 border border-white/10 hover:border-brand-400/40 transition-all duration-500 hover:-translate-y-1 hover:bg-brand-ink">
+            <a href="mailto:info@brandmates.au" className="contact-card opacity-0 translate-y-6 group relative overflow-hidden rounded-3xl p-8 md:p-10 bg-brand-ink/70 border border-white/10 hover:border-brand-400/40 transition-all duration-500 hover:-translate-y-1 hover:bg-brand-ink">
               <div className="absolute -bottom-24 -right-24 w-64 h-64 rounded-full bg-brand-400/15 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="relative flex flex-col gap-8 h-full">
                 <div className="flex items-start justify-between">
@@ -671,7 +671,7 @@ export default function HomeClient() {
                 <div className="mt-auto pt-6 border-t border-white/10">
                   <div className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-white/40 mb-2">Direct line</div>
                   <div className="flex items-center gap-2 text-brand-300 group-hover:text-brand-400 font-bold text-lg md:text-xl transition-colors">
-                    <span>studio@brandmates.au</span>
+                    <span>info@brandmates.au</span>
                     <ArrowRight size={16} className="transition-transform duration-500 group-hover:translate-x-1" />
                   </div>
                 </div>

@@ -48,7 +48,7 @@ export default function AccessibilityPage() {
         <div>
           <h2>4. Tell us</h2>
           <p>
-            Email <a href="mailto:studio@brandmates.au">studio@brandmates.au</a> or call{" "}
+            Email <a href="mailto:info@brandmates.au">info@brandmates.au</a> or call{" "}
             <a href="tel:+61426525614">+61 426 525 614</a> (Mon-Fri, 9-6 AEST) and describe the issue and the page it&apos;s
             on. We&apos;ll get back to you within one business day.
           </p>

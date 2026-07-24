@@ -147,8 +147,8 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-4 flex flex-col gap-5">
             <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/60">Say g&apos;day</span>
             <div className="flex flex-col gap-4 text-sm">
-              <a href="mailto:studio@brandmates.au" className="group inline-flex items-center gap-2 text-white font-semibold text-base md:text-lg hover:text-brand-300 transition-colors">
-                <span>studio@brandmates.au</span>
+              <a href="mailto:info@brandmates.au" className="group inline-flex items-center gap-2 text-white font-semibold text-base md:text-lg hover:text-brand-300 transition-colors">
+                <span>info@brandmates.au</span>
                 <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
                   <ArrowIcon size={14} />
                 </span>
