@@ -18,11 +18,34 @@ const SocialIcon = ({ children, label, href }: { children: React.ReactNode; labe
 );
 
 export default function Footer() {
-  const [dispatchStatus, setDispatchStatus] = useState<"idle" | "sent">("idle");
+  const [dispatchStatus, setDispatchStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [dispatchLoadedAt] = useState(() => Date.now());
 
-  function handleDispatchSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleDispatchSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setDispatchStatus("sent");
+    setDispatchStatus("sending");
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: data.get("email"),
+          source: "footer-dispatch",
+          hp: data.get("hp"),
+          startedAt: dispatchLoadedAt,
+        }),
+      });
+
+      if (!res.ok) throw new Error();
+      setDispatchStatus("sent");
+      form.reset();
+    } catch {
+      setDispatchStatus("error");
+    }
   }
 
   return (
@@ -64,16 +87,19 @@ export default function Footer() {
               An Australian brand studio for founders and CMOs who need the work to actually hold up. Strategy, identity, and launch, end to end, in your timezone.
             </p>
             <form className="flex flex-col gap-3" onSubmit={handleDispatchSubmit}>
+              <input type="text" name="hp" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
               <label htmlFor="ft-dispatch-email" className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-brand-300">Studio dispatch</label>
               <div className="flex items-center gap-0 rounded-full border border-white/10 bg-white/2 focus-within:border-brand-400/60 transition-colors overflow-hidden pl-5 pr-1 py-1">
-                <input id="ft-dispatch-email" type="email" required disabled={dispatchStatus === "sent"} placeholder="you@company.com.au" className="flex-1 bg-transparent border-0 outline-none text-white placeholder:text-white/55 text-sm py-2 disabled:opacity-60" />
-                <button type="submit" disabled={dispatchStatus === "sent"} aria-label="Subscribe to the studio dispatch" className="shrink-0 w-9 h-9 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 flex items-center justify-center transition-colors disabled:hover:bg-brand-400">
+                <input id="ft-dispatch-email" name="email" type="email" required disabled={dispatchStatus === "sending" || dispatchStatus === "sent"} placeholder="you@company.com.au" className="flex-1 bg-transparent border-0 outline-none text-white placeholder:text-white/55 text-sm py-2 disabled:opacity-60" />
+                <button type="submit" disabled={dispatchStatus === "sending" || dispatchStatus === "sent"} aria-label="Subscribe to the studio dispatch" className="shrink-0 w-9 h-9 rounded-full bg-brand-400 hover:bg-brand-300 text-brand-700 flex items-center justify-center transition-colors disabled:hover:bg-brand-400">
                   {dispatchStatus === "sent" ? <Check size={14} strokeWidth={2.5} /> : <ArrowIcon size={14} strokeWidth={2.5} />}
                 </button>
               </div>
               <span aria-live="polite" className="text-white/60 text-[0.7rem]">
                 {dispatchStatus === "sent"
                   ? "You're on the list. First dispatch lands early next month."
+                  : dispatchStatus === "error"
+                  ? "Something went wrong. Please try again."
                   : "One email a month. What's working in AU digital marketing right now."}
               </span>
             </form>

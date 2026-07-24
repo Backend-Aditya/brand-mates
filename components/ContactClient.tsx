@@ -19,13 +19,46 @@ const CalendarIcon = () => <Calendar size={14} strokeWidth={2} className="shrink
 const ClockIcon = () => <Clock size={14} strokeWidth={2} className="shrink-0 opacity-60" />;
 
 export default function ContactClient() {
-  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [formError, setFormError] = useState("");
+  const [loadedAt] = useState(() => Date.now());
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setFormStatus("sending");
-    await new Promise(r => setTimeout(r, 900));
-    setFormStatus("sent");
+    setFormError("");
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          company: data.get("company"),
+          website: data.get("website"),
+          service: data.get("service"),
+          budget: data.get("budget"),
+          message: data.get("message"),
+          hp: data.get("hp"),
+          startedAt: loadedAt,
+        }),
+      });
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => null);
+        throw new Error(body?.error || "Something went wrong.");
+      }
+
+      setFormStatus("sent");
+      form.reset();
+    } catch (err) {
+      setFormStatus("error");
+      setFormError(err instanceof Error ? err.message : "Something went wrong.");
+    }
   }
 
   useEffect(() => {
@@ -102,31 +135,33 @@ export default function ContactClient() {
             <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
               {formStatus === "sending" && "Sending your enquiry..."}
               {formStatus === "sent" && "Enquiry sent. We will reply within 1 business day, AEST."}
+              {formStatus === "error" && formError}
             </div>
             <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+              <input type="text" name="hp" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
               <div className="grid sm:grid-cols-2 gap-5">
                 <div className="flex flex-col gap-2">
                   <label htmlFor="ct-name" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/65">Your name</label>
-                  <input id="ct-name" type="text" placeholder="Alex Chen" className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/55 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
+                  <input id="ct-name" name="name" type="text" required placeholder="Alex Chen" className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/55 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
                 </div>
                 <div className="flex flex-col gap-2">
                   <label htmlFor="ct-email" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/65">Work email</label>
-                  <input id="ct-email" type="email" placeholder="alex@company.com.au" className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/55 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
+                  <input id="ct-email" name="email" type="email" required placeholder="alex@company.com.au" className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/55 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
                 </div>
               </div>
               <div className="grid sm:grid-cols-2 gap-5">
                 <div className="flex flex-col gap-2">
                   <label htmlFor="ct-company" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/65">Company</label>
-                  <input id="ct-company" type="text" placeholder="Your company name" className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/55 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
+                  <input id="ct-company" name="company" type="text" placeholder="Your company name" className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/55 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
                 </div>
                 <div className="flex flex-col gap-2">
                   <label htmlFor="ct-website" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/65">Website (optional)</label>
-                  <input id="ct-website" type="url" placeholder="yoursite.com.au" className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/55 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
+                  <input id="ct-website" name="website" type="url" placeholder="yoursite.com.au" className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/55 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all" />
                 </div>
               </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="ct-service" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/65">Service you&apos;re interested in <span aria-hidden="true" className="text-brand-400">*</span></label>
-                <select id="ct-service" required className="w-full rounded-xl border border-white/10 bg-white/3 text-white text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all appearance-none cursor-pointer" style={selectStyle}>
+                <select id="ct-service" name="service" required className="w-full rounded-xl border border-white/10 bg-white/3 text-white text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all appearance-none cursor-pointer" style={selectStyle}>
                   <option value="" className="bg-brand-ink">Select a service...</option>
                   <option value="web" className="bg-brand-ink">Web Design &amp; Development</option>
                   <option value="social" className="bg-brand-ink">Social Media</option>
@@ -138,7 +173,7 @@ export default function ContactClient() {
               </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="ct-budget" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/65">Monthly budget (AUD, ex-GST) <span aria-hidden="true" className="text-brand-400">*</span></label>
-                <select id="ct-budget" required className="w-full rounded-xl border border-white/10 bg-white/3 text-white text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all appearance-none cursor-pointer" style={selectStyle}>
+                <select id="ct-budget" name="budget" required className="w-full rounded-xl border border-white/10 bg-white/3 text-white text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all appearance-none cursor-pointer" style={selectStyle}>
                   <option value="" className="bg-brand-ink">Select budget range...</option>
                   <option value="2-5" className="bg-brand-ink">$2,000 – $5,000 / month</option>
                   <option value="5-10" className="bg-brand-ink">$5,000 – $10,000 / month</option>
@@ -149,10 +184,11 @@ export default function ContactClient() {
               </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="ct-message" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/65">Tell us about your project</label>
-                <textarea id="ct-message" rows={5} placeholder="What are you trying to achieve? Where are you now, and where do you want to be? The more context you share, the better our first conversation will be." className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/55 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all resize-none leading-relaxed"></textarea>
+                <textarea id="ct-message" name="message" required rows={5} placeholder="What are you trying to achieve? Where are you now, and where do you want to be? The more context you share, the better our first conversation will be." className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/55 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all resize-none leading-relaxed"></textarea>
               </div>
               <div className="flex flex-col gap-3">
                 <p className="text-white/55 text-xs"><span aria-hidden="true" className="text-brand-400">*</span> Required fields</p>
+                {formStatus === "error" && <p className="text-red-400 text-xs">{formError}</p>}
                 <button
                   type="submit"
                   disabled={formStatus === "sending" || formStatus === "sent"}
@@ -160,7 +196,7 @@ export default function ContactClient() {
                 >
                   {formStatus === "sending" && "Sending..."}
                   {formStatus === "sent" && "Enquiry sent"}
-                  {formStatus === "idle" && (
+                  {(formStatus === "idle" || formStatus === "error") && (
                     <>
                       Send enquiry
                       <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />

@@ -6,13 +6,43 @@ import Image from "next/image";
 import { ArrowRight, ChevronDown, Calendar, Mail, Check } from "lucide-react";
 
 export default function HomeClient() {
-  const [heroFormStatus, setHeroFormStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [heroFormStatus, setHeroFormStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [heroFormError, setHeroFormError] = useState("");
+  const [heroLoadedAt] = useState(() => Date.now());
 
   async function handleHeroSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setHeroFormStatus("sending");
-    await new Promise((r) => setTimeout(r, 900));
-    setHeroFormStatus("sent");
+    setHeroFormError("");
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          service: data.get("service"),
+          message: data.get("message"),
+          hp: data.get("hp"),
+          startedAt: heroLoadedAt,
+        }),
+      });
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => null);
+        throw new Error(body?.error || "Something went wrong.");
+      }
+
+      setHeroFormStatus("sent");
+      form.reset();
+    } catch (err) {
+      setHeroFormStatus("error");
+      setHeroFormError(err instanceof Error ? err.message : "Something went wrong.");
+    }
   }
 
   useEffect(() => {
@@ -191,21 +221,23 @@ export default function HomeClient() {
               <div role="status" aria-live="polite" className="sr-only">
                 {heroFormStatus === "sending" && "Sending your enquiry..."}
                 {heroFormStatus === "sent" && "Enquiry sent. We will reply within 1 business day, AEST."}
+                {heroFormStatus === "error" && heroFormError}
               </div>
+              <input type="text" name="hp" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="flex flex-col gap-1.5">
                   <label htmlFor="hero-name" className="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-white/65">Name</label>
-                  <input id="hero-name" type="text" required placeholder="Alex Chen" className="rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-white/55 text-sm px-3.5 py-2.5 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all" />
+                  <input id="hero-name" name="name" type="text" required placeholder="Alex Chen" className="rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-white/55 text-sm px-3.5 py-2.5 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all" />
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <label htmlFor="hero-email" className="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-white/65">Email</label>
-                  <input id="hero-email" type="email" required placeholder="you@co.com.au" className="rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-white/55 text-sm px-3.5 py-2.5 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all" />
+                  <input id="hero-email" name="email" type="email" required placeholder="you@co.com.au" className="rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-white/55 text-sm px-3.5 py-2.5 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all" />
                 </div>
               </div>
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="hero-service" className="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-white/65">I need help with</label>
                 <div className="relative">
-                  <select id="hero-service" className="w-full rounded-lg border border-white/10 bg-white/5 text-white/60 text-sm px-3.5 py-2.5 pr-9 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all appearance-none cursor-pointer [&>option]:bg-zinc-900 [&>option]:text-white">
+                  <select id="hero-service" name="service" className="w-full rounded-lg border border-white/10 bg-white/5 text-white/60 text-sm px-3.5 py-2.5 pr-9 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all appearance-none cursor-pointer [&>option]:bg-zinc-900 [&>option]:text-white">
                     <option value="">Select a service...</option>
                     <option value="web">Web Design &amp; Development</option>
                     <option value="social">Social Media</option>
@@ -220,14 +252,15 @@ export default function HomeClient() {
               </div>
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="hero-message" className="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-white/65">Message</label>
-                <textarea id="hero-message" rows={3} placeholder="Tell us about your project…" className="rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-white/55 text-sm px-3.5 py-2.5 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all resize-none leading-relaxed"></textarea>
+                <textarea id="hero-message" name="message" required rows={3} placeholder="Tell us about your project…" className="rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-white/55 text-sm px-3.5 py-2.5 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all resize-none leading-relaxed"></textarea>
               </div>
+              {heroFormStatus === "error" && <p className="text-red-400 text-xs -mt-1">{heroFormError}</p>}
               <button
                 type="submit"
-                disabled={heroFormStatus !== "idle"}
+                disabled={heroFormStatus === "sending" || heroFormStatus === "sent"}
                 className="group w-full flex items-center justify-center gap-2 rounded-full bg-brand-400 hover:bg-brand-300 disabled:opacity-70 disabled:cursor-default disabled:hover:bg-brand-400 disabled:hover:translate-y-0 text-brand-700 font-bold text-sm py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-(--shadow-brand-md) mt-1"
               >
-                {heroFormStatus === "idle" && (
+                {(heroFormStatus === "idle" || heroFormStatus === "error") && (
                   <>
                     Send enquiry
                     <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />

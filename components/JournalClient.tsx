@@ -13,11 +13,34 @@ const featuredArticle = journalArticles[0];
 const listArticles = journalArticles.slice(1);
 
 export default function JournalClient() {
-  const [subscribeStatus, setSubscribeStatus] = useState<"idle" | "sent">("idle");
+  const [subscribeStatus, setSubscribeStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [subscribeLoadedAt] = useState(() => Date.now());
 
-  function handleSubscribe(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubscribe(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubscribeStatus("sent");
+    setSubscribeStatus("sending");
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: data.get("email"),
+          source: "journal",
+          hp: data.get("hp"),
+          startedAt: subscribeLoadedAt,
+        }),
+      });
+
+      if (!res.ok) throw new Error();
+      setSubscribeStatus("sent");
+      form.reset();
+    } catch {
+      setSubscribeStatus("error");
+    }
   }
 
   useEffect(() => {
@@ -177,19 +200,20 @@ export default function JournalClient() {
                 <p className="text-white/55 text-base">What&apos;s working in AU digital marketing right now, no filler, no agency self-promotion. Just the stuff worth knowing.</p>
               </div>
               <form className="flex flex-col sm:flex-row gap-3 shrink-0 w-full md:w-auto" onSubmit={handleSubscribe}>
+                <input type="text" name="hp" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
                 <label htmlFor="newsletter-email" className="sr-only">Email address</label>
                 <input
                   id="newsletter-email"
                   name="email"
                   type="email"
                   required
-                  disabled={subscribeStatus === "sent"}
+                  disabled={subscribeStatus === "sending" || subscribeStatus === "sent"}
                   placeholder="you@company.com.au"
                   className="flex-1 md:w-64 rounded-full border border-white/15 bg-white/10 text-white placeholder:text-white/40 text-sm px-6 py-3.5 outline-none focus:border-brand-400/60 transition-colors disabled:opacity-60"
                 />
                 <button
                   type="submit"
-                  disabled={subscribeStatus === "sent"}
+                  disabled={subscribeStatus === "sending" || subscribeStatus === "sent"}
                   aria-live="polite"
                   className="shrink-0 inline-flex items-center justify-center gap-2 rounded-full bg-brand-400 hover:bg-brand-300 disabled:hover:bg-brand-400 text-brand-700 font-bold text-sm px-7 py-3.5 transition-colors"
                 >
@@ -204,6 +228,7 @@ export default function JournalClient() {
                 </button>
               </form>
             </div>
+            {subscribeStatus === "error" && <p className="relative text-red-300 text-xs mt-3">Something went wrong. Please try again.</p>}
           </div>
         </div>
       </section>
