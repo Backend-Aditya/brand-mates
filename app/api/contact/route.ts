@@ -53,6 +53,21 @@ export async function POST(req: NextRequest) {
       ].filter(Boolean).join("\n"),
     });
 
+    sendMail({
+      to: email,
+      subject: "We've got your enquiry — BrandMates",
+      text: [
+        `Hi ${name},`,
+        "",
+        "Thanks for reaching out to BrandMates. We've received your enquiry and will reply within 1 business day (AEST).",
+        "",
+        "If it's urgent, call us on +61 426 525 614.",
+        "",
+        "— The BrandMates team",
+        "https://www.brandmates.au",
+      ].join("\n"),
+    }).catch((err) => console.error("Contact auto-reply failed:", err));
+
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("Contact form send failed:", err);

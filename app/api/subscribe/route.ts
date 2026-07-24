@@ -39,6 +39,21 @@ export async function POST(req: NextRequest) {
       text: `Email: ${email}\nSource: ${source ?? "unknown"}`,
     });
 
+    sendMail({
+      to: email,
+      subject: "You're on the list — BrandMates Studio Dispatch",
+      text: [
+        "Thanks for subscribing to the Studio Dispatch.",
+        "",
+        "One thoughtful email a month, what's working in AU digital marketing right now. No filler, no agency self-promotion.",
+        "",
+        "First dispatch lands early next month.",
+        "",
+        "— The BrandMates team",
+        "https://www.brandmates.au",
+      ].join("\n"),
+    }).catch((err) => console.error("Subscribe auto-reply failed:", err));
+
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("Subscribe form send failed:", err);
