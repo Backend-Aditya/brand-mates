@@ -123,6 +123,48 @@ export const emailStyles = {
     margin: "0 0 20px",
     fontFamily,
   } as React.CSSProperties,
+  overline: {
+    fontSize: "11px",
+    fontWeight: 800,
+    textTransform: "uppercase" as const,
+    letterSpacing: "0.2em",
+    color: "rgba(15,33,71,0.6)",
+    margin: "0 0 10px",
+    fontFamily,
+  } as React.CSSProperties,
+  ctaCard: {
+    backgroundColor: brand[400],
+    backgroundImage: `linear-gradient(135deg, ${brand[400]} 0%, ${brand[300]} 100%)`,
+    borderRadius: "16px",
+    padding: "24px 28px",
+    margin: "24px 0 0",
+  } as React.CSSProperties,
+  ctaHeading: {
+    fontSize: "18px",
+    fontWeight: 800,
+    color: brand[700],
+    letterSpacing: "-0.01em",
+    margin: "0 0 8px",
+    fontFamily,
+  } as React.CSSProperties,
+  ctaText: {
+    fontSize: "14px",
+    lineHeight: "21px",
+    color: "rgba(15,33,71,0.7)",
+    margin: "0 0 18px",
+    fontFamily,
+  } as React.CSSProperties,
+  ctaButton: {
+    display: "inline-block",
+    backgroundColor: brand[700],
+    color: brand[300],
+    fontWeight: 700,
+    fontSize: "13px",
+    padding: "12px 24px",
+    borderRadius: "999px",
+    textDecoration: "none",
+    fontFamily,
+  } as React.CSSProperties,
 };
 
 const styles: Record<string, React.CSSProperties> = {

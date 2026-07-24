@@ -184,7 +184,7 @@ export default function ContactClient() {
               </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="ct-message" className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-white/65">Tell us about your project</label>
-                <textarea id="ct-message" name="message" required rows={5} placeholder="What are you trying to achieve? Where are you now, and where do you want to be? The more context you share, the better our first conversation will be." className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/55 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all resize-none leading-relaxed"></textarea>
+                <textarea id="ct-message" name="message" required rows={5} placeholder="What are you trying to achieve? Where are you now, and where do you want to be? The more context you share, the better our first conversation will be." data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" className="w-full rounded-xl border border-white/10 bg-white/3 text-white placeholder:text-white/55 text-sm px-5 py-3.5 outline-none focus:border-brand-400/60 focus:bg-brand-400/5 transition-all resize-none leading-relaxed"></textarea>
               </div>
               <div className="flex flex-col gap-3">
                 <p className="text-white/55 text-xs"><span aria-hidden="true" className="text-brand-400">*</span> Required fields</p>
