@@ -250,9 +250,9 @@ export default function HomeClient() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col gap-1.5">
+              <div className="relative flex flex-col gap-1.5 overflow-hidden">
                 <label htmlFor="hero-message" className="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-white/65">Message</label>
-                <textarea id="hero-message" name="message" required rows={3} placeholder="Tell us about your project…" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" className="rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-white/55 text-sm px-3.5 py-2.5 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all resize-none leading-relaxed"></textarea>
+                <textarea id="hero-message" name="message" required rows={3} placeholder="Tell us about your project…" className="rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-white/55 text-sm px-3.5 py-2.5 outline-none focus:border-brand-400/50 focus:bg-brand-400/5 transition-all resize-none leading-relaxed"></textarea>
               </div>
               {heroFormStatus === "error" && <p className="text-red-400 text-xs -mt-1">{heroFormError}</p>}
               <button
