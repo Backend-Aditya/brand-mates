@@ -211,6 +211,8 @@ export default function Footer() {
             <Link href="/terms" className="hover:text-white/80 transition-colors">Terms</Link>
             <span className="w-1 h-1 rounded-full bg-white/20"></span>
             <Link href="/accessibility" className="hover:text-white/80 transition-colors">Accessibility</Link>
+            <span className="w-1 h-1 rounded-full bg-white/20"></span>
+            <a href="/sitemap.xml" className="hover:text-white/80 transition-colors">Sitemap</a>
           </div>
         </div>
       </div>
