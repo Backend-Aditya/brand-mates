@@ -12,7 +12,7 @@ const onest = Onest({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://brandmates.au"),
+  metadataBase: new URL("https://www.brandmates.au"),
   title: "BrandMates - Australia's Brand Studio. We Build Belief.",
   description:
     "BrandMates is an Australian brand studio for founders and CMOs who need identity, digital, and content work that holds up in the real world - based in Sydney.",
@@ -22,9 +22,9 @@ const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: "BrandMates",
-  url: "https://brandmates.au",
-  logo: "https://brandmates.au/logo.png",
-  image: "https://brandmates.au/logo.png",
+  url: "https://www.brandmates.au",
+  logo: "https://www.brandmates.au/logo.png",
+  image: "https://www.brandmates.au/logo.png",
   description:
     "BrandMates is an Australian brand studio for founders and CMOs who need identity, digital, and content work that holds up in the real world - based in Sydney.",
   address: {

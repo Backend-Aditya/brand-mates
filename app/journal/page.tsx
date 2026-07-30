@@ -9,13 +9,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Journal - BrandMates",
     description: "Practical insights from a studio that actually runs campaigns in the Australian market.",
-    url: "https://brandmates.au/journal",
+    url: "https://www.brandmates.au/journal",
     siteName: "BrandMates",
     locale: "en_AU",
     type: "website",
   },
   twitter: { card: "summary_large_image", title: "Journal - BrandMates", description: "From the studio desk." },
-  alternates: { canonical: "https://brandmates.au/journal" },
+  alternates: { canonical: "https://www.brandmates.au/journal" },
 };
 
 export default function JournalPage() {

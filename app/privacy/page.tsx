@@ -6,7 +6,7 @@ import FooterReveal from "@/components/FooterReveal";
 export const metadata: Metadata = {
   title: "Privacy Policy - BrandMates",
   description: "How BrandMates collects, uses, and protects your personal information.",
-  alternates: { canonical: "https://brandmates.au/privacy" },
+  alternates: { canonical: "https://www.brandmates.au/privacy" },
 };
 
 export default function PrivacyPage() {

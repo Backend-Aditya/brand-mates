@@ -6,7 +6,7 @@ import FooterReveal from "@/components/FooterReveal";
 export const metadata: Metadata = {
   title: "Accessibility - BrandMates",
   description: "Our commitment to an accessible website for every visitor.",
-  alternates: { canonical: "https://brandmates.au/accessibility" },
+  alternates: { canonical: "https://www.brandmates.au/accessibility" },
 };
 
 export default function AccessibilityPage() {
