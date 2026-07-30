@@ -6,7 +6,7 @@ import FooterReveal from "@/components/FooterReveal";
 export const metadata: Metadata = {
   title: "Terms of Use - BrandMates",
   description: "The terms governing use of the BrandMates website.",
-  alternates: { canonical: "https://www.brandmates.au/terms" },
+  alternates: { canonical: "https://brandmates.au/terms" },
 };
 
 export default function TermsPage() {

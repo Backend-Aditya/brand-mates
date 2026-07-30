@@ -3,7 +3,7 @@ import { workProjects } from "@/lib/work";
 import { journalArticles } from "@/lib/journal";
 import { services } from "@/lib/services";
 
-const BASE = "https://www.brandmates.au";
+const BASE = "https://brandmates.au";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const static_pages = [

@@ -9,13 +9,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Studio - BrandMates",
     description: "Six senior Aussies. No juniors, no offshore hand-offs.",
-    url: "https://www.brandmates.au/studio",
+    url: "https://brandmates.au/studio",
     siteName: "BrandMates",
     locale: "en_AU",
     type: "website",
   },
   twitter: { card: "summary_large_image", title: "Studio - BrandMates", description: "Meet the team behind BrandMates." },
-  alternates: { canonical: "https://www.brandmates.au/studio" },
+  alternates: { canonical: "https://brandmates.au/studio" },
 };
 
 export default function StudioPage() {

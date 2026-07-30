@@ -23,13 +23,13 @@ export async function generateMetadata({
     openGraph: {
       title: `${project.client} Case Study - BrandMates`,
       description: project.tagline,
-      url: `https://www.brandmates.au/work/${slug}`,
+      url: `https://brandmates.au/work/${slug}`,
       siteName: "BrandMates",
       locale: "en_AU",
       type: "article",
     },
     twitter: { card: "summary_large_image", title: `${project.client} - BrandMates` },
-    alternates: { canonical: `https://www.brandmates.au/work/${slug}` },
+    alternates: { canonical: `https://brandmates.au/work/${slug}` },
   };
 }
 
@@ -68,14 +68,14 @@ export default async function WorkCaseStudyPage({
         about: project.client,
         genre: project.category,
         keywords: project.tags.join(", "),
-        creator: { "@type": "Organization", name: "BrandMates", url: "https://www.brandmates.au" },
-        url: `https://www.brandmates.au/work/${slug}`,
+        creator: { "@type": "Organization", name: "BrandMates", url: "https://brandmates.au" },
+        url: `https://brandmates.au/work/${slug}`,
       },
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Work", item: "https://www.brandmates.au/work" },
-          { "@type": "ListItem", position: 2, name: project.client, item: `https://www.brandmates.au/work/${slug}` },
+          { "@type": "ListItem", position: 1, name: "Work", item: "https://brandmates.au/work" },
+          { "@type": "ListItem", position: 2, name: project.client, item: `https://brandmates.au/work/${slug}` },
         ],
       },
     ],

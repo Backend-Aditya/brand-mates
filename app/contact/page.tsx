@@ -9,13 +9,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Contact - BrandMates",
     description: "Book a discovery call. 20 minutes. No pitch deck, no pressure.",
-    url: "https://www.brandmates.au/contact",
+    url: "https://brandmates.au/contact",
     siteName: "BrandMates",
     locale: "en_AU",
     type: "website",
   },
   twitter: { card: "summary_large_image", title: "Contact - BrandMates", description: "Book a discovery call with BrandMates." },
-  alternates: { canonical: "https://www.brandmates.au/contact" },
+  alternates: { canonical: "https://brandmates.au/contact" },
 };
 
 export default function ContactPage() {

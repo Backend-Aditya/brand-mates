@@ -23,13 +23,13 @@ export async function generateMetadata({
     openGraph: {
       title: article.title,
       description: article.excerpt,
-      url: `https://www.brandmates.au/journal/${slug}`,
+      url: `https://brandmates.au/journal/${slug}`,
       siteName: "BrandMates",
       locale: "en_AU",
       type: "article",
     },
     twitter: { card: "summary_large_image", title: article.title, description: article.excerpt },
-    alternates: { canonical: `https://www.brandmates.au/journal/${slug}` },
+    alternates: { canonical: `https://brandmates.au/journal/${slug}` },
   };
 }
 
@@ -68,21 +68,21 @@ export default async function JournalArticlePage({
         description: article.excerpt,
         datePublished: publishedIso,
         dateModified: publishedIso,
-        author: { "@type": "Organization", name: "BrandMates", url: "https://www.brandmates.au" },
+        author: { "@type": "Organization", name: "BrandMates", url: "https://brandmates.au" },
         publisher: {
           "@type": "Organization",
           name: "BrandMates",
-          logo: { "@type": "ImageObject", url: "https://www.brandmates.au/logo.png" },
+          logo: { "@type": "ImageObject", url: "https://brandmates.au/logo.png" },
         },
-        mainEntityOfPage: `https://www.brandmates.au/journal/${slug}`,
+        mainEntityOfPage: `https://brandmates.au/journal/${slug}`,
         articleSection: article.tag,
-        url: `https://www.brandmates.au/journal/${slug}`,
+        url: `https://brandmates.au/journal/${slug}`,
       },
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Journal", item: "https://www.brandmates.au/journal" },
-          { "@type": "ListItem", position: 2, name: article.title, item: `https://www.brandmates.au/journal/${slug}` },
+          { "@type": "ListItem", position: 1, name: "Journal", item: "https://brandmates.au/journal" },
+          { "@type": "ListItem", position: 2, name: article.title, item: `https://brandmates.au/journal/${slug}` },
         ],
       },
     ],
