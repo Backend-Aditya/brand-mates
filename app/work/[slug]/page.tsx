@@ -58,8 +58,32 @@ export default async function WorkCaseStudyPage({
   const prevProject = currentIndex > 0 ? workProjects[currentIndex - 1] : null;
   const nextProject = currentIndex < workProjects.length - 1 ? workProjects[currentIndex + 1] : null;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CreativeWork",
+        name: `${project.client} Case Study`,
+        headline: project.tagline,
+        about: project.client,
+        genre: project.category,
+        keywords: project.tags.join(", "),
+        creator: { "@type": "Organization", name: "BrandMates", url: "https://brandmates.au" },
+        url: `https://brandmates.au/work/${slug}`,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Work", item: "https://brandmates.au/work" },
+          { "@type": "ListItem", position: 2, name: project.client, item: `https://brandmates.au/work/${slug}` },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* HERO */}
       <section className="relative w-full pt-36 md:pt-44 pb-20 overflow-hidden">
         <div className="px-6 sm:px-10 md:px-16 max-w-7xl mx-auto">
