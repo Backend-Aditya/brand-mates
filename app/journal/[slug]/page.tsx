@@ -58,8 +58,39 @@ export default async function JournalArticlePage({
   const prevArticle = currentIndex > 0 ? journalArticles[currentIndex - 1] : null;
   const nextArticle = currentIndex < journalArticles.length - 1 ? journalArticles[currentIndex + 1] : null;
 
+  const publishedIso = new Date(article.date).toISOString();
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        headline: article.title,
+        description: article.excerpt,
+        datePublished: publishedIso,
+        dateModified: publishedIso,
+        author: { "@type": "Organization", name: "BrandMates", url: "https://brandmates.au" },
+        publisher: {
+          "@type": "Organization",
+          name: "BrandMates",
+          logo: { "@type": "ImageObject", url: "https://brandmates.au/logo.png" },
+        },
+        mainEntityOfPage: `https://brandmates.au/journal/${slug}`,
+        articleSection: article.tag,
+        url: `https://brandmates.au/journal/${slug}`,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Journal", item: "https://brandmates.au/journal" },
+          { "@type": "ListItem", position: 2, name: article.title, item: `https://brandmates.au/journal/${slug}` },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* HERO */}
       <section className="relative w-full pt-36 md:pt-44 pb-16 overflow-hidden">
         <div className="px-6 sm:px-10 md:px-16 max-w-4xl mx-auto">
