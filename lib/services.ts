@@ -109,7 +109,7 @@ export const services: Service[] = [
     eyebrow: "Paid Ads",
     navLabel: "Paid Ads",
     headingLines: ["Ad spend that", "actually pays back."],
-    metaTitle: "Paid Ads Agency Australia (Meta, Google, TikTok) - BrandMates",
+    metaTitle: "Paid Ads Agency Australia - BrandMates",
     metaDescription:
       "Performance marketing for Australian brands across Meta, Google and TikTok Ads, with fortnightly reporting tied to revenue, not reach.",
     intro:

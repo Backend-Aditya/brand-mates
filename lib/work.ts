@@ -4,6 +4,7 @@ export interface WorkProject {
   category: string;
   year: string;
   tagline: string;
+  metaDescription: string;
   tags: string[];
   challenge: string;
   approach: string;
@@ -24,6 +25,7 @@ export const workProjects: WorkProject[] = [
     category: "Sustainable Fashion",
     year: "2024",
     tagline: "Full rebrand: web, social & ads",
+    metaDescription: "How BrandMates rebranded Saltbush Co across web, social and Meta ads, lifting conversion 0.8% to 3.4% and ROAS to 4.1×.",
     tags: ["Web Design", "Social Media", "Paid Ads"],
     challenge:
       "Saltbush Co had a compelling sustainable story but a fragmented digital presence. Their DTC site was converting below 1%, social felt inconsistent across channels, and Meta ads were burning $40K/month at a ROAS of 1.2×. Stockists were asking why the online brand didn't match the in-store experience.",
@@ -47,6 +49,7 @@ export const workProjects: WorkProject[] = [
     category: "Outdoor Apparel",
     year: "2024",
     tagline: "Performance paid ads: $820K ROAS 4.2×",
+    metaDescription: "How BrandMates built Koorang's Meta and Google ad framework, driving $820K in attributed revenue at a 4.2× ROAS in one quarter.",
     tags: ["Paid Ads", "Content Creation"],
     challenge:
       "Koorang had award-winning technical outdoor apparel and no paid media infrastructure to match. Their internal team was spending time producing creative rather than strategising, every campaign started from scratch, and there was no data architecture to build on.",
@@ -70,6 +73,7 @@ export const workProjects: WorkProject[] = [
     category: "Restaurant Group",
     year: "2023",
     tagline: "Social presence that fills tables",
+    metaDescription: "How BrandMates built a five-venue social strategy for Harbour Co, lifting reservation enquiries 240% in six months.",
     tags: ["Social Media", "Content Creation"],
     challenge:
       "A five-venue Sydney restaurant group with no unified social strategy. Each venue had its own account managed ad hoc by floor staff, posting inconsistently, getting low engagement, and running zero paid amplification. Competitor venues with inferior food were outperforming them online.",
@@ -93,6 +97,7 @@ export const workProjects: WorkProject[] = [
     category: "Artisan Candles",
     year: "2023",
     tagline: "E-commerce site + content suite",
+    metaDescription: "How BrandMates redesigned Tallow & Co's Shopify store and shot a content suite that grew online revenue 380% in one quarter.",
     tags: ["Web Design", "Content Creation"],
     challenge:
       "Tallow & Co were selling primarily through Sydney weekend markets and a basic Shopify template that had never been designed. Great product and a loyal repeat customer base, but no brand photography, no digital story, and no infrastructure to scale DTC.",
@@ -116,6 +121,7 @@ export const workProjects: WorkProject[] = [
     category: "Outdoor Retail",
     year: "2022",
     tagline: "National paid media scale-up",
+    metaDescription: "How BrandMates scaled Bushline's paid media nationally, growing digital revenue from $380K to $2.1M in 12 months.",
     tags: ["Paid Ads", "Social Media"],
     challenge:
       "Bushline had 12 stores across Australia but negligible digital revenue - less than $380K annually online. They'd never invested in performance media and were losing market share to two well-capitalised e-commerce competitors with national digital budgets.",
@@ -139,6 +145,7 @@ export const workProjects: WorkProject[] = [
     category: "Sydney Fintech · ASX",
     year: "2024",
     tagline: "Full identity system for an Aussie digital bank",
+    metaDescription: "How BrandMates built Aura's brand identity ahead of ASX listing, lifting NPS 18 points and signups 340% in one quarter.",
     tags: ["Strategy", "Identity", "Product"],
     challenge:
       "A digital bank preparing for ASX listing needed an identity that could reassure nervous first-time investors and pass APRA compliance review - while feeling modern enough to attract under-35s in a market dominated by the Big Four. The rebrand had to work across five capital cities from day one.",
@@ -162,6 +169,7 @@ export const workProjects: WorkProject[] = [
     category: "Hospitality · Byron Bay & Hobart",
     year: "2024",
     tagline: "Launch identity for a boutique hotel group",
+    metaDescription: "How BrandMates launched Meridian's twin hotels in Byron Bay and Hobart with one flexible identity system and 68% direct bookings.",
     tags: ["Branding", "Print", "Web"],
     challenge:
       "Meridian was launching two boutique hotels simultaneously - one in Byron Bay, one in Hobart - markets with fundamentally different aesthetics and guest profiles. A single brand identity needed to feel native to both locations without feeling generic to either.",
@@ -185,6 +193,7 @@ export const workProjects: WorkProject[] = [
     category: "Melbourne Dev Tools",
     year: "2023",
     tagline: "From Blackbird Series A to category leader",
+    metaDescription: "How BrandMates repositioned Forge's dev tools brand, lifting trial signup conversion from 0.4% to 2.1% in six months.",
     tags: ["Positioning", "Web", "Motion"],
     challenge:
       "A Melbourne-based developer tools company (Blackbird-backed, Series A) had exceptional product but no clear category position. Engineers loved it; the sales team couldn't explain it in under a minute. The marketing site was a technical spec sheet that converted at 0.4%.",
@@ -208,6 +217,7 @@ export const workProjects: WorkProject[] = [
     category: "Medicare Telehealth",
     year: "2023",
     tagline: "Rebrand for a bulk-billed telehealth platform",
+    metaDescription: "How BrandMates rebranded Clarity's Medicare telehealth platform, lifting GP referrals 180% and patient trust 28 points.",
     tags: ["Strategy", "Identity", "Campaign"],
     challenge:
       "A Medicare-integrated telehealth platform serving patients from Cairns to Perth needed a brand that felt trustworthy enough for anxious patients, efficient enough to win GP referrals, and clear enough to work across every waiting room pamphlet, follow-up SMS, and outdoor health campaign.",

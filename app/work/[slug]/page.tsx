@@ -19,10 +19,10 @@ export async function generateMetadata({
   if (!project) return {};
   return {
     title: `${project.client} - BrandMates`,
-    description: project.tagline,
+    description: project.metaDescription,
     openGraph: {
       title: `${project.client} Case Study - BrandMates`,
-      description: project.tagline,
+      description: project.metaDescription,
       url: `https://brandmates.au/work/${slug}`,
       siteName: "BrandMates",
       locale: "en_AU",
@@ -223,7 +223,7 @@ export default async function WorkCaseStudyPage({
 
             {/* CTA */}
             <div className="rounded-2xl bg-linear-to-br from-brand-400 to-brand-300 p-6 text-brand-700">
-              <h3 className="font-extrabold text-lg tracking-tight mb-2">Start a project</h3>
+              <h2 className="font-extrabold text-lg tracking-tight mb-2">Start a project</h2>
               <p className="text-brand-700/70 text-sm leading-relaxed mb-5">Your project could be next. Book a 20-minute discovery call.</p>
               <Link
                 href="/contact"

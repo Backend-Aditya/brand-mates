@@ -216,7 +216,7 @@ export default function ContactClient() {
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_100%_0%,rgba(255,255,255,0.2),transparent_60%)]"></div>
               <div className="relative">
                 <p className="text-[0.65rem] font-black uppercase tracking-[0.2em] opacity-60 mb-3">Skip the form</p>
-                <h3 className="text-xl font-extrabold tracking-tight mb-2">Book a discovery call</h3>
+                <h2 className="text-xl font-extrabold tracking-tight mb-2">Book a discovery call</h2>
                 <p className="text-brand-700/70 text-sm leading-relaxed mb-5">30 minutes. No pitch deck, no pressure. Just a real conversation about your brand.</p>
                 <div className="flex items-center gap-3 mb-5">
                   <div className="w-9 h-9 rounded-full bg-brand-700/20 flex items-center justify-center font-black text-sm">P</div>

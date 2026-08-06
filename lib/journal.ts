@@ -4,6 +4,7 @@ export interface JournalArticle {
   date: string;
   readTime: string;
   title: string;
+  metaTitle: string;
   excerpt: string;
   gradient: string;
   initials: string;
@@ -17,6 +18,7 @@ export const journalArticles: JournalArticle[] = [
     date: "22 Jun 2026",
     readTime: "8 min read",
     title: "How we ran $2.3M in Meta ads for Saltbush, and what actually worked",
+    metaTitle: "$2.3M in Meta Ads for Saltbush",
     excerpt:
       "A frank look at our creative testing framework, our biggest mistakes, and the three campaign types that drove 80% of the revenue.",
     gradient: "from-brand-700 via-brand-600 to-brand-500",
@@ -50,6 +52,7 @@ export const journalArticles: JournalArticle[] = [
     date: "8 Jun 2026",
     readTime: "5 min read",
     title: "Why your website is leaking leads in 2026, and the 5-minute fix",
+    metaTitle: "Why Your Website Is Leaking Leads",
     excerpt:
       "Most conversion problems come from one of three places. Here's how to find yours in under an afternoon.",
     gradient: "from-zinc-800 via-brand-700 to-zinc-900",
@@ -79,6 +82,7 @@ export const journalArticles: JournalArticle[] = [
     date: "25 May 2026",
     readTime: "6 min read",
     title: "Instagram Reels vs TikTok in Australia: 2026 data breakdown",
+    metaTitle: "Reels vs TikTok in Australia (2026)",
     excerpt:
       "We analysed 18 months of data across 12 Australian brand accounts. Here's what the numbers actually say.",
     gradient: "from-violet-900 via-brand-700 to-slate-900",
@@ -112,6 +116,7 @@ export const journalArticles: JournalArticle[] = [
     date: "11 May 2026",
     readTime: "7 min read",
     title: "What we learned from 50 on-location content shoots across Australia",
+    metaTitle: "Lessons From 50 Content Shoots",
     excerpt:
       "From Bondi to Broome, the logistical, creative, and cultural lessons that changed how we approach every shoot.",
     gradient: "from-orange-950 via-amber-900 to-brand-700",
@@ -141,6 +146,7 @@ export const journalArticles: JournalArticle[] = [
     date: "27 Apr 2026",
     readTime: "5 min read",
     title: "EOFY marketing: how Australian brands should spend their leftover budget",
+    metaTitle: "EOFY Marketing: Leftover Budget",
     excerpt:
       "The end of financial year is the most misunderstood opportunity in the AU marketing calendar. Here's how to use it.",
     gradient: "from-brand-600 via-brand-500 to-brand-400",
@@ -170,6 +176,7 @@ export const journalArticles: JournalArticle[] = [
     date: "13 Apr 2026",
     readTime: "6 min read",
     title: "The Meta creative framework we use for every Australian DTC brand",
+    metaTitle: "Our Meta Creative Framework",
     excerpt:
       "Three ad formats, two testing methodologies, and one rule we never break, regardless of budget or category.",
     gradient: "from-slate-800 via-zinc-700 to-brand-700",
@@ -199,6 +206,7 @@ export const journalArticles: JournalArticle[] = [
     date: "30 Mar 2026",
     readTime: "4 min read",
     title: "The BrandMates onboarding process: what happens after you say yes",
+    metaTitle: "The BrandMates Onboarding Process",
     excerpt:
       "Week by week, what clients can expect in our first 30 days, and why we front-load the hard conversations.",
     gradient: "from-brand-700 via-brand-600 to-zinc-900",
